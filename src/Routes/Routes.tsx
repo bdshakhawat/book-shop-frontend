@@ -4,24 +4,34 @@ import NotFoundPage from "../components/404/NotFound";
 import Home from "../components/Home/Home";
 import AllBooks from "../Pages/Books/All Books/AllBooks";
 import Reviews from "../components/Reviews/Reviews";
+import Login from "../Pages/Login/Login";
+import Register from "../Pages/Register/Register";
 
 const router= createBrowserRouter([
     {
         path : '/',
-        Component:MainLayout,
+        element : <MainLayout></MainLayout>,
         errorElement:<NotFoundPage></NotFoundPage>,
         children:[
             {
                 index: true,
-                Component: Home
+                element :<Home></Home>
             },
             {
                 path : "/allbooks",
-                Component: AllBooks
+                element : <AllBooks></AllBooks>
             },
             {
                 path : "/reviews",
-                Component : Reviews
+                element : <Reviews></Reviews>
+            },
+            {
+                path : "/login",
+                element : <Login></Login>
+            },
+            {
+                path : '/register',
+                element : <Register></Register>
             }
         ]
 

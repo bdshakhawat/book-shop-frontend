@@ -1,17 +1,20 @@
+import DealsBanner from "../../Pages/bestDeals/DealsBanner";
 import Banner from "../Banner/Banner";
-import Footer from "../Footer/Footer";
-import Navbar from "../Navbar.tsx/Navbar";
+
 import NewArrival from "../New Arrival/NewArrival";
+import ChooseUs from '../../Pages/ChooseUs/ChooseUs';
+
 
 
 
 const Home = () => {
     return (
         <div>
-            <Navbar></Navbar>
             <Banner></Banner>
             <NewArrival></NewArrival>
-            <Footer></Footer>
+            <DealsBanner></DealsBanner>
+            <ChooseUs></ChooseUs>
+            
         </div>
     );
 };

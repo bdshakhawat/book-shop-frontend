@@ -3,7 +3,7 @@
 const AllBooks = () => {
     return (
         <div>
-            
+        
         </div>
     );
 };
