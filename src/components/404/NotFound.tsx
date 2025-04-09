@@ -8,7 +8,7 @@ export default function NotFoundPage() {
         Page Not Found
       </h2>
       <p className="text-gray-600 mt-4 text-lg">
-        Oops! Something went wrong.
+        Oops! The page you are looking for does not exist.
       </p>
       <Link to="/">
         <button className="mt-6 px-6 py-3 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-300">
