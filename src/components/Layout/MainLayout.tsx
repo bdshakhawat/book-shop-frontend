@@ -2,10 +2,12 @@
 // import Navbar from "../Navbar.tsx/Navbar";
 // import Footer from "../Footer/Footer";
 
+import Home from "../Home/Home";
+
 const MainLayout = () => {
   return (
     <div className="relative min-h-screen">
-      {/* <Navbar /> */}
+      <Home></Home>
       {/* <Outlet /> */}
       {/* <Footer /> */}
     </div>
