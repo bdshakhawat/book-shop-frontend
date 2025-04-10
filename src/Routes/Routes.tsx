@@ -9,6 +9,7 @@ import Register from "../Pages/Register/Register";
 import About from "../Pages/About/About";
 import Success from "../Pages/Payment/Success";
 import Failure from "../Pages/Payment/Failure";
+import { BookDetailsSkeleton } from "../components/BookDetailsSkeleton/BookDetailsSkeleton";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/products/:productId",
+        element: <BookDetailsSkeleton></BookDetailsSkeleton>,
       },
       {
         path: "/sucess",

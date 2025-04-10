@@ -69,9 +69,11 @@ const Card = () => {
             <span className="text-lg font-bold">${book.price}</span>
             <span className="text-yellow-500">⭐ {book.rating}</span>
           </div>
-          <button className="btn first-letter:text-orange-600  hover:bg-orange-400 hover:text-white mt-4 p-4">
-            See Details
-          </button>
+          <Link to={`products/${book.id}`}>
+            <button className="btn first-letter:text-orange-600  hover:bg-orange-400 hover:text-white mt-4 p-4">
+              See Details
+            </button>
+          </Link>
         </div>
       ))}
     </div>

@@ -11,7 +11,7 @@ const Home = () => {
       {/* <Navbar></Navbar> */}
       <Banner></Banner>
       <NewArrival></NewArrival>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </div>
   );
 };
