@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-=======
+
+
 
 const About = () => {
   return (
@@ -98,4 +98,4 @@ const About = () => {
 };
 
 export default About;
->>>>>>> f4baf10d15d92a50dc010f279710ff27d544bb11
+
