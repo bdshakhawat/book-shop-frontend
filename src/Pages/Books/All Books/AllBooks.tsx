@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import BookCard from "../../../components/Card/BookCard";
 import Pagination from "../../../components/pagination/Pagination";
@@ -65,3 +66,4 @@ const AllBooks = () => {
 };
 
 export default AllBooks;
+

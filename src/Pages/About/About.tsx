@@ -1,4 +1,6 @@
 
+
+
 const About = () => {
   return (
     <section className="py-24 relative xl:mr-0 lg:mr-5 mr-0">
@@ -49,7 +51,7 @@ const About = () => {
                   </div>
                   <div className="w-full h-full p-3.5 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-700 ease-in-out flex-col justify-start items-start gap-2.5 inline-flex">
                     <h4 className="text-gray-900 text-2xl font-bold font-manrope leading-9">
-                      99% Reader Satisfaction
+                      97% Reader Satisfaction
                     </h4>
                     <p className="text-gray-500 text-base font-normal leading-relaxed">
                       Dedicated to Ensuring Customer Satisfaction
@@ -60,7 +62,7 @@ const About = () => {
             </div>
             <button className="sm:w-fit w-full group px-3.5 py-2 bg-red-50 hover:bg-red-100 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] transition-all duration-700 ease-in-out justify-center items-center flex">
               <span className="px-1.5 text-[#e12503] text-sm font-medium leading-6 group-hover:-translate-x-0.5 transition-all duration-700 ease-in-out">
-                Read More
+                Learn  More
               </span>
               <svg
                 className="group-hover:translate-x-0.5 transition-all duration-700 ease-in-out"
@@ -96,3 +98,4 @@ const About = () => {
 };
 
 export default About;
+
