@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
 
 export const BookDetailsSkeleton = () => {
   const { productId } = useParams();
@@ -32,6 +33,54 @@ export const BookDetailsSkeleton = () => {
     return <div className="text-center mt-10">Loading...</div>;
   }
 
+  // const { data: book } = useGetBookByIdQuery(productId);
+  console.log(book);
+  // const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [placeOrder, { error, data }] = usePlaceOrderMutation();
+  const user = useSelector(selectCurrentUser);
+
+  const makePayment = async () => {
+    if (!user) {
+      // Redirect to login and remember current location
+      navigate("/login", { state: { from: location } });
+      return;
+    }
+    // setLoading(true);
+    const stripe = await loadStripe("");
+
+    const body = {
+      product: book.data,
+      user,
+    };
+
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    const response = await fetch(
+      "http://localhost:5000/create-checkout-session",
+      {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body),
+      }
+    );
+
+    const session = await response.json();
+    console.log("session", session);
+
+    const result = stripe?.redirectToCheckout({
+      sessionId: session?.id,
+    });
+    // setLoading(false);
+    console.log("payment result", result);
+
+    if (result?.error) {
+      console.log(result.error);
+    }
+  };
   return (
     <div className="container mx-auto p-6">
       <div className="grid md:grid-cols-2 gap-10 items-start">
@@ -73,7 +122,7 @@ export const BookDetailsSkeleton = () => {
 
           <div className="mt-4 flex gap-4">
             <button className="btn btn-primary bg-orange-600 border-none hover:bg-orange-700">
-              Add to Cart
+              Oeder Now
             </button>
             <button className="btn btn-outline btn-warning">Wishlist</button>
           </div>
