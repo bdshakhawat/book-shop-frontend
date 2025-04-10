@@ -1,15 +1,15 @@
-<<<<<<< HEAD
+
 import { reviews } from "../../Constants/constants";
 import { Star } from 'lucide-react';
 
 const Reviews = () => {
   return (
     <section className="py-12 bg-gray-50">
-      <div className="container mx-auto px-4">
+      <div className="w-11/12 mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">
           Customer Reviews
         </h2>
-        <div className="grid gap-6 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {reviews.map(({ id, name, rating, text, avatar }) => (
             <div
               key={id}
@@ -40,16 +40,7 @@ const Reviews = () => {
 };
 
 export default Reviews;
-=======
 
 
-const Reviews = () => {
-    return (
-        <div>
-            
-        </div>
-    );
-};
 
-export default Reviews;
->>>>>>> f4baf10d15d92a50dc010f279710ff27d544bb11
+
