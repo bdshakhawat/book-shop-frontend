@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { reviews } from "../../Constants/constants";
 import { Star } from 'lucide-react';
 
@@ -39,3 +40,16 @@ const Reviews = () => {
 };
 
 export default Reviews;
+=======
+
+
+const Reviews = () => {
+    return (
+        <div>
+            
+        </div>
+    );
+};
+
+export default Reviews;
+>>>>>>> f4baf10d15d92a50dc010f279710ff27d544bb11
