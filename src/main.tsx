@@ -7,6 +7,7 @@ import "./index.css";
 // import { Store, persistor } from "./Redux/store";
 // import { PersistGate } from "redux-persist/integration/react";
 import { Toaster } from "sonner";
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     {/* <Provider store={Store}> */}
