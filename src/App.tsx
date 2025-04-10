@@ -11,6 +11,7 @@ function App() {
       {/* <NewArrival /> */}
       {/* New arrival section */}
       {/* <Footer /> */}
+      
     </div>
   );
 }
