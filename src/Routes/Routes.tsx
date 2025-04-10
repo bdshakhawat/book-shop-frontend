@@ -6,6 +6,7 @@ import AllBooks from "../Pages/Books/All Books/AllBooks";
 import Reviews from "../components/Reviews/Reviews";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import About from "../Pages/About/About";
 
 const router= createBrowserRouter([
     {
@@ -20,6 +21,10 @@ const router= createBrowserRouter([
             {
                 path : "/allbooks",
                 element : <AllBooks></AllBooks>
+            },
+            {
+                path :"/about",
+                element : <About></About>
             },
             {
                 path : "/reviews",
