@@ -6,8 +6,8 @@ const Navbar = () => {
     const links = <>
         <NavLink
             to="/"
-            className={({ isActive }) =>
-            `px-4 py-2 rounded-md transition-all duration-300 ${
+            className={  ({ isActive }) =>
+            `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
                 isActive
                 ? "bg-orange-100 text-orange-600 font-semibold"
                 : "hover:bg-orange-50 hover:text-orange-500"
@@ -20,7 +20,7 @@ const Navbar = () => {
         <NavLink
             to="/allbooks"
             className={({ isActive }) =>
-            `px-4 py-2 rounded-md transition-all duration-300 ${
+            `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
                 isActive
                 ? "bg-orange-100 text-orange-600 font-semibold"
                 : "hover:bg-orange-50 hover:text-orange-500"
@@ -32,7 +32,7 @@ const Navbar = () => {
         <NavLink
             to="/about"
             className={({ isActive }) =>
-            `px-4 py-2 rounded-md transition-all duration-300 ${
+            `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
                 isActive
                 ? "bg-orange-100 text-orange-600 font-semibold"
                 : "hover:bg-orange-50 hover:text-orange-500"
@@ -45,7 +45,7 @@ const Navbar = () => {
         <NavLink
             to="/reviews"
             className={({ isActive }) =>
-            `px-4 py-2 rounded-md transition-all duration-300 ${
+            `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
                 isActive
                 ? "bg-orange-100 text-orange-600 font-semibold"
                 : "hover:bg-orange-50 hover:text-orange-500"
@@ -59,7 +59,7 @@ const Navbar = () => {
   
     return (
 
-        <div className="w-11/12 mx-auto">
+        <div className="max-w-[80%] mx-auto">
             <div className="navbar h-24 bg-base-100 shadow-sm ">
             <div className="navbar-start">
                 <div className="dropdown">
@@ -74,7 +74,7 @@ const Navbar = () => {
                     }
                 </ul>
                 </div>
-                <a className="text-xl"><img src="https://i.ibb.co.com/xSc69QtL/360-F-211078110-mttx-Edu3gs-Sb-MKajsy98-E4-M4-E5-RUCiuo-removebg-preview.png" height={250} width={250} alt="" /></a>
+                <a className="text-lg"><img src="https://i.ibb.co.com/q3t1CR0Z/360-F-211078110-mttx-Edu3gs-Sb-MKajsy98-E4-M4-E5-RUCiuo-removebg-preview.png" height={100} width={100} alt="" /></a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 gap-3">
