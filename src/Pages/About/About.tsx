@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-=======
-
 const About = () => {
   return (
     <section className="py-24 relative xl:mr-0 lg:mr-5 mr-0">
@@ -98,4 +95,3 @@ const About = () => {
 };
 
 export default About;
->>>>>>> f4baf10d15d92a50dc010f279710ff27d544bb11
