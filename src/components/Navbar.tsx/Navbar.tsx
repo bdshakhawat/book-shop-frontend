@@ -1,13 +1,61 @@
+import { Link, NavLink } from "react-router-dom";
 
 
 
 const Navbar = () => {
     const links = <>
-      <li>Home</li>
-      <li>All Books</li>
-      <li>About</li>
-      <li>Reviews</li>
-    </>;
+        <NavLink
+            to="/"
+            className={({ isActive }) =>
+            `px-4 py-2 rounded-md transition-all duration-300 ${
+                isActive
+                ? "bg-orange-100 text-orange-600 font-semibold"
+                : "hover:bg-orange-50 hover:text-orange-500"
+            }`
+            }
+        >
+            Home
+        </NavLink>
+
+        <NavLink
+            to="/allbooks"
+            className={({ isActive }) =>
+            `px-4 py-2 rounded-md transition-all duration-300 ${
+                isActive
+                ? "bg-orange-100 text-orange-600 font-semibold"
+                : "hover:bg-orange-50 hover:text-orange-500"
+            }`
+            }
+        >
+            All Books
+        </NavLink>
+        <NavLink
+            to="/about"
+            className={({ isActive }) =>
+            `px-4 py-2 rounded-md transition-all duration-300 ${
+                isActive
+                ? "bg-orange-100 text-orange-600 font-semibold"
+                : "hover:bg-orange-50 hover:text-orange-500"
+            }`
+            }
+        >
+            About
+        </NavLink>
+
+        <NavLink
+            to="/reviews"
+            className={({ isActive }) =>
+            `px-4 py-2 rounded-md transition-all duration-300 ${
+                isActive
+                ? "bg-orange-100 text-orange-600 font-semibold"
+                : "hover:bg-orange-50 hover:text-orange-500"
+            }`
+            }
+        >
+            Reviews
+        </NavLink>
+        </>;
+        
   
     return (
 
@@ -29,17 +77,17 @@ const Navbar = () => {
                 <a className="text-xl"><img src="https://i.ibb.co.com/xSc69QtL/360-F-211078110-mttx-Edu3gs-Sb-MKajsy98-E4-M4-E5-RUCiuo-removebg-preview.png" height={250} width={250} alt="" /></a>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal px-1 gap-3">
                 
                 {
                     links
                 }
                 </ul>
             </div>
-            <div className="navbar-end gap-5">
+            <div className="navbar-end">
                 
-                <a className="btn">Login</a>
-                <a href="" className="btn">Register</a>
+                <Link to='/login' className="btn">Login</Link>
+                {/* <Link to='/register' className="btn">Register</Link> */}
             </div>
             </div>
        

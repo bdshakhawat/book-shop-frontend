@@ -1,4 +1,6 @@
 
+
+
 const About = () => {
   return (
     <section className="py-24 relative xl:mr-0 lg:mr-5 mr-0">
@@ -96,3 +98,4 @@ const About = () => {
 };
 
 export default About;
+
