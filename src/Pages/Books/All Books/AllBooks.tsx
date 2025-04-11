@@ -20,7 +20,7 @@ const AllBooks = () => {
   );
   return (
     <div className="bg-gray-100">
-      <div className="  lg:max-w-screen-2xl mx-4 md:mx-6 lg:mx-auto py-14 ">
+      <div className="lg:max-w-screen-2xl mx-4 md:mx-6 lg:mx-auto py-14 ">
         <div className="flex justify-center">
 
         <input type='text' placeholder="Seacrh by book name,author,category" className="w-[40%] py-3 rounded-md text-center mb-5"/>
