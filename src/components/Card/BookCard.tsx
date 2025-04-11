@@ -1,10 +1,10 @@
-type TBook = {
+export type TBook = {
   id: string;
   title: string;
   author: string;
   category: string;
   price: number;
-  available: boolean;
+  inStock: boolean;
   image: string;
 };
 
@@ -22,7 +22,7 @@ const BookCard = ({ book }: BookCardProps) => {
             className=" h-52 w-full rounded-lg "
             alt=""
           />
-          <p className={`absolute top-2 my-1 right-2 px-2 border text-xs rounded-sm ${book.available?'bg-green-100 text-green-500 border-green-500':'bg-red-100 text-red-500 border-red-500'}`}>{book.available?<span>in sotck</span>:<span>out of stock</span>}</p>
+          <p className={`absolute top-2 my-1 right-2 px-2 border text-xs rounded-sm ${book.inStock?'bg-green-100 text-green-500 border-green-500':'bg-red-100 text-red-500 border-red-500'}`}>{book.inStock?<span>in sotck</span>:<span>out of stock</span>}</p>
         </div>
 
         <div className="space-y-1 mt-3 ">
