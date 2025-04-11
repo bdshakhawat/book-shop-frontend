@@ -1,5 +1,8 @@
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1050542ee0075b91f986e4c57eb93781bcdc3075
 const About = () => {
   return (
     <section className="py-24 relative xl:mr-0 lg:mr-5 mr-0">
@@ -97,4 +100,3 @@ const About = () => {
 };
 
 export default About;
-

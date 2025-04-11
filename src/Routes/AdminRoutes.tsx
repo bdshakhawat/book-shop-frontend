@@ -1,45 +1,26 @@
 import AdminDashboard from "../Pages/Admin/AdminDashboard";
 import AddBookToStore from "../Pages/Admin/AddBookToStore";
-import { TRoutes } from "../Types/global";
-import PrivateRoute from "../components/RouteComponents/PrivateRoute";
-import UpdateBook from "../Pages/Admin/UpdateBook";
 
-const AdminRoutes: TRoutes[] = [
+const AdminRoutes = [
   {
     index: true,
     name: "Dashboard",
-    element: (
-      <PrivateRoute>
-        <AdminDashboard />
-      </PrivateRoute>
-    ),
+    element: <AdminDashboard />,
   },
   {
     path: "dashboard",
     name: "Dashboard",
-    element: (
-      <PrivateRoute>
-        <AdminDashboard />
-      </PrivateRoute>
-    ),
+    element: <AdminDashboard />,
   },
   {
-    element: (
-      <PrivateRoute>
-        <AddBookToStore />
-      </PrivateRoute>
-    ),
     path: "add-book",
     name: "Add New Book",
+    element: <AddBookToStore />,
   },
-  {
-    element: (
-      <PrivateRoute>
-        <UpdateBook />
-      </PrivateRoute>
-    ),
-    path: "update-book/:id",
-  },
+  // {
+  //   element: <UpdateBook />,
+  //   path: "update-book/:id",
+  // },
 ];
 
 export default AdminRoutes;
