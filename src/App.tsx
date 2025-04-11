@@ -13,6 +13,7 @@ function App() {
       {/* <NewArrival /> */}
       <Reviews />
       {/* <Footer /> */}
+      
     </div>
   );
 }
