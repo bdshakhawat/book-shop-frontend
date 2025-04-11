@@ -10,7 +10,7 @@ const userRole = {
 
 const DashboardLayout = () => {
   
-  const currentUserRole = "user";
+  const currentUserRole = "admin";
   let sidebarItem;
 
   switch (currentUserRole) {

@@ -1,7 +1,7 @@
 
 const UserDashboard = () => {
   return (
-    <div>
+    <div className="text-2xl text-center">
       user dashboard
     </div>
   )

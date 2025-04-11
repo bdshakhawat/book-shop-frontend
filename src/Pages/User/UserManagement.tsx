@@ -1,7 +1,7 @@
 
 const UserManagement = () => {
   return (
-    <div>
+    <div className="text-2xl text-center">
       user Management 
     </div>
   )

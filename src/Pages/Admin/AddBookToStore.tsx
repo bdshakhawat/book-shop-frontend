@@ -1,7 +1,7 @@
 
 const AddBookToStore = () => {
   return (
-    <div>
+    <div className="text-2xl text-center">
       AddBookToStore
     </div>
   )
