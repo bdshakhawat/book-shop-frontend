@@ -20,7 +20,7 @@ export const sidebarItemsGenerator = (items: TUserPath[], role: string) => {
     if (item.path && item.name) {
       acc.push({
         key: item.name,
-        label: `${item.path}`,
+        label: `/${role}/${item.path}`,
       });
     }
 
@@ -32,7 +32,7 @@ export const sidebarItemsGenerator = (items: TUserPath[], role: string) => {
           if (child.name) {
             return {
               key: child.name,
-              label: `${item.path}`,
+              label: `/${role}/${item.path}`,
             };
           }
         }),
