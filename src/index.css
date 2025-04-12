@@ -141,3 +141,28 @@
   background-color: #ebedf1 !important; 
   color: rgb(44, 42, 42) !important;
 }
+
+.login{
+  background: url("./assets/new_release_360632003.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  
+}
+
+.register{
+  background: url("./assets/new_release_360632003.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:white;
+}
