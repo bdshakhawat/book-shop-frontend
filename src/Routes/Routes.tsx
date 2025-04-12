@@ -3,7 +3,6 @@ import MainLayout from "../components/Layout/MainLayout";
 import NotFoundPage from "../components/404/NotFound";
 import Home from "../components/Home/Home";
 import AllBooks from "../Pages/Books/All Books/AllBooks";
-import Reviews from "../components/Reviews/Reviews";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import About from "../Pages/About/About";
@@ -40,8 +39,7 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register></Register>,
       },
-    ],
-  },
+  
   {
     path: "/admin",
     element: <DashboardLayout></DashboardLayout>,
@@ -54,11 +52,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-<<<<<<< HEAD
-    }
-])
+
 
 export default router
-=======
-export default router;
->>>>>>> 1050542ee0075b91f986e4c57eb93781bcdc3075
+
+
