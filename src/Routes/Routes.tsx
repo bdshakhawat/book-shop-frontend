@@ -1,4 +1,3 @@
-
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../components/Layout/MainLayout";
 import NotFoundPage from "../components/404/NotFound";
@@ -55,4 +54,11 @@ const router = createBrowserRouter([
   },
 ]);
 
+<<<<<<< HEAD
+    }
+])
+
+export default router
+=======
 export default router;
+>>>>>>> 1050542ee0075b91f986e4c57eb93781bcdc3075
