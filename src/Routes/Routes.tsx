@@ -8,39 +8,38 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import About from "../Pages/About/About";
 
-const router= createBrowserRouter([
-    {
-        path : '/',
-        element : <MainLayout></MainLayout>,
-        errorElement:<NotFoundPage></NotFoundPage>,
-        children:[
-            {
-                index: true,
-                element :<Home></Home>
-            },
-            {
-                path : "/allbooks",
-                element : <AllBooks></AllBooks>
-            },
-            {
-                path :"/about",
-                element : <About></About>
-            },
-            {
-                path : "/reviews",
-                element : <Reviews></Reviews>
-            },
-            {
-                path : "/login",
-                element : <Login></Login>
-            },
-            {
-                path : '/register',
-                element : <Register></Register>
-            }
-        ]
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout></MainLayout>,
+    errorElement: <NotFoundPage></NotFoundPage>,
+    children: [
+      {
+        index: true,
+        element: <Home></Home>,
+      },
+      {
+        path: "/allbooks",
+        element: <AllBooks></AllBooks>,
+      },
+      {
+        path: "/about",
+        element: <About></About>,
+      },
+      {
+        path: "/reviews",
+        element: <Reviews></Reviews>,
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <Login></Login>,
+  },
+  {
+    path: "/register",
+    element: <Register></Register>,
+  },
+]);
 
-    }
-])
-
-export default router
+export default router;
