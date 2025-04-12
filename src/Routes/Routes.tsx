@@ -31,29 +31,25 @@ const router = createBrowserRouter([
       },
     ],
   },
-      {
-        path: "/login",
-        element: <Login></Login>,
-      },
-      {
-        path: "/register",
-        element: <Register></Register>,
-      },
-  
+  {
+    path: "/login",
+    element: <Login></Login>,
+  },
+  {
+    path: "/register",
+    element: <Register></Register>,
+  },
+
   {
     path: "/admin",
     element: <DashboardLayout></DashboardLayout>,
-    children: routeGenerator(AdminRoutes)
+    children: routeGenerator(AdminRoutes),
   },
   {
     path: "/user",
     element: <DashboardLayout></DashboardLayout>,
-    children: routeGenerator(UserRoutes)
+    children: routeGenerator(UserRoutes),
   },
 ]);
 
-
-
-export default router
-
-
+export default router;

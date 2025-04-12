@@ -45,7 +45,7 @@ const Login = () => {
                 EMAIL
               </label>
               <input
-                {...register("email", { required: true })}
+                {...register("email")}
                 placeholder="Ex:saiful@example.com"
                 type="email"
                 id="email"
@@ -61,7 +61,7 @@ const Login = () => {
                 PASSWORD
               </label>
               <input
-                {...register("password", { required: true })}
+                {...register("password")}
                 placeholder="Ex: ********"
                 type="password"
                 id="current-password"
