@@ -32,11 +32,11 @@ const Filter = ({ setShowFilter, showFilter, setFilterParams }: any) => {
   const onSubmit = (data: any) => {
     const filterObject: any = {};
 
-    // Handle price range if it is not set to the default values
-    // if (data.min !== 0 || data.max !== 100000) {
-    //   filterObject.minPrice = data.min;
-    //   filterObject.maxPrice = data.max;
-    // }
+    //Handle price range if it is not set to the default values
+    if (data.min !== 0 || data.max !== 100000) {
+      filterObject.minPrice = data.min;
+      filterObject.maxPrice = data.max;
+    }
 
     // Handle availability
     if (data.inStock !== "All") {
