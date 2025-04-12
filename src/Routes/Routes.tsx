@@ -6,9 +6,9 @@ import AllBooks from "../Pages/Books/All Books/AllBooks";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import About from "../Pages/About/About";
-import Success from "../Pages/Payment/Success";
-import Failure from "../Pages/Payment/Failure";
-import { BookDetailsSkeleton } from "../components/BookDetailsSkeleton/BookDetailsSkeleton";
+//import Success from "../Pages/Payment/Success";
+//import Failure from "../Pages/Payment/Failure";
+//import { BookDetailsSkeleton } from "../components/BookDetailsSkeleton/BookDetailsSkeleton";
 import DashboardLayout from "../components/Layout/DashboardLayout";
 import { routeGenerator } from "../Utils/routesGenerator";
 import AdminRoutes from "./AdminRoutes";
@@ -41,18 +41,18 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register></Register>,
       },
-      {
-        path: "/products/:productId",
-        element: <BookDetailsSkeleton></BookDetailsSkeleton>,
-      },
-      {
-        path: "/sucess",
-        element: <Success />,
-      },
-      {
-        path: "/fail",
-        element: <Failure />,
-      },
+      // {
+      //   path: "/products/:productId",
+      //   element: <BookDetailsSkeleton></BookDetailsSkeleton>,
+      // },
+      // {
+      //   path: "/sucess",
+      //   element: <Success />,
+      // },
+      // {
+      //   path: "/fail",
+      //   element: <Failure />,
+      // },
     ],
   },
   {
