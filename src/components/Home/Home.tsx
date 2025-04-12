@@ -3,6 +3,7 @@ import DealsBanner from "../../Pages/bestDeals/DealsBanner";
 import Banner from "../Banner/Banner";
 import NewArrival from "../New Arrival/NewArrival";
 import ChooseUs from '../../Pages/ChooseUs/ChooseUs';
+import Reviews from "../Reviews/Reviews";
 
 
 
@@ -13,7 +14,7 @@ const Home = () => {
             <Banner></Banner>
             <NewArrival></NewArrival>
             <DealsBanner></DealsBanner>
-            {/* <Reviews></Reviews> */}
+            <Reviews></Reviews>
             <ChooseUs></ChooseUs>
             
         </div>
