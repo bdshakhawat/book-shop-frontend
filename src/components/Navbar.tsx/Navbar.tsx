@@ -42,7 +42,7 @@ const Navbar = () => {
             About
         </NavLink>
 
-        <NavLink
+        {/* <NavLink
             to="/reviews"
             className={({ isActive }) =>
             `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
@@ -53,7 +53,7 @@ const Navbar = () => {
             }
         >
             Reviews
-        </NavLink>
+        </NavLink> */}
         </>;
         
   
