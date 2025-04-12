@@ -6,6 +6,9 @@ import AllBooks from "../Pages/Books/All Books/AllBooks";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import About from "../Pages/About/About";
+import Success from "../Pages/Payment/Success";
+import Failure from "../Pages/Payment/Failure";
+import { BookDetailsSkeleton } from "../components/BookDetailsSkeleton/BookDetailsSkeleton";
 import DashboardLayout from "../components/Layout/DashboardLayout";
 import { routeGenerator } from "../Utils/routesGenerator";
 import AdminRoutes from "./AdminRoutes";
@@ -29,7 +32,7 @@ const router = createBrowserRouter([
         path: "/about",
         element: <About></About>,
       },
-     
+
       {
         path: "/login",
         element: <Login></Login>,
@@ -37,6 +40,18 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/products/:productId",
+        element: <BookDetailsSkeleton></BookDetailsSkeleton>,
+      },
+      {
+        path: "/sucess",
+        element: <Success />,
+      },
+      {
+        path: "/fail",
+        element: <Failure />,
       },
     ],
   },
@@ -51,13 +66,5 @@ const router = createBrowserRouter([
     children: routeGenerator(UserRoutes)
   },
 ]);
-
 export default router
-// <<<<<<< HEAD
-//     }
-// ])
 
-// export default router
-// =======
-// export default router;
-// >>>>>>> 1050542ee0075b91f986e4c57eb93781bcdc3075
