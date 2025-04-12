@@ -21,9 +21,17 @@ const bookManagementApi = baseApi.injectEndpoints({
                     params:params
                 }
             }
-        })
+        }),
+       getSingleBook: builder.query({
+        query: (id) => {
+            return {
+                url : `/books/get-book/${id}`,
+                method: 'GET',
+            }
+        }
+       }) 
     })
 })
 
 
-export const { useGetAllbooksQuery } = bookManagementApi
+export const { useGetAllbooksQuery,useGetSingleBookQuery } = bookManagementApi
