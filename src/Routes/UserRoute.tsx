@@ -1,9 +1,17 @@
-import DashboardLayout from "../components/Layout/DashboardLayout";
+import UserManagement from "../Pages/User/UserManagement";
+import UserDashboard from "./../Pages/User/UserDashboard";
 
 const UserRoutes = [
   {
-    path: "/",
-    element: <DashboardLayout />,
+    path: "dashboard",
+    name: "Dashboard",
+    element: <UserDashboard />,
   },
+  {
+    path: "userManagement",
+    name: "User Management",
+    element: <UserManagement />,
+  },
+  
 ];
 export default UserRoutes;

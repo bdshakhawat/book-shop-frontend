@@ -3,13 +3,16 @@ import MainLayout from "../components/Layout/MainLayout";
 import NotFoundPage from "../components/404/NotFound";
 import Home from "../components/Home/Home";
 import AllBooks from "../Pages/Books/All Books/AllBooks";
-import Reviews from "../components/Reviews/Reviews";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import About from "../Pages/About/About";
 import Success from "../Pages/Payment/Success";
 import Failure from "../Pages/Payment/Failure";
 import { BookDetailsSkeleton } from "../components/BookDetailsSkeleton/BookDetailsSkeleton";
+import DashboardLayout from "../components/Layout/DashboardLayout";
+import { routeGenerator } from "../Utils/routesGenerator";
+import AdminRoutes from "./AdminRoutes";
+import UserRoutes from "./UserRoute";
 
 const router = createBrowserRouter([
   {
@@ -29,10 +32,7 @@ const router = createBrowserRouter([
         path: "/about",
         element: <About></About>,
       },
-      {
-        path: "/reviews",
-        element: <Reviews></Reviews>,
-      },
+
       {
         path: "/login",
         element: <Login></Login>,
@@ -55,6 +55,16 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/admin",
+    element: <DashboardLayout></DashboardLayout>,
+    children: routeGenerator(AdminRoutes)
+  },
+  {
+    path: "/user",
+    element: <DashboardLayout></DashboardLayout>,
+    children: routeGenerator(UserRoutes)
+  },
 ]);
+export default router
 
-export default router;

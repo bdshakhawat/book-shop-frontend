@@ -1,9 +1,12 @@
 import DealsBanner from "../../Pages/bestDeals/DealsBanner";
 import Banner from "../Banner/Banner";
-import Reviews from "../Reviews/Reviews";
 import NewArrival from "../New Arrival/NewArrival";
-import ChooseUs from "../../Pages/ChooseUs/ChooseUs";
-import Footer from "../Footer/Footer";
+
+import ChooseUs from '../../Pages/ChooseUs/ChooseUs';
+import Reviews from "../Reviews/Reviews";
+
+
+
 
 const Home = () => {
   return (

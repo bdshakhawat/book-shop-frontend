@@ -1,5 +1,67 @@
+
+import { Button } from "antd";
+import { Link } from "react-router-dom";
+
 const Login = () => {
-  return <div className="h-screen"></div>;
+  return (
+    <>
+      <div className="login">
+        <div className="border w-[400px] p-8 rounded-lg  backdrop-blur-md bg-brandPrimary/40">
+          <div className="flex justify-center items-center mb-8">
+          </div>
+          <h1 className="text-3xl text-center font-bold text-brandTextSecondary">
+            LOGIN NOW{" "}
+          </h1>
+          <form>
+            <div className="mt-8">
+              <label
+                htmlFor="email"
+                className="font-semibold tracking-[4px] text-brandTextTertiary"
+              >
+                EMAIL
+              </label>
+              <input
+                placeholder="Ex:saiful@example.com"
+                type="email"
+                id="email"
+                className="w-full border border-brandTextSecondary p-2 rounded-lg bg-transparent outline-none mt-2 placeholder:text-gray-500"
+              />
+            </div>
+
+            <div className="mt-4">
+              <label
+                htmlFor="password"
+                className="font-semibold tracking-[4px] text-brandTextTertiary"
+              >
+                PASSWORD
+              </label>
+              <input
+                placeholder="Ex: ********"
+                type="password"
+                id="current-password"
+                className="w-full border border-brandTextSecondary p-2 rounded-lg bg-transparent outline-none mt-2 placeholder:text-gray-500"
+              />
+            </div>
+            <Button
+              htmlType="submit"
+              className="w-full mt-8 bg-brandTextSecondary hover:bg-brandTextSecondary/70"
+            >
+              Login
+            </Button>
+
+            <div className="mt-4">
+              <p className="text-center text-brandTextTertiary">
+                Don't have an account?{" "}
+                <Link to="/register" className="text-[#510039] font-semibold">
+                Please Register
+                </Link>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Login;
