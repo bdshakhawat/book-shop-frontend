@@ -14,6 +14,7 @@ const Home = () => {
       {/* <Navbar></Navbar> */}
       <Banner></Banner>
       <NewArrival></NewArrival>
+<<<<<<< HEAD
 
       <DealsBanner></DealsBanner>
       <ChooseUs></ChooseUs>
@@ -22,6 +23,9 @@ const Home = () => {
 
       <Reviews></Reviews>
 
+=======
+      <Reviews></Reviews>
+>>>>>>> devSaiful-reviews
       {/* <Footer></Footer> */}
     </div>
   );

@@ -1,24 +1,54 @@
 import { Link, NavLink } from "react-router-dom";
-
-
+// import { useAppDispatch, useAppSelector } from "../../Redux/hook";
+import { DropdownMenu, DropdownMenuContent,  DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
+// import { toast } from "sonner";
+// import { LogOut } from "lucide-react";
+// import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Button } from "../ui/button";
 
 const Navbar = () => {
-    const links = <>
-        <NavLink
-            to="/"
-            className={  ({ isActive }) =>
-            `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
-                isActive
-                ? "bg-orange-100 text-orange-600 font-semibold"
-                : "hover:bg-orange-50 hover:text-orange-500"
-            }`
-            }
-        >
-            Home
-        </NavLink>
+  const links = (
+    <>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
+            isActive
+              ? "bg-orange-100 text-orange-600 font-semibold"
+              : "hover:bg-orange-50 hover:text-orange-500"
+          }`
+        }
+      >
+        Home
+      </NavLink>
 
-        <NavLink
-            to="/allbooks"
+      <NavLink
+        to="/allbooks"
+        className={({ isActive }) =>
+          `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
+            isActive
+              ? "bg-orange-100 text-orange-600 font-semibold"
+              : "hover:bg-orange-50 hover:text-orange-500"
+          }`
+        }
+      >
+        All Books
+      </NavLink>
+      <NavLink
+        to="/about"
+        className={({ isActive }) =>
+          `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
+            isActive
+              ? "bg-orange-100 text-orange-600 font-semibold"
+              : "hover:bg-orange-50 hover:text-orange-500"
+          }`
+        }
+      >
+        About
+      </NavLink>
+
+        {/* <NavLink
+            to="/reviews"
             className={({ isActive }) =>
             `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
                 isActive
@@ -27,22 +57,8 @@ const Navbar = () => {
             }`
             }
         >
-            All Books
-        </NavLink>
-        <NavLink
-            to="/about"
-            className={({ isActive }) =>
-            `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
-                isActive
-                ? "bg-orange-100 text-orange-600 font-semibold"
-                : "hover:bg-orange-50 hover:text-orange-500"
-            }`
-            }
-        >
-            About
-        </NavLink>
-
-       
+            Reviews
+        </NavLink> */}
         </>;
         
   
@@ -75,7 +91,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 
-                <Link to='/login' className="btn hover:bg-orange-500 hover:text-white">Login</Link>
+                <Link to='/login' className="btn">Login</Link>
                 {/* <Link to='/register' className="btn">Register</Link> */}
             </div>
             </div>
