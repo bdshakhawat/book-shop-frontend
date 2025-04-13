@@ -1,9 +1,9 @@
 import { Link, NavLink } from "react-router-dom";
-// import { useAppDispatch, useAppSelector } from "../../Redux/hook";
-import { DropdownMenu, DropdownMenuContent,  DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
-// import { toast } from "sonner";
-// import { LogOut } from "lucide-react";
-// import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { useAppDispatch, useAppSelector } from "../../Redux/hook";
+import { DropdownMenu, DropdownMenuContent,  DropdownMenuItem,  DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { toast } from "sonner";
+import { LogOut } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 
 const Navbar = () => {
@@ -62,12 +62,10 @@ const Navbar = () => {
     </>
   );
 
-  const users ={
-    email:"test@gamil.com"
-  }
 
-  // const user = useAppSelector((state) => state.auth.user);
-  // const dispatch = useAppDispatch();
+
+  const user = useAppSelector((state) => state.auth.user);
+  const dispatch = useAppDispatch();
 
   return (
     <div className="max-w-[80%] mx-auto">
@@ -111,19 +109,19 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1 gap-3">{links}</ul>
         </div>
         <div className="navbar-end">
-          {users?.email ? (
+          {user?.email ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                {/* <Avatar className="cursor-pointer">
-                  <AvatarImage src={users?.profileImage} />
-                  <AvatarFallback>{users.name[0]}</AvatarFallback>
-                </Avatar> */}
+                <Avatar className="cursor-pointer">
+                  <AvatarImage src={user?.profileImage} />
+                  <AvatarFallback>{user.name[0]}</AvatarFallback>
+                </Avatar>
               </DropdownMenuTrigger>
 
               <DropdownMenuContent className="w-56 ">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                {/* <DropdownMenuItem
+                <DropdownMenuItem
                   onClick={() => {
                     dispatch(logout());
                     toast.success("Logout Successfull...");
@@ -131,7 +129,7 @@ const Navbar = () => {
                 >
                   <LogOut />
                   <span>Log out</span>
-                </DropdownMenuItem> */}
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
