@@ -1,16 +1,54 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLoginMutation, useRegisterMutation } from "../../Redux/Features/Auth/authApi";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { useAppDispatch } from "../../Redux/hook";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const [createUser] = useRegisterMutation();
+  const [logingUser] = useLoginMutation();
+  const dispatch = useAppDispatch();
+  const { register, handleSubmit } = useForm();
+  const handleRegister: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Creating your account...!");
+    const payload = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      role: "user",
+    };
+    const res = (await createUser(payload)) as any;
+    if (res.data?.success) {
+      toast.success(
+        "Successfully creted your account",
+        { id: toastId }
+      );
+      const logingRes = await logingUser({
+        email: data.email,
+        password: data.password,
+      });
+      dispatch(
+        logingRes as any
+      );
+      toast.success("Successfully Login.....!", { id: toastId });
+      navigate("/");
+    } else {
+      toast.error("Something went wrong!! Please provide valid information", {
+        id: toastId,
+      });
+    }
+  };
   return (
     <div className="register">
       <div className="border w-[400px] p-8 rounded-lg  backdrop-blur-md bg-brandPrimary/40">
-        <div className="flex justify-center items-center mb-4">
-        </div>
+        <div className="flex justify-center items-center mb-4"></div>
         <h1 className="text-3xl text-center font-bold text-brandTextSecondary">
           REGISTER NOW{" "}
         </h1>
-        <form>
+        <form onSubmit={handleSubmit(handleRegister)}>
           <div className="mt-8">
             <label
               htmlFor="name"
@@ -19,6 +57,7 @@ const Register = () => {
               NAME
             </label>
             <input
+              {...register("name")}
               placeholder="Ex: Saiful Islam"
               type="text"
               id="name"
@@ -33,6 +72,7 @@ const Register = () => {
               EMAIL
             </label>
             <input
+              {...register("email")}
               placeholder="Ex: saiful@example.com"
               type="email"
               id="email"
@@ -48,6 +88,7 @@ const Register = () => {
               PASSWORD
             </label>
             <input
+              {...register("password")}
               placeholder="Ex: ******"
               type="password"
               id="password"
@@ -66,7 +107,7 @@ const Register = () => {
             <p className="text-center text-brandTextTertiary">
               Have an account?{" "}
               <Link to="/login" className="text-[#510039] font-semibold">
-              Please Login
+                Please Login
               </Link>
             </p>
           </div>
