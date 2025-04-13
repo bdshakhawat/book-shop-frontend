@@ -42,18 +42,7 @@ const Navbar = () => {
             About
         </NavLink>
 
-        {/* <NavLink
-            to="/reviews"
-            className={({ isActive }) =>
-            `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
-                isActive
-                ? "bg-orange-100 text-orange-600 font-semibold"
-                : "hover:bg-orange-50 hover:text-orange-500"
-            }`
-            }
-        >
-            Reviews
-        </NavLink> */}
+       
         </>;
         
   
@@ -86,7 +75,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 
-                <Link to='/login' className="btn">Login</Link>
+                <Link to='/login' className="btn hover:bg-orange-500 hover:text-white">Login</Link>
                 {/* <Link to='/register' className="btn">Register</Link> */}
             </div>
             </div>
