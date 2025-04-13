@@ -13,6 +13,7 @@ const Success = () => {
   const [paymentDetails, setPaymentDetails] = useState(null);
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id"); // Get session_id from URL
+  console.log("sessionid", sessionId);
 
   useEffect(() => {
     if (sessionId) {
@@ -33,7 +34,7 @@ const Success = () => {
   }, [sessionId]);
   console.log(paymentDetails);
 
-  console.log("adding product error", error);
+  // console.log("adding product error", error);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-green-100">

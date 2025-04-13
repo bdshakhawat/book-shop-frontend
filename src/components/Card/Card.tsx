@@ -1,10 +1,13 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Link } from "react-router-dom";
 
-const Card = ({ book }) => {
+//import { Link } from "react-router-dom";
+
+const Card = ({ book }: any) => {
   return (
     <div>
-      <div key={book.id} className="card shadow-lg p-4">
+      <div key={book._id} className="card shadow-lg p-4">
         <img
           src={book.image}
           className="w-full h-60 object-cover rounded-md mb-4"
@@ -19,7 +22,7 @@ const Card = ({ book }) => {
           <span className="text-lg font-bold">${book.price}</span>
           <span className="text-yellow-500">⭐ {book.rating}</span>
         </div>
-        <Link to={`products/${book.id}`}>
+        <Link to={`products/${book._id}`}>
           <button className="btn first-letter:text-orange-600  hover:bg-orange-400 hover:text-white mt-4 p-4">
             See Details
           </button>

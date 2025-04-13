@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
+
 export type TBook = {
-  id: string;
+  _id: string;
   title: string;
   author: string;
   category: string;
@@ -22,7 +24,15 @@ const BookCard = ({ book }: BookCardProps) => {
             className=" h-52 w-full rounded-lg "
             alt=""
           />
-          <p className={`absolute top-2 my-1 right-2 px-2 border text-xs rounded-sm ${book.inStock?'bg-green-100 text-green-500 border-green-500':'bg-red-100 text-red-500 border-red-500'}`}>{book.inStock?<span>in sotck</span>:<span>out of stock</span>}</p>
+          <p
+            className={`absolute top-2 my-1 right-2 px-2 border text-xs rounded-sm ${
+              book.inStock
+                ? "bg-green-100 text-green-500 border-green-500"
+                : "bg-red-100 text-red-500 border-red-500"
+            }`}
+          >
+            {book.inStock ? <span>in sotck</span> : <span>out of stock</span>}
+          </p>
         </div>
 
         <div className="space-y-1 mt-3 ">
@@ -31,9 +41,11 @@ const BookCard = ({ book }: BookCardProps) => {
             <span>{book.author}</span> | <span>{book.category}</span>
           </p>
           <h1 className="text-2xl text-rose-500">${book.price}</h1>
-          <button className="bg-rose-500 text-white hover:bg-rose-600 w-full text-center font-semibold py-2 rounded-lg mt-3 ">
-            View Details
-          </button>
+          <Link to={`/allbooks/${book._id}`}>
+            <button className="bg-rose-500 text-white hover:bg-rose-600 w-full text-center font-semibold py-2 rounded-lg mt-3 ">
+              View Details
+            </button>
+          </Link>
         </div>
       </div>
     </div>

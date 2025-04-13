@@ -1,18 +1,51 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Button } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { useLoginMutation } from "../../Redux/Features/Auth/authApi";
+import { verifyToken } from "../../Utils/verifyToken";
+import { setUser, TUser } from "../../Redux/Features/Auth/authSlice";
+import { useAppDispatch } from "../../Redux/hook";
 
 const Login = () => {
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { state } = useLocation();
+  const [loginUser] = useLoginMutation();
+  const { register, handleSubmit } = useForm();
+  const handelLogin: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Login in progress ........!!");
+    const payload = {
+      email: data.email,
+      password: data.password,
+    };
+    const res = (await loginUser(payload)) as any;
+    console.log(res.data.data.accessToken)
+    if (res.data?.success) {
+      toast.success("Login successfully", { id: toastId });
+     
+      const user = verifyToken(res.data.data.accessToken) as TUser;
+      dispatch(setUser({ user: user, token: res.data.data.accessToken }));
+      navigate(state || `/`);
+    } else {
+      toast.error("Something went wrong!! Please provide valid information", {
+        id: toastId,
+      });
+    }
+  };
+
   return (
     <>
       <div className="login">
         <div className="border w-[400px] p-8 rounded-lg  backdrop-blur-md bg-brandPrimary/40">
-          <div className="flex justify-center items-center mb-8">
-          </div>
+          <div className="flex justify-center items-center mb-8"></div>
           <h1 className="text-3xl text-center font-bold text-brandTextSecondary">
             LOGIN NOW{" "}
           </h1>
-          <form>
+          <form onSubmit={handleSubmit(handelLogin)}>
             <div className="mt-8">
               <label
                 htmlFor="email"
@@ -21,6 +54,7 @@ const Login = () => {
                 EMAIL
               </label>
               <input
+                {...register("email")}
                 placeholder="Ex:saiful@example.com"
                 type="email"
                 id="email"
@@ -36,6 +70,7 @@ const Login = () => {
                 PASSWORD
               </label>
               <input
+                {...register("password")}
                 placeholder="Ex: ********"
                 type="password"
                 id="current-password"
@@ -53,7 +88,7 @@ const Login = () => {
               <p className="text-center text-brandTextTertiary">
                 Don't have an account?{" "}
                 <Link to="/register" className="text-[#510039] font-semibold">
-                Please Register
+                  Please Register
                 </Link>
               </p>
             </div>
