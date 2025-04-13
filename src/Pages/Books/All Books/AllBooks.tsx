@@ -5,6 +5,10 @@ import Pagination from "../../../components/pagination/Pagination";
 import Filter from "../../../components/filter/Filter";
 import { BsFilter } from "react-icons/bs";
 import { useGetAllbooksQuery } from "../../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
+import Loader from "../../../components/loader/Loader";
+
+
+
 
 const AllBooks = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,7 +24,11 @@ const AllBooks = () => {
   console.log("allbooks", allBook);
 
   if (isLoading) {
-    return <p>loading ..</p>;
+    return (
+      <div>
+        <Loader></Loader>
+      </div>
+    )
   }
 
   const allBooks = allBook?.data || [];
