@@ -11,7 +11,7 @@ const userRole = {
 };
 
 const DashboardLayout = () => {
-  const currentUserRole = useAppSelector((state)=>state.auth.user?.role)
+  const currentUserRole = useAppSelector((state) => state.auth.user?.role);
   let sidebarItem;
 
   switch (currentUserRole) {
@@ -28,7 +28,7 @@ const DashboardLayout = () => {
   return (
     <div className="max-w-[2520px]  mx-auto ">
       <div className="md:flex lg:flex ">
-        <div className=" lg:w-60  lg:min-h-screen  text-black shadow-xl border-2">
+        <div className=" lg:w-60  lg:min-h-screen  text-black shadow-xl border-2 ">
           <div className="flex justify-center items-center mt-2  ">
             <img
               className="w-[50%]"
@@ -42,7 +42,7 @@ const DashboardLayout = () => {
                 if (!item) return null; // skip undefined
                 return (
                   <div key={index}>
-                    <li className="bg-gray-50 hover:bg-orange-50 hover:text-orange-500 hover:font-semibold px-4 py-2 rounded-md ">
+                    <li className=" bg-orange-50 hover:bg-gray-100 text-orange-500 hover:text-orange-600 font-semibold px-4 py-2 rounded-md ">
                       <NavLink to={`${item.label}`}>{item.key}</NavLink>
                     </li>
                   </div>
@@ -52,7 +52,7 @@ const DashboardLayout = () => {
 
             <div className=" ">
               <ul className="list-none text-lg space-y-3 pt-8 px-2 text-center">
-                <li className=" bg-gray-50 hover:bg-orange-50 hover:text-orange-500 hover:font-semibold px-4 py-2 rounded-md ">
+                <li className=" bg-orange-50 hover:bg-gray-100 text-orange-500 hover:text-orange-600 font-semibold px-4 py-2 rounded-md ">
                   <NavLink
                     className={"flex items-center justify-center"}
                     to={`/`}
@@ -64,6 +64,7 @@ const DashboardLayout = () => {
             </div>
           </div>
         </div>
+       
 
         <div className="flex-1 py-10 px-8">
           <Outlet></Outlet>
