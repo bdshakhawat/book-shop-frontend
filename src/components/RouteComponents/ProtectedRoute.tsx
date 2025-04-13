@@ -24,6 +24,7 @@ const ProtectedRoute = ({ children, role }: TProtectedRoute) => {
     user = verifyToken(token);
   }
 
+
   if (role !== undefined && role !== user?.role) {
     dispatch(logout());
     persistor.purge();
