@@ -1,12 +1,11 @@
-
 import { Link } from 'react-router-dom';
-import Card from '../Card/Card';
-
+import BookCard from '../Card/BookCard';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 const NewArrival = () => {
     const books = [
         {
-          "id": "1",
+          "_id": "1",
           "title": "The Silent Patient",
           "author": "Alex Michaelides",
           "genre": "Thriller",
@@ -16,7 +15,7 @@ const NewArrival = () => {
           "image": "https://i.ibb.co/j6fKd5v/the-silent-patient.jpg"
         },
         {
-          "id": "2",
+          "_id": "2",
           "title": "Atomic Habits",
           "author": "James Clear",
           "genre": "Self-Help",
@@ -26,7 +25,7 @@ const NewArrival = () => {
           "image": "https://i.ibb.co/jrH4kfs/atomic-habits.jpg"
         },
         {
-          "id": "3",
+          "_id": "3",
           "title": "It Ends with Us",
           "author": "Colleen Hoover",
           "genre": "Romance",
@@ -36,7 +35,7 @@ const NewArrival = () => {
           "image": "https://i.ibb.co/nLqjS5c/it-ends-with-us.jpg"
         },
         {
-          "id": "4",
+          "_id": "4",
           "title": "Rich Dad Poor Dad",
           "author": "Robert T. Kiyosaki",
           "genre": "Finance",
@@ -46,7 +45,7 @@ const NewArrival = () => {
           "image": "https://i.ibb.co/0YmXChJ/rich-dad-poor-dad.jpg"
         },
         {
-          "id": "5",
+          "_id": "5",
           "title": "The Alchemist",
           "author": "Paulo Coelho",
           "genre": "Fiction",
@@ -59,11 +58,11 @@ const NewArrival = () => {
     return (
         <div className='lg:max-w-[80%] px-5 mx-auto' >
             <h1 className='text-center p-10 font-bold text-2xl lg:text-5xl bg-gradient-to-r from-orange-600 via-red-500 to-yellow-500 bg-clip-text text-transparent drop-shadow-lg tracking-wide'>New Arrivals</h1>
-            <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 rounded-md gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 rounded-md gap-6">
             {
-                books.map((book)=>(
-                    <Card key={book.id} book={book}></Card>
-                ))
+              books.slice(0,4).map((book : any) => (
+                <BookCard key={book._id} book={book} />
+              ))
             }
             </div>
             <div className="w-full p-5 flex justify-center">
