@@ -1,4 +1,4 @@
-import { useGetOrdersByEmailQuery } from "../../Redux/Features/Orders/Order.api";
+
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useAppSelector } from "../../Redux/hook";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -6,11 +6,6 @@ import { FiUser } from "react-icons/fi";
 import { toast } from "sonner";
 import { useUpdatePasswordMutation } from "../../Redux/Features/Auth/authApi";
 
-type TUpdatePasswordData = {
-  email: string;
-  currentPassword: string;
-  newPassword: string;
-};
 
 const UserDashboard = () => {
   const [updatePassword] = useUpdatePasswordMutation();
