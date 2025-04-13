@@ -4,6 +4,7 @@ import Card from '../Card/Card';
 
 
 const NewArrival = () => {
+  
     const books = [
         {
           "id": "1",
