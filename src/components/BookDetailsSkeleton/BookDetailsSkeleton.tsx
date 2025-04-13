@@ -126,7 +126,7 @@ const BookDetailsSkeleton = () => {
     // }
     // setLoading(true);
     const stripe = await loadStripe(
-      "pk_test_51M5sVrSH7xFCRHqM5aX9bzGVNU84eEqd8S1LQZncPaX6ks7Vsw1kZJnuz39Lb6lZsRjraY6xnvij9rFHfOn8zpCc00y7uEtVT7"
+      "pk_test_51NFeKsHXxHHqqBSEXEZ6oVqeAquqIpszGA5xvnGO3XSkrX53ffO3A2pRkRRuIhjoVvUKiFxBoC476BMmG8pr8GDK00kNXNphd6"
     );
 
     const body = {
