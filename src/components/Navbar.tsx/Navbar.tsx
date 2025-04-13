@@ -42,18 +42,7 @@ const Navbar = () => {
             About
         </NavLink>
 
-        {/* <NavLink
-            to="/reviews"
-            className={({ isActive }) =>
-            `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
-                isActive
-                ? "bg-orange-100 text-orange-600 font-semibold"
-                : "hover:bg-orange-50 hover:text-orange-500"
-            }`
-            }
-        >
-            Reviews
-        </NavLink> */}
+       
         </>;
         
   
