@@ -3,6 +3,7 @@ import { sidebarItemsGenerator } from "../../Utils/sideBarGenerator";
 import AdminRoutes from "../../Routes/AdminRoutes";
 import UserRoutes from "../../Routes/UserRoute";
 import { IoHomeOutline } from "react-icons/io5";
+import { useAppSelector } from "../../Redux/hook";
 
 const userRole = {
   ADMIN: "admin",
@@ -10,7 +11,7 @@ const userRole = {
 };
 
 const DashboardLayout = () => {
-  const currentUserRole = "user";
+  const currentUserRole = useAppSelector((state)=>state.auth.user?.role)
   let sidebarItem;
 
   switch (currentUserRole) {
@@ -38,7 +39,6 @@ const DashboardLayout = () => {
           <div className="flex flex-col justify-between h-[calc(100vh-96px)]">
             <ul className=" text-lg space-y-3 pt-8 px-2 text-center">
               {sidebarItem?.map((item, index) => {
-                console.log(item);
                 if (!item) return null; // skip undefined
                 return (
                   <div key={index}>

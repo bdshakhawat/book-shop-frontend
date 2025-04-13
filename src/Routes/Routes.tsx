@@ -13,6 +13,7 @@ import DashboardLayout from "../components/Layout/DashboardLayout";
 import { routeGenerator } from "../Utils/routesGenerator";
 import AdminRoutes from "./AdminRoutes";
 import UserRoutes from "./UserRoute";
+import ProtectedRoute from "../components/RouteComponents/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -45,12 +46,12 @@ const router = createBrowserRouter([
 
   {
     path: "/admin",
-    element: <DashboardLayout></DashboardLayout>,
+    element: <ProtectedRoute role="admin"><DashboardLayout></DashboardLayout></ProtectedRoute>,
     children: routeGenerator(AdminRoutes),
   },
   {
     path: "/user",
-    element: <DashboardLayout></DashboardLayout>,
+    element:<ProtectedRoute role="user"><DashboardLayout></DashboardLayout></ProtectedRoute>,
     children: routeGenerator(UserRoutes),
   },
 ]);
