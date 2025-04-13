@@ -1,37 +1,9 @@
-
 // import { useEffect, useState } from "react";
 // import { useLocation, useNavigate, useParams } from "react-router-dom";
-// //import { loadStripe } from "@stripe/stripe-js";
+// import { loadStripe } from "@stripe/stripe-js";
 // export const BookDetailsSkeleton = () => {
 //   const { productId } = useParams();
 //   const [book, setBook] = useState(null);
-
-//   useEffect(() => {
-//     // Replace this with your actual fetch logic
-//     const fetchBook = async () => {
-//       // Simulating a data fetch
-//       const mockData = {
-//         id: productId,
-//         title: "The Silent Patient",
-//         author: "Alex Michaelides",
-//         price: 12.99,
-//         rating: 4.5,
-//         description:
-//           "Alicia Berenson’s life is seemingly perfect... until she shoots her husband and stops speaking forever.",
-//         coverImage: "https://i.ibb.co/7z6vcLk/cover-placeholder.jpg",
-//       };
-
-//       setTimeout(() => {
-//         setBook(mockData);
-//       }, 500);
-//     };
-
-//     fetchBook();
-//   }, [productId]);
-
-//   if (!book) {
-//     return <div className="text-center mt-10">Loading...</div>;
-//   }
 
 //   // const { data: book } = useGetBookByIdQuery(productId);
 //   console.log(book);
