@@ -125,7 +125,9 @@ const BookDetailsSkeleton = () => {
     //   return;
     // }
     // setLoading(true);
-    const stripe = await loadStripe("");
+    const stripe = await loadStripe(
+      "pk_test_51NFeKsHXxHHqqBSEXEZ6oVqeAquqIpszGA5xvnGO3XSkrX53ffO3A2pRkRRuIhjoVvUKiFxBoC476BMmG8pr8GDK00kNXNphd6"
+    );
 
     const body = {
       product: book.data,
@@ -137,7 +139,7 @@ const BookDetailsSkeleton = () => {
     };
 
     const response = await fetch(
-      "http://localhost:5000/create-checkout-session",
+      "https://book-shop-backend-v1.vercel.app/create-checkout-session",
       {
         method: "POST",
         headers: headers,
@@ -159,17 +161,17 @@ const BookDetailsSkeleton = () => {
     }
   };
   return (
-    <div className="container mx-auto p-6 h-screen">
-      <div className="grid md:grid-cols-2 gap-10 items-start">
-        <div className="rounded-lg overflow-hidden shadow-lg">
+    <div className="container lg:w-[80%] mx-auto p-6 h-screen mt-10">
+      <div className="flex justify-center  gap-20  items-center">
+        <div className="rounded-lg flex-1 overflow-hidden shadow-lg">
           <img
-            src={book?.data?.img}
+            src={book?.data?.img || 'https://images.theconversation.com/files/45159/original/rptgtpxd-1396254731.jpg?ixlib=rb-4.1.0&q=45&auto=format&w=754&fit=clip'} 
             alt={book?.data?.title}
             className="w-full h-auto object-cover"
           />
         </div>
 
-        <div>
+        <div className="flex-1">
           <h2 className="text-3xl font-bold text-orange-600">
             {book?.data?.title}
           </h2>
@@ -204,7 +206,7 @@ const BookDetailsSkeleton = () => {
               onClick={makePayment}
               className="btn btn-primary bg-orange-600 border-none hover:bg-orange-700"
             >
-              Oeder Now
+              Order Now
             </button>
           </div>
         </div>
