@@ -3,8 +3,9 @@ import { useAppDispatch, useAppSelector } from "../../Redux/hook";
 import { DropdownMenu, DropdownMenuContent,  DropdownMenuItem,  DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { toast } from "sonner";
 import { LogOut } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
+import { logout } from "../../Redux/Features/Auth/authSlice";
 
 const Navbar = () => {
   const links = (
@@ -113,7 +114,7 @@ const Navbar = () => {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Avatar className="cursor-pointer">
-                  <AvatarImage src={user?.profileImage} />
+                  {/* <AvatarImage src={user?.profileImage} /> */}
                   <AvatarFallback>{user.name[0]}</AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>

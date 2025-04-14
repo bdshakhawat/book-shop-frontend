@@ -8,18 +8,16 @@ import router from "./Routes/Routes";
 // import { PersistGate } from "redux-persist/integration/react";
 import { Toaster } from "sonner";
 import { Provider } from "react-redux";
-import { store } from "./Redux/store";
+import { persistor, store } from "./Redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    {/* <Provider store={Store}> */}
-    {/* <PersistGate persistor={persistor}> */}
     <Provider store={store}>
-      <RouterProvider router={router} />
-      <Toaster />
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={router} />
+        <Toaster />
+      </PersistGate>
     </Provider>
-
-    {/* </PersistGate>
-    {/* </Provider> */}
   </StrictMode>
 );

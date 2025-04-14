@@ -13,6 +13,10 @@ import DashboardLayout from "../components/Layout/DashboardLayout";
 import { routeGenerator } from "../Utils/routesGenerator";
 import AdminRoutes from "./AdminRoutes";
 import UserRoutes from "./UserRoute";
+import ProtectedRoute from "../components/RouteComponents/ProtectedRoute";
+import BookDetailsSkeleton from "../components/BookDetailsSkeleton/BookDetailsSkeleton";
+import Success from "../Pages/Payment/Success";
+import Failure from "../Pages/Payment/Failure";
 
 const router = createBrowserRouter([
   {
@@ -29,22 +33,13 @@ const router = createBrowserRouter([
         element: <AllBooks></AllBooks>,
       },
       {
+        path: "/allbooks/:bookId",
+        element: <BookDetailsSkeleton />,
+      },
+      {
         path: "/about",
         element: <About></About>,
       },
-      // {
-      //   path: "/products/:productId",
-      //   element: <BookDetailsSkeleton></BookDetailsSkeleton>,
-      // },
-      // {
-      //   path: "/sucess",
-      //   element: <Success />,
-      // },
-      // {
-      //   path: "/fail",
-      //   element: <Failure />,
-      // },
-
     ],
   },
   {
@@ -58,14 +53,30 @@ const router = createBrowserRouter([
 
   {
     path: "/admin",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <ProtectedRoute role="admin">
+        <DashboardLayout></DashboardLayout>
+      </ProtectedRoute>
+    ),
     children: routeGenerator(AdminRoutes),
   },
   {
     path: "/user",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <ProtectedRoute role="user">
+        <DashboardLayout></DashboardLayout>
+      </ProtectedRoute>
+    ),
     children: routeGenerator(UserRoutes),
   },
+  {
+    path: "/success",
+    element: <Success />,
+  },
+  {
+    path: "/failed",
+    element: <Failure />,
+  },
 ]);
-export default router
 
+export default router;

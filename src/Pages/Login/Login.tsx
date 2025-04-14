@@ -1,4 +1,3 @@
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Button } from "antd";
@@ -6,10 +5,15 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useLoginMutation } from "../../Redux/Features/Auth/authApi";
+import { verifyToken } from "../../Utils/verifyToken";
+import { setUser, TUser } from "../../Redux/Features/Auth/authSlice";
+import { useAppDispatch } from "../../Redux/hook";
 
 const Login = () => {
+
   const navigate = useNavigate();
-  const { state } = useLocation(); 
+  const dispatch = useAppDispatch();
+  const { state } = useLocation();
   const [loginUser] = useLoginMutation();
   const { register, handleSubmit } = useForm();
   const handelLogin: SubmitHandler<FieldValues> = async (data) => {
@@ -22,7 +26,9 @@ const Login = () => {
     if (res.data?.success) {
       toast.success("Login successfully", { id: toastId });
      
-      navigate(state || "/");
+      const user = verifyToken(res.data.data.accessToken) as TUser;
+      dispatch(setUser({ user: user, token: res.data.data.accessToken }));
+      navigate(state || `/`);
     } else {
       toast.error("Something went wrong!! Please provide valid information", {
         id: toastId,
