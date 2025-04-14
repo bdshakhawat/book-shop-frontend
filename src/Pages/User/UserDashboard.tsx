@@ -1,35 +1,50 @@
-import { useGetOrdersByEmailQuery } from "../../Redux/Features/Orders/Order.api";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useAppSelector } from "../../Redux/hook";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { FiUser } from "react-icons/fi";
 import { toast } from "sonner";
 import { useUpdatePasswordMutation } from "../../Redux/Features/Auth/authApi";
+import { useGetOrdersByEmailQuery } from "../../Redux/Features/Orders/Order.api";
 
-type TUpdatePasswordData = {
+export interface IOrder {
+  user?: string;
+  products: {
+    product: string;
+    quantity: number;
+  }[];
+  totalPrice: number;
   email: string;
-  currentPassword: string;
-  newPassword: string;
-};
+  status: "Pending" | "Paid" | "Shipped" | "Completed" | "Cancelled";
+  transaction: {
+    id: string;
+    transactionStatus: string;
+    bank_status: string;
+    sp_code: string;
+    sp_message: string;
+    method: string;
+    date_time: string;
+  };
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 
 const UserDashboard = () => {
   const [updatePassword] = useUpdatePasswordMutation();
   const userEmail = useAppSelector((state) => state.auth.user?.email);
+  const { data, isLoading } = useGetOrdersByEmailQuery(undefined);
 
-  // const { data, isLoading } = useGetOrdersByEmailQuery(undefined);
-  // console.log(data)
-  const { register, handleSubmit ,reset} = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const handleUpdatePassword: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data)
+    console.log(data);
     try {
       const res = await updatePassword({
         email: data.email,
         oldPassword: data.password,
         newPassword: data.newPassword,
       }).unwrap();
-      console.log(res)
+      console.log(res);
       toast.success("Password updated successfully!");
-      reset()
+      reset();
     } catch (err) {
       console.error(err);
       toast.error("Failed to update password");
@@ -71,13 +86,15 @@ const UserDashboard = () => {
         />
         <div className="tab-content  bg-base-100 p-10 rounded-lg">
           <div>
-            <h1 className="py-4 text-lg">Manage Order : (2) </h1>
+            <h1 className="py-4 text-lg">
+              Manage Order : ({data?.data?.length}){" "}
+            </h1>
             <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
               <table className="table">
                 {/* head */}
                 <thead>
                   <tr className="bg-base-200">
-                    <th>Order Id </th>
+                    <th>Author Name  </th>
                     <th>Customer Email</th>
                     <th>Order Status</th>
                     <th>Total Price</th>
@@ -86,36 +103,16 @@ const UserDashboard = () => {
                 </thead>
                 <tbody>
                   {/* row 1 */}
-                  <tr className="border border-gray-300">
-                    <td>Cy Ganderton</td>
-                    <td>Quality Control Specialist</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                    <td>Blue</td>
-                  </tr>
-                  {/* row 2 */}
-                  <tr>
-                    <td>Hart Hagerty</td>
-                    <td>Desktop Support Technician</td>
-                    <td>Desktop Support Technician</td>
-                    <td>Purple</td>
-                    <td>Purple</td>
-                  </tr>
-                  {/* row 3 */}
-                  <tr>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Red</td>
-                    <td>Red</td>
-                  </tr>
-                  <tr>
-                    <td>Brice Swyre</td>
-                    <td>Tax Accountant</td>
-                    <td>Tax Accountant</td>
-                    <td>Red</td>
-                    <td>Red</td>
-                  </tr>
+
+                  {data?.data.map((orderItem: IOrder, index) => (
+                    <tr className="border border-gray-300">
+                      <td>{orderItem?.user?.name}</td>
+                      <td>{orderItem?.user?.email}</td>
+                      <td>{orderItem?.status}</td>
+                      <td>{orderItem.totalPrice}</td>
+                      <td>{(orderItem?.createdAt?.toLocaleString()) as string}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
@@ -164,7 +161,12 @@ const UserDashboard = () => {
                     placeholder="New Password"
                   />
 
-                  <button type="submit" className="bg-orange-500 text-white hover:bg-orange-600 w-full text-center font-semibold py-2 rounded-lg mt-3">Login</button>
+                  <button
+                    type="submit"
+                    className="bg-orange-500 text-white hover:bg-orange-600 w-full text-center font-semibold py-2 rounded-lg mt-3"
+                  >
+                    Login
+                  </button>
                 </form>
               </div>
             </div>

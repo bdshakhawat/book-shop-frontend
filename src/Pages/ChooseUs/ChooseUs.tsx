@@ -2,9 +2,9 @@ import { FaShippingFast, FaRedo, FaHeadset, FaStar } from "react-icons/fa";
 
 const ChooseUs = () => {
     return (
-        <div className="bg-gray-50 py-16">
+        <div className="bg-gray-50 pb-4 ">
       <div className="max-w-[80%] mx-auto text-center">
-        <h2 className="text-3xl font-bold text-gray-800 mb-8">Why Choose Us?</h2>
+        <h2 className="text-3xl font-bold text-gray-800 py-14">Why Choose Us?</h2>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="flex flex-col items-center">
