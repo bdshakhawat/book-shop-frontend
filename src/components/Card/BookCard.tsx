@@ -16,7 +16,7 @@ type BookCardProps = {
 
 const BookCard = ({ book }: BookCardProps) => {
   return (
-    <div className="border bg-white border-gray-300 shadow-md rounded-lg">
+    <div className="border bg-white border-gray-300 shadow-md rounded-lg"> 
       <div className="p-4">
         <div className="relative ">
           <img

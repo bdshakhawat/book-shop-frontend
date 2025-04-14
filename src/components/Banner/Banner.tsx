@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 const Banner = () => {
     return (
       <div
@@ -34,9 +36,9 @@ const Banner = () => {
             <p className="mb-5">
               Explore handpicked collections and enjoy exclusive offers on your favorite books.
             </p>
-            <button className="btn btn-outline text-white border-white hover:bg-orange-600 hover:text-black transition-all duration-300">
+            <NavLink to={'/allbooks'}><button className="btn btn-outline text-white border-white hover:bg-orange-500 hover:text-black transition-all duration-300">
              Browse Collection
-            </button>
+            </button></NavLink>
           </div>
         </div>
       </div>
