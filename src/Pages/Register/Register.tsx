@@ -1,16 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "antd";
-import { Link, useNavigate } from "react-router-dom";
-import { useLoginMutation, useRegisterMutation } from "../../Redux/Features/Auth/authApi";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  useLoginMutation,
+  useRegisterMutation,
+} from "../../Redux/Features/Auth/authApi";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { verifyToken } from "../../Utils/verifyToken";
+import { setUser, TUser } from "../../Redux/Features/Auth/authSlice";
 import { useAppDispatch } from "../../Redux/hook";
+
 
 const Register = () => {
   const navigate = useNavigate();
-  const [createUser] = useRegisterMutation();
-  const [logingUser] = useLoginMutation();
   const dispatch = useAppDispatch();
+  const { state } = useLocation();
+  const [createUser] = useRegisterMutation();
+  const [loginUser] = useLoginMutation();
   const { register, handleSubmit } = useForm();
   const handleRegister: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating your account...!");
@@ -21,21 +28,22 @@ const Register = () => {
       role: "user",
     };
     const res = (await createUser(payload)) as any;
+ 
+
     if (res.data?.success) {
-      toast.success(
-        "Successfully creted your account",
-        { id: toastId }
-      );
-      const logingRes = await logingUser({
-        email: data.email,
-        password: data.password,
-      });
-      dispatch(
-        logingRes as any
-      );
-      toast.success("Successfully Login.....!", { id: toastId });
-      navigate("/");
-    } else {
+      toast.success("Successfully created your account", { id: toastId });
+      const loginRes = (await loginUser(payload)) as any;
+      if (loginRes.data?.success) {
+        toast.success("Login successfully", { id: toastId });
+
+        const user = verifyToken(loginRes.data.data.accessToken) as TUser;
+        dispatch(
+          setUser({ user: user, token: loginRes.data.data.accessToken })
+        );
+        navigate(state || "/");
+      }
+    } 
+    else {
       toast.error("Something went wrong!! Please provide valid information", {
         id: toastId,
       });

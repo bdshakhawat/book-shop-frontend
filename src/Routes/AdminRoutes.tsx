@@ -1,5 +1,6 @@
 import AdminDashboard from "../Pages/Admin/AdminDashboard";
 import AddBookToStore from "../Pages/Admin/AddBookToStore";
+// import UpdateBook from "../Pages/Admin/UpdateBook";
 
 const AdminRoutes = [
   {

@@ -5,9 +5,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useLoginMutation } from "../../Redux/Features/Auth/authApi";
+import { verifyToken } from "../../Utils/verifyToken";
+import { setUser, TUser } from "../../Redux/Features/Auth/authSlice";
+import { useAppDispatch } from "../../Redux/hook";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const { state } = useLocation();
   const [loginUser] = useLoginMutation();
   const { register, handleSubmit } = useForm();
@@ -22,7 +26,9 @@ const Login = () => {
       console.log(res);
       toast.success("Login successfully", { id: toastId });
 
-      navigate(state || "/");
+      const user = verifyToken(res.data.data.accessToken) as TUser;
+      dispatch(setUser({ user: user, token: res.data.data.accessToken }));
+      navigate(state || `/`);
     } else {
       toast.error("Something went wrong!! Please provide valid information", {
         id: toastId,

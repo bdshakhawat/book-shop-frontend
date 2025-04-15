@@ -4,9 +4,9 @@ import { Star } from 'lucide-react';
 
 const Reviews = () => {
   return (
-    <section className="py-12 bg-gray-50">
-      <div className="w-11/12 mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">
+    <section className="py-12 ">
+      <div className="container lg:max-w-[80%] mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center text-gray-800 py-14">
           Customer Reviews
         </h2>
         <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

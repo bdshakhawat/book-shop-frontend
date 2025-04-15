@@ -16,7 +16,7 @@ type BookCardProps = {
 
 const BookCard = ({ book }: BookCardProps) => {
   return (
-    <div className="border bg-white border-gray-300 shadow-md rounded-lg">
+    <div className="border bg-white border-gray-300 shadow-md rounded-lg"> 
       <div className="p-4">
         <div className="relative ">
           <img
@@ -41,7 +41,7 @@ const BookCard = ({ book }: BookCardProps) => {
             <span>{book.author}</span> | <span>{book.category}</span>
           </p>
           <h1 className="text-2xl text-orange-500">${book.price}</h1>
-          <Link to={`/product/${book._id}`}>
+          <Link to={`/allbooks/${book._id}`}>
             <button className="bg-orange-500 text-white hover:bg-orange-600 w-full text-center font-semibold py-2 rounded-lg mt-3 ">
               View Details
             </button>
