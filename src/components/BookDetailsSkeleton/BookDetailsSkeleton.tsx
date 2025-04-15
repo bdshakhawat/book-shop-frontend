@@ -110,13 +110,17 @@ import { Navigate, useParams } from "react-router-dom";
 import { useGetSingleBookQuery } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../Redux/Features/Auth/authSlice";
+import Loader from "../loader/Loader";
 
 const BookDetailsSkeleton = () => {
   const { bookId } = useParams();
   const user = useSelector(selectCurrentUser);
-  const { data: book } = useGetSingleBookQuery(bookId);
+  const { data: book,isLoading } = useGetSingleBookQuery(bookId);
   console.log("product id", bookId);
   console.log(book);
+ if(isLoading){
+  return <Loader></Loader>
+ }
 
   const makePayment = async () => {
     // if (!user) {

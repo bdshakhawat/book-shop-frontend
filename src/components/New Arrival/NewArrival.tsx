@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import BookCard from '../Card/BookCard';
+import { useGetAllbooksQuery } from '../../Redux/Features/Admin/UserManagementApi/bookManagement.api';
+import Loader from '../loader/Loader';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 const NewArrival = () => {
@@ -56,18 +58,24 @@ const NewArrival = () => {
           "image": "https://i.ibb.co/3mJZg04/the-alchemist.jpg"
         }
       ]
+
+      const {data,isLoading} = useGetAllbooksQuery(undefined)
+      if(isLoading){
+        return <Loader></Loader>
+      }
+
     return (
         <div className='lg:max-w-[80%] px-5 mx-auto' >
             <h1 className='text-center p-10 font-bold text-2xl lg:text-5xl bg-gradient-to-r from-orange-600 via-red-500 to-yellow-500 bg-clip-text text-transparent drop-shadow-lg tracking-wide'>New Arrivals</h1>
-            <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 rounded-md gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  rounded-md gap-6">
             {
-              books.slice(0,4).map((book : any) => (
+              data?.data?.slice(0,6).map((book : any) => (
                 <BookCard key={book._id} book={book} />
               ))
             }
             </div>
             <div className="w-full p-5 flex justify-center">
-            <Link to='/allbooks'  className="btn rounded-lg bg-orange-600 text-white hover:bg-orange-300">
+            <Link to='/allbooks'  className="btn rounded-lg bg-orange-500 text-white hover:bg-orange-600">
                 See More
             </Link>
             </div>
