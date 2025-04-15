@@ -6,6 +6,7 @@ import { useCreateOrderMutation } from "../../Redux/Features/Orders/Order.api";
 const Success = () => {
   const navigate = useNavigate();
   const [placeOrder , { data, error }] = useCreateOrderMutation()
+  console.log(data)
   // const [placeOrder, { data, error }] = usePlaceOrderMutation();
   // useEffect(() => {
   //   // You can clear cart or perform any necessary cleanup here
