@@ -32,7 +32,7 @@ const UserDashboard = () => {
   const [updatePassword] = useUpdatePasswordMutation();
   const userEmail = useAppSelector((state) => state.auth.user?.email);
   const { data, isLoading } = useGetOrdersByEmailQuery(undefined);
-
+console.log(data)
   const { register, handleSubmit, reset } = useForm();
   const handleUpdatePassword: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
@@ -90,7 +90,8 @@ const UserDashboard = () => {
               Manage Order : ({data?.data?.length}){" "}
             </h1>
             <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
-              <table className="table">
+            {
+              data?.data.length > 0 ? (  <table className="table">
                 {/* head */}
                 <thead>
                   <tr className="bg-base-200">
@@ -114,7 +115,9 @@ const UserDashboard = () => {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </table>) : <p className="text-center text-2xl py-20 font-semibold">You currently don't have any order! 😔
+              </p>
+            }
             </div>
           </div>
         </div>
