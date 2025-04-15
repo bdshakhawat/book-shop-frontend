@@ -4,38 +4,24 @@ import CustomInput from "../../components/CustomForm/CustomInput";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import CustomSelect from "../../components/CustomForm/CustomSelect";
 import { CategoryOptions } from "../../Constants/constants";
-//import { useUpdateBookDataMutation } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
-import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useCreateBookMutation } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
-const UpdateBook = () => {
-  const { id } = useParams();
-  //const [updateBook] = useUpdateBookDataMutation(undefined);
+const CreateBook = () => {
+    const navigate = useNavigate();
+  const [addBook] = useCreateBookMutation(undefined);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const toastId = toast.loading("Updating book...");
-    console.log(data);
-    // const custommizedData = {
-    //   title: "The Great Gatsby",
-    //   description: "A story of the Great Gatsby",
-    //   price: 100,
-    //   quantity: 10,
-    //   author: "F. Scott Fitzgerald",
-    //   category: "Fiction",
-    // };
-    // const { data: response } = await updateBook({ id, custommizedData });
-    // try {
-    //   const { data: response } = await updateBook({ id, data });
-    //   if (response?.data?.success) {
-    //     toast.success("Book updated successfully", { id: toastId });
-    //   } else {
-    //     toast.error("Failed to update book", { id: toastId });
-    //   }
-    //   // console.log(response);
-    // } catch (error) {
-    //   toast.error("Failed to update book", { id: toastId });
-    //   console.log(error);
-    // }
+    const toastId = toast.loading("Book crating...");
+    try {
+      await addBook(data).unwrap();
+      toast.success("Book created successfully", { id: toastId });
+        navigate("/admin/dashboard");
+    } catch (error) {
+      toast.error("Failed to create book", { id: toastId });
+      console.log(error);
+    }
   };
   return (
     <motion.div
@@ -51,7 +37,7 @@ const UpdateBook = () => {
         className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-md"
       >
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
-          Update Book Information📚
+          Create A Book📚
         </h2>
         <CustomForm onSubmit={onSubmit} className="space-y-6">
           <CustomInput name="title" placeholder="Title" type="text" />
@@ -60,13 +46,10 @@ const UpdateBook = () => {
             placeholder="Description"
             type="text"
           />
+          
           <CustomInput name="price" placeholder="Price" type="number" />
-          <CustomInput
-            name="quantity"
-            placeholder="Quantity"
-            type="number"
-          />
-          <CustomInput name="author" placeholderTitle="Author" type="text" />
+          <CustomInput name="quantity" placeholder="Quantity" type="number" />
+          <CustomInput name="author" placeholder="Author" type="text" />
           <CustomSelect
             name="category"
             label="Category"
@@ -79,7 +62,7 @@ const UpdateBook = () => {
               className="custom-btn"
               style={{ width: "100%" }}
             >
-              Update Book
+              Submit
             </Button>
           </motion.div>
         </CustomForm>
@@ -88,4 +71,4 @@ const UpdateBook = () => {
   );
 };
 
-export default UpdateBook;
+export default CreateBook;
