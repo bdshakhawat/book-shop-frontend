@@ -28,7 +28,7 @@ const DashboardLayout = () => {
   return (
     <div className="max-w-[2520px]  mx-auto ">
       <div className="md:flex lg:flex ">
-        <div className=" lg:w-60  lg:min-h-screen  text-black shadow-xl border-2 ">
+        <div className=" lg:w-60  lg:min-h-screen text-black shadow-xl border-2 ">
           <div className="flex justify-center items-center mt-2  ">
             <img
               className="w-[50%]"
