@@ -46,6 +46,7 @@ const CreateBook = () => {
             placeholder="Description"
             type="text"
           />
+          
           <CustomInput name="price" placeholder="Price" type="number" />
           <CustomInput name="quantity" placeholder="Quantity" type="number" />
           <CustomInput name="author" placeholder="Author" type="text" />
