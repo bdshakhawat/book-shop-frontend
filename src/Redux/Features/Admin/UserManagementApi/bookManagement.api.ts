@@ -51,4 +51,5 @@ export const {
   useGetAllbooksQuery,
   useGetSingleBookQuery,
   useDeleteABookMutation,
+  useUpdateProductMutation
 } = bookManagementApi;

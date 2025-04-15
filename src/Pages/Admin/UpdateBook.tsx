@@ -7,7 +7,7 @@ import { CategoryOptions } from "../../Constants/constants";
 import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { useUpdateProductMutation } from "../../Redux/Features/product/productApi";
+import { useUpdateProductMutation } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
 
 const UpdateBook = () => {
     const navigate = useNavigate()
