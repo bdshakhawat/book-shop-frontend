@@ -1,4 +1,3 @@
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Button } from "antd";
@@ -9,7 +8,7 @@ import { useLoginMutation } from "../../Redux/Features/Auth/authApi";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { state } = useLocation(); 
+  const { state } = useLocation();
   const [loginUser] = useLoginMutation();
   const { register, handleSubmit } = useForm();
   const handelLogin: SubmitHandler<FieldValues> = async (data) => {
@@ -20,8 +19,9 @@ const Login = () => {
     };
     const res = (await loginUser(payload)) as any;
     if (res.data?.success) {
+      console.log(res);
       toast.success("Login successfully", { id: toastId });
-     
+
       navigate(state || "/");
     } else {
       toast.error("Something went wrong!! Please provide valid information", {
