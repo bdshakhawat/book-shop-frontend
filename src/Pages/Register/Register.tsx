@@ -11,6 +11,7 @@ import { verifyToken } from "../../Utils/verifyToken";
 import { setUser, TUser } from "../../Redux/Features/Auth/authSlice";
 import { useAppDispatch } from "../../Redux/hook";
 
+
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -27,6 +28,7 @@ const Register = () => {
       role: "user",
     };
     const res = (await createUser(payload)) as any;
+ 
 
     if (res.data?.success) {
       toast.success("Successfully created your account", { id: toastId });
@@ -35,10 +37,13 @@ const Register = () => {
         toast.success("Login successfully", { id: toastId });
 
         const user = verifyToken(loginRes.data.data.accessToken) as TUser;
-        dispatch(setUser({ user: user, token: loginRes.data.data.accessToken }));
+        dispatch(
+          setUser({ user: user, token: loginRes.data.data.accessToken })
+        );
         navigate(state || "/");
       }
-    } else {
+    } 
+    else {
       toast.error("Something went wrong!! Please provide valid information", {
         id: toastId,
       });
