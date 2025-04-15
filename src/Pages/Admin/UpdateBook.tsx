@@ -15,19 +15,7 @@ const UpdateBook = () => {
   const [updateBook] = useUpdateProductMutation(undefined);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Updating book...");
-    // const custommizedData = {
-    //   title: "The Great Gatsby",
-    //   description: "A story of the Great Gatsby",
-    //   price: 100,
-    //   quantity: 10,
-    //   author: "F. Scott Fitzgerald",
-    //   category: "Fiction",
-    // };
-
-//     const { data: response } = await updateBook({ id, data });
-//    console.log(response)
-   
-
+    
    
     try {
       const { data: response } = await updateBook({ id, data} );

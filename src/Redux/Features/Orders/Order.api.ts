@@ -16,9 +16,8 @@ export const orderAPI = baseApi.injectEndpoints({
         url: `/order/verify-order?order_id=${orderId}`,
         method: "PATCH",
       }),
-      
     }),
-     getCustomerOrders: build.query({
+    getCustomerOrders: build.query({
       query: () => ({
         url: `/order/get-customer-orders`,
         method: "GET",
@@ -35,6 +34,10 @@ export const orderAPI = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetOrdersByEmailQuery ,useCreateOrderMutation, useUpdateOrderStatusMutation, useVerifyOrderMutation
-, useGetCustomerOrdersQuery
+export const {
+  useGetOrdersByEmailQuery,
+  useCreateOrderMutation,
+  useUpdateOrderStatusMutation,
+  useVerifyOrderMutation,
+  useGetCustomerOrdersQuery,
 } = orderAPI;

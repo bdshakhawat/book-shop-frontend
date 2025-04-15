@@ -110,13 +110,17 @@ import { Navigate, useParams } from "react-router-dom";
 import { useGetSingleBookQuery } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../Redux/Features/Auth/authSlice";
+import Loader from "../loader/Loader";
 
 const BookDetailsSkeleton = () => {
   const { bookId } = useParams();
   const user = useSelector(selectCurrentUser);
-  const { data: book } = useGetSingleBookQuery(bookId);
+  const { data: book,isLoading } = useGetSingleBookQuery(bookId);
   console.log("product id", bookId);
   console.log(book);
+ if(isLoading){
+  return <Loader></Loader>
+ }
 
   const makePayment = async () => {
     // if (!user) {
@@ -125,9 +129,7 @@ const BookDetailsSkeleton = () => {
     //   return;
     // }
     // setLoading(true);
-    const stripe = await loadStripe(
-      "pk_test_51NFeKsHXxHHqqBSEXEZ6oVqeAquqIpszGA5xvnGO3XSkrX53ffO3A2pRkRRuIhjoVvUKiFxBoC476BMmG8pr8GDK00kNXNphd6"
-    );
+    const stripe = await loadStripe("");
 
     const body = {
       product: book.data,
@@ -139,7 +141,7 @@ const BookDetailsSkeleton = () => {
     };
 
     const response = await fetch(
-      "https://book-shop-backend-v1.vercel.app/create-checkout-session",
+      "http://localhost:5000/create-checkout-session",
       {
         method: "POST",
         headers: headers,
@@ -165,7 +167,10 @@ const BookDetailsSkeleton = () => {
       <div className="flex justify-center  gap-20  items-center">
         <div className="rounded-lg flex-1 overflow-hidden shadow-lg">
           <img
-            src={book?.data?.img || 'https://images.theconversation.com/files/45159/original/rptgtpxd-1396254731.jpg?ixlib=rb-4.1.0&q=45&auto=format&w=754&fit=clip'} 
+            src={
+              book?.data?.img ||
+              "https://images.theconversation.com/files/45159/original/rptgtpxd-1396254731.jpg?ixlib=rb-4.1.0&q=45&auto=format&w=754&fit=clip"
+            }
             alt={book?.data?.title}
             className="w-full h-auto object-cover"
           />
