@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-// import { usePlaceOrderMutation } from "../redux/features/auth/authApi";
+import { useCreateOrderMutation } from "../../Redux/Features/Orders/Order.api";
+
 
 const Success = () => {
   const navigate = useNavigate();
+  const [placeOrder , { data, error }] = useCreateOrderMutation()
   // const [placeOrder, { data, error }] = usePlaceOrderMutation();
   // useEffect(() => {
   //   // You can clear cart or perform any necessary cleanup here
@@ -20,12 +22,13 @@ const Success = () => {
       fetch(`http://localhost:5000/checkout-session/${sessionId}`)
         .then((res) => res.json())
         .then((data) => {
-          // placeOrder({
-          //   email: data.userEmail,
-          //   product: data.productId,
-          //   quantity: parseInt(data.productQuantity),
-          //   totalPrice: parseInt(data.productPrice),
-          // });
+          console.log(data)
+          placeOrder({
+            email: data.userEmail,
+            product: data.productId,
+            quantity: parseInt(data.productQuantity),
+            totalPrice: parseInt(data.productPrice),
+          });
         })
         .catch((error) =>
           console.error("Error fetching payment details:", error)

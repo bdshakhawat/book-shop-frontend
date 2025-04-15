@@ -36,7 +36,7 @@ const DashboardLayout = () => {
               alt=""
             />
           </div>
-          <div className="flex flex-col justify-between h-[calc(100vh-96px)]">
+          <div className="flex flex-col justify-between min-h-[calc(100vh-96px)]">
             <ul className=" text-lg space-y-3 pt-8 px-2 text-center">
               {sidebarItem?.map((item, index) => {
                 if (!item) return null; // skip undefined
@@ -57,7 +57,7 @@ const DashboardLayout = () => {
                     className={"flex items-center justify-center"}
                     to={`/`}
                   >
-                    <IoHomeOutline size={20}></IoHomeOutline> Home
+                    <IoHomeOutline size={20}></IoHomeOutline> &nbsp; Home
                   </NavLink>
                 </li>
               </ul>
@@ -66,7 +66,7 @@ const DashboardLayout = () => {
         </div>
        
 
-        <div className="flex-1 py-10 px-8">
+        <div className="flex-1 py-8 px-14 bg-base-200">
           <Outlet></Outlet>
         </div>
       </div>

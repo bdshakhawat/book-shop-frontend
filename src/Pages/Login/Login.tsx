@@ -23,7 +23,6 @@ const Login = () => {
       password: data.password,
     };
     const res = (await loginUser(payload)) as any;
-    console.log(res.data.data.accessToken)
     if (res.data?.success) {
       toast.success("Login successfully", { id: toastId });
      

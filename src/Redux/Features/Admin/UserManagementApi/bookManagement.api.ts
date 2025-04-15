@@ -22,6 +22,12 @@ const bookManagementApi = baseApi.injectEndpoints({
                 }
             }
         }),
+        deleteABook: builder.mutation({
+        query: (params) => ({
+         url: `/books/delete-book/${params}`,
+         method: "PATCH",
+      }),
+    }),
        getSingleBook: builder.query({
         query: (id) => {
             return {
@@ -34,4 +40,4 @@ const bookManagementApi = baseApi.injectEndpoints({
 })
 
 
-export const { useGetAllbooksQuery,useGetSingleBookQuery } = bookManagementApi
+export const { useGetAllbooksQuery,useGetSingleBookQuery, useDeleteABookMutation } = bookManagementApi
