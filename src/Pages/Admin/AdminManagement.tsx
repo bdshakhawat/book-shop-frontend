@@ -8,9 +8,9 @@ import {
 import moment from "moment";
 import {
   useDeleteABookMutation,
-  useGetAllbooksQuery
+  useGetAllbooksQuery,
 } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
- import {
+import {
   useGetOrdersByEmailQuery,
   useUpdateOrderStatusMutation,
   useVerifyOrderMutation,
@@ -47,7 +47,6 @@ const ManageAdmin = () => {
     },
   ];
 
-  console.log(Books);
   const handleAction = async (data: string) => {
     const [_id, actionType] = data.split("-");
     console.log(_id, actionType);

@@ -28,7 +28,7 @@ const DashboardLayout = () => {
   return (
     <div className="max-w-[2520px]  mx-auto ">
       <div className="md:flex lg:flex ">
-        <div className=" lg:w-60  lg:min-h-screen  text-black shadow-xl border-2 ">
+        <div className="fixed top-0 left-0 lg:w-60 lg:h-screen   text-black shadow-xl border-2 ">
           <div className="flex justify-center items-center mt-2  ">
             <img
               className="w-[50%]"
@@ -66,7 +66,7 @@ const DashboardLayout = () => {
         </div>
        
 
-        <div className="flex-1 py-8 px-14 bg-base-200">
+        <div className="ml-60 flex-1 py-8 px-14 bg-base-200">
           <Outlet></Outlet>
         </div>
       </div>

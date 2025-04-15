@@ -1,6 +1,6 @@
 import AdminDashboard from "../Pages/Admin/AdminDashboard";
 import AddBookToStore from "../Pages/Admin/AddBookToStore";
-// import UpdateBook from "../Pages/Admin/UpdateBook";
+import UpdateBook from "../Pages/Admin/UpdateBook";
 
 const AdminRoutes = [
   {
@@ -18,10 +18,10 @@ const AdminRoutes = [
     name: "Add New Book",
     element: <AddBookToStore />,
   },
-  // {
-  //   element: <UpdateBook />,
-  //   path: "update-book/:id",
-  // },
+  {
+    element: <UpdateBook />,
+    path: "update-book/:id",
+  },
 ];
 
 export default AdminRoutes;
