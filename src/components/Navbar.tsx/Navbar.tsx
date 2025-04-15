@@ -5,6 +5,7 @@ import { LogOut } from "lucide-react";
 import { logout } from "../../Redux/Features/Auth/authSlice";
 import { Avatar, Space } from "antd";
 import { UserOutlined } from '@ant-design/icons';
+import { persistor } from "../../Redux/store";
 const Navbar = () => {
   const links = (
     <>
@@ -111,7 +112,7 @@ const Navbar = () => {
               <div tabIndex={0} role="button">
                 <Space size={16} wrap>
                   {/* <Avatar size={40}>{user?.email[0]}</Avatar> */}
-                  <Avatar className="bg-orange-500 " icon={<UserOutlined />} />
+                  <Avatar className="bg-orange-600 " icon={<UserOutlined />} />
                 </Space>
               </div>
 
@@ -129,6 +130,7 @@ const Navbar = () => {
                 <div
                   onClick={() => {
                     dispatch(logout());
+                     persistor.purge();
                     toast.success("Logout Successfull...");
                   }}
                 >

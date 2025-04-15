@@ -32,7 +32,7 @@ const UserDashboard = () => {
   const [updatePassword] = useUpdatePasswordMutation();
   const userEmail = useAppSelector((state) => state.auth.user?.email);
   const { data, isLoading } = useGetOrdersByEmailQuery(undefined);
-
+console.log(data)
   const { register, handleSubmit, reset } = useForm();
   const handleUpdatePassword: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
