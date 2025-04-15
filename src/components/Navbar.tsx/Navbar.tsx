@@ -111,7 +111,7 @@ const Navbar = () => {
               <div tabIndex={0} role="button">
                 <Space size={16} wrap>
                   {/* <Avatar size={40}>{user?.email[0]}</Avatar> */}
-                  <Avatar icon={<UserOutlined />} />
+                  <Avatar className="bg-orange-500 " icon={<UserOutlined />} />
                 </Space>
               </div>
 
@@ -121,7 +121,7 @@ const Navbar = () => {
               >
                 <Link
                   className="mt-2 bg-brandTextTertiary hover:bg-brandTextTertiary/70 text-base"
-                  to="/dashboard"
+                  to={`/${user?.role}/dashboard`}
                 >
                   Dashboard
                 </Link>
@@ -132,7 +132,7 @@ const Navbar = () => {
                     toast.success("Logout Successfull...");
                   }}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 cursor-pointer">
                     <LogOut />
                     <span>Log out</span>
                   </div>
