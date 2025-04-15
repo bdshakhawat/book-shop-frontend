@@ -1,12 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Redux/hook";
-import { DropdownMenu, DropdownMenuContent,  DropdownMenuItem,  DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { toast } from "sonner";
 import { LogOut } from "lucide-react";
-import { Avatar, AvatarFallback } from "../ui/avatar";
-import { Button } from "../ui/button";
 import { logout } from "../../Redux/Features/Auth/authSlice";
-
+import { Avatar, Space } from "antd";
+import { UserOutlined } from '@ant-design/icons';
 const Navbar = () => {
   const links = (
     <>
@@ -63,8 +61,6 @@ const Navbar = () => {
     </>
   );
 
-
-
   const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
 
@@ -111,33 +107,43 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {user?.email ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Avatar className="cursor-pointer">
-                  {/* <AvatarImage src={user?.profileImage} /> */}
-                  <AvatarFallback>{user.name[0]}</AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
+            <div className="dropdown">
+              <div tabIndex={0} role="button">
+                <Space size={16} wrap>
+                  {/* <Avatar size={40}>{user?.email[0]}</Avatar> */}
+                  <Avatar icon={<UserOutlined />} />
+                </Space>
+              </div>
 
-              <DropdownMenuContent className="w-56 ">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem
+              <ul
+                tabIndex={0}
+                className="dropdown-content menu bg-base-100 rounded-box z-1 w-24 lg:w-44  p-2 shadow-sm"
+              >
+                <Link
+                  className="mt-2 bg-brandTextTertiary hover:bg-brandTextTertiary/70 text-base"
+                  to="/dashboard"
+                >
+                  Dashboard
+                </Link>
+                <br />
+                <div
                   onClick={() => {
                     dispatch(logout());
                     toast.success("Logout Successfull...");
                   }}
                 >
-                  <LogOut />
-                  <span>Log out</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  <div className="flex items-center gap-2">
+                    <LogOut />
+                    <span>Log out</span>
+                  </div>
+                </div>
+              </ul>
+            </div>
           ) : (
             <Link to="/login">
-              <Button className="bg-brandTextTertiary hover:bg-brandTextTertiary/70 text-white text-base">
+              <button className="btn p-4 hover:bg-orange-50 hover:text-orange-500 text-base">
                 Login
-              </Button>
+              </button>
             </Link>
           )}
         </div>
