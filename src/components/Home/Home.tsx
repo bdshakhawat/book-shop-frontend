@@ -14,10 +14,9 @@ const Home = () => {
       {/* <Navbar></Navbar> */}
       <Banner></Banner>
       <NewArrival></NewArrival>
-
-      <DealsBanner></DealsBanner>
       <ChooseUs></ChooseUs>
       <Reviews></Reviews>
+      {/* <Footer></Footer> */}
     </div>
   );
 };
