@@ -1,26 +1,42 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useCreateOrderMutation } from "../../Redux/Features/Orders/Order.api";
 
 const Success = () => {
   const navigate = useNavigate();
   const [createOrder, { data, error }] = useCreateOrderMutation();
-
   const [searchParams] = useSearchParams();
-  const sessionId = searchParams.get("session_id"); // Get session_id from URL
-  console.log("sessionid", sessionId);
+  const sessionId = searchParams.get("session_id");
+
+  const orderPlacedRef = useRef(false); // 👈 persist across renders
 
   useEffect(() => {
-    if (sessionId) {
+    if (sessionId && !orderPlacedRef.current) {
+      orderPlacedRef.current = true; // ✅ prevent re-entry
+
       fetch(`http://localhost:5000/checkout-session/${sessionId}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log("from seein id", data);
+          console.log("Checkout session data:", data);
           createOrder({
-            email: data.userEmail,
-            product: data.productId,
-            quantity: parseInt(data.productQuantity),
-            totalPrice: parseInt(data.productPrice),
+            user: data.userId, // Ensure you are sending ObjectId of the user
+            products: [
+              {
+                productId: data.productId,
+                quantity: parseInt(data.productQuantity),
+                title: data.productTitle, // New
+                author: data.productAuthor, // New
+              },
+            ],
+            totalPrice: parseFloat(data.productPrice),
+            status: "Paid",
+            transaction: {
+              id: sessionId,
+              transactionStatus: data.paymentStatus,
+              method: "card", // or from data if available
+              date_time: new Date().toISOString(),
+            },
+            userEmail: data.userEmail, // ⬅️ You may also store this if needed
           });
         })
         .catch((error) =>
@@ -28,10 +44,6 @@ const Success = () => {
         );
     }
   }, [sessionId]);
-
-  console.log("err", error);
-
-  // console.log("adding product error", error);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-green-100">
