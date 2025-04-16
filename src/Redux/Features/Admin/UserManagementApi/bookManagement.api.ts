@@ -22,6 +22,13 @@ const bookManagementApi = baseApi.injectEndpoints({
       providesTags: ['Books'], // ✅ Tells RTK Query this query provides 'Books' data
       keepUnusedDataFor: 300,  // ✅ Cache for 5 minutes
     }),
+    createBook: builder.mutation({
+      query: (data)=>({
+          url: '/books/create-new-book',
+          method: 'POST',
+          body: data,
+      })
+  }),
 
     deleteABook: builder.mutation({
       query: (params) => ({
@@ -54,5 +61,6 @@ export const {
   useGetAllbooksQuery,
   useGetSingleBookQuery,
   useDeleteABookMutation,
+  useCreateBookMutation,
   useUpdateProductMutation, // <- You forgot to export this earlier
 } = bookManagementApi;
