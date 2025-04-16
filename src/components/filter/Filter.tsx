@@ -22,27 +22,31 @@ const Filter = ({ setShowFilter, showFilter, setFilterParams }: any) => {
 
   const { watch } = methods;
 
-  // 👀 Watch all the filter fields
-  const watchedFilters = watch();
+  // 👀 Watch all the filter fields const min = watch("min");
+  const min = watch("min");
+  const max = watch("max");
+  const inStock = watch("inStock");
+  const category = watch("category");
+  const author = watch("author");
 
   useEffect(() => {
     const filterObject: any = {};
 
-    if (watchedFilters.min !== 0 || watchedFilters.max !== 100000) {
-      filterObject.minPrice = watchedFilters.min;
-      filterObject.maxPrice = watchedFilters.max;
+    if (min !== 0 || max !== 100000) {
+      filterObject.minPrice = min;
+      filterObject.maxPrice = max;
     }
 
-    if (watchedFilters.inStock !== "All") {
-      filterObject.inStock = watchedFilters.inStock === "in stock";
+    if (inStock !== "All") {
+      filterObject.inStock = inStock === "in stock";
     }
 
-    if (watchedFilters.category !== "All") {
-      filterObject.category = watchedFilters.category;
+    if (category !== "All") {
+      filterObject.category = category;
     }
 
-    if (watchedFilters.author !== "All") {
-      filterObject.author = watchedFilters.author;
+    if (author !== "All") {
+      filterObject.author = author;
     }
 
     const filterArray = Object.entries(filterObject).map(([key, value]) => ({
@@ -51,21 +55,21 @@ const Filter = ({ setShowFilter, showFilter, setFilterParams }: any) => {
     }));
 
     setFilterParams(filterArray);
-  }, [watchedFilters, setFilterParams]);
+  }, [min, max, inStock, category, author, setFilterParams]);
 
-  
+
 
   if (isLoading) {
     return <p>loading ..</p>;
   }
-  const category = [
+  const categoryOptions = [
+    "All",
     ...new Set(data?.data?.map((book: TBook) => book.category)),
   ] as string[];
-  category.unshift("All");
-  const author = [
+  const authorOptions = [
+    'All',
     ...new Set(data?.data?.map((book: TBook) => book.author)),
   ] as string[];
-  author.unshift("All");
 
   // const onSubmit = (data: any) => {
   //   const filterObject: any = {};
@@ -135,13 +139,13 @@ const Filter = ({ setShowFilter, showFilter, setFilterParams }: any) => {
         </div>
         <div>
           <CoustomRadioSelect
-            options={category}
+            options={categoryOptions}
             label="Category"
             name="category"
           />
         </div>
         <div>
-          <CoustomRadioSelect options={author} label="Author" name="author" />
+          <CoustomRadioSelect options={authorOptions} label="Author" name="author" />
         </div>
       </form>
     </FormProvider>
