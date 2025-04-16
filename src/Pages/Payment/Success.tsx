@@ -24,8 +24,8 @@ const Success = () => {
               {
                 productId: data.productId,
                 quantity: parseInt(data.productQuantity),
-                title: data.productTitle, // New
-                author: data.productAuthor, // New
+                title: "test", // New
+                author: "tesd", // New
               },
             ],
             totalPrice: parseFloat(data.productPrice),

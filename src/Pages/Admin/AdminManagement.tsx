@@ -8,9 +8,10 @@ import {
 import moment from "moment";
 import {
   useDeleteABookMutation,
-  useGetAllbooksQuery
+  useGetAllbooksQuery,
 } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
- import {
+import {
+  useGetAllOrdersQuery,
   useGetOrdersByEmailQuery,
   useUpdateOrderStatusMutation,
   useVerifyOrderMutation,
@@ -25,6 +26,8 @@ const ManageAdmin = () => {
   const [verifyOrder] = useVerifyOrderMutation(undefined);
   const [deactivateUser] = useDeactivateUserMutation();
   const [activateUser] = useActivateUserMutation();
+  const { data: AllOrders } = useGetAllOrdersQuery(undefined);
+  console.log("all orders", AllOrders);
   // const { refetch } = useGetAllbooksQuery();
   const navigate = useNavigate();
   const { data: Orders } = useGetOrdersByEmailQuery(undefined, {
@@ -43,7 +46,7 @@ const ManageAdmin = () => {
     {
       id: "manageOrder",
       label: "Manage Order",
-      count: Orders?.data?.length || 0,
+      count: AllOrders?.data?.length || 0,
     },
   ];
 
@@ -51,25 +54,24 @@ const ManageAdmin = () => {
 
   const [deleteBook, { isLoading }] = useDeleteABookMutation(); // Remove undefined
 
-const handleAction = async (data: string) => {
-  const [_id, actionType] = data.split("-");
-  console.log(_id, actionType);
-  
-  if (actionType === "delete") {
-    try {
-      const result = await deleteBook(_id).unwrap(); // Add .unwrap()
-      console.log("Book deleted successfully:", result);
-      refetch();
-      
-    } catch (error) {
-      console.error("Failed to delete book:", error);
-      // message.error("Failed to delete book");
+  const handleAction = async (data: string) => {
+    const [_id, actionType] = data.split("-");
+    console.log(_id, actionType);
+
+    if (actionType === "delete") {
+      try {
+        const result = await deleteBook(_id).unwrap(); // Add .unwrap()
+        console.log("Book deleted successfully:", result);
+        refetch();
+      } catch (error) {
+        console.error("Failed to delete book:", error);
+        // message.error("Failed to delete book");
+      }
+    } else {
+      navigate(`/admin/update-book/${_id}`);
     }
-  } else {
-    navigate(`/admin/update-book/${_id}`);
-  }
-};
-  
+  };
+
   const handleChangeOrderStatus = async (data: string) => {
     // console.log(data);
     const [_id, status] = data.split("-");
@@ -85,6 +87,8 @@ const handleAction = async (data: string) => {
     toast.success("Status updated successfully", { id: toastId });
     console.log(result);
   };
+
+  console.log("orders", Orders);
   return (
     <section className=" lg:ml-3">
       <div className="lg:px-8 lg:py-6">
@@ -304,17 +308,19 @@ const handleAction = async (data: string) => {
                                 </div>
                               </td>
                               <td className="px-4 py-4 text-sm whitespace-nowrap">
-                               <Select
+                                <Select
                                   defaultValue="Edit"
                                   style={{ width: 120 }}
                                   onChange={handleAction}
                                   loading={isLoading} // Show loading state
                                   options={[
                                     { value: `${_id}-update`, label: "Edit" },
-                                    { 
-                                      value: `${_id}-delete`, 
-                                      label: isLoading ? "Deleting..." : "Delete",
-                                      disabled: isLoading // Disable while deleting
+                                    {
+                                      value: `${_id}-delete`,
+                                      label: isLoading
+                                        ? "Deleting..."
+                                        : "Delete",
+                                      disabled: isLoading, // Disable while deleting
                                     },
                                   ]}
                                 />
@@ -339,7 +345,7 @@ const handleAction = async (data: string) => {
       >
         <div className="container px-4 mx-auto">
           <p className="text-[18px] mb-4">
-            Manage Order ({Orders?.data?.length})
+            Manage Order ({AllOrders?.data?.length})
           </p>
           <div className="flex flex-col">
             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -348,9 +354,6 @@ const handleAction = async (data: string) => {
                   <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <thead className="bg-gray-50 dark:bg-gray-800">
                       <tr>
-                        <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                          Order ID
-                        </th>
                         <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                           Customer Email
                         </th>
@@ -363,16 +366,14 @@ const handleAction = async (data: string) => {
                         <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                           Ordered At
                         </th>
-                        <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                          <span className="">Transaction Method</span>
-                        </th>
+
                         <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                           <span className="">Change Status</span>
                         </th>
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                      {Orders?.data?.map(
+                      {AllOrders?.data?.map(
                         ({
                           user,
                           _id,
@@ -382,11 +383,6 @@ const handleAction = async (data: string) => {
                           transaction,
                         }: TransactionDetails) => (
                           <tr key={_id}>
-                            <td className="px-4 py-4 text-sm font-medium text-gray-700 dark:text-gray-200 whitespace-nowrap">
-                              <div className="inline-flex items-center gap-x-3">
-                                <span>{transaction?.id}</span>
-                              </div>
-                            </td>
                             <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                               {user?.email}
                             </td>
@@ -405,13 +401,7 @@ const handleAction = async (data: string) => {
                             <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
                               {moment(createdAt).format("YYYY-MM-DD")}
                             </td>
-                            <td className="px-4 py-4 text-sm whitespace-nowrap">
-                              <div className="flex items-center gap-x-6">
-                                <button className="text-gray-500 transition-colors duration-200 dark:hover:text-indigo-500 dark:text-gray-300 hover:text-indigo-500 focus:outline-none">
-                                  {transaction?.method}
-                                </button>
-                              </div>
-                            </td>
+
                             <td className="px-4 py-4 text-sm whitespace-nowrap">
                               <Select
                                 defaultValue={
