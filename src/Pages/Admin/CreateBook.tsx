@@ -5,7 +5,6 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import CustomSelect from "../../components/CustomForm/CustomSelect";
 import { CategoryOptions } from "../../Constants/constants";
 import { motion } from "framer-motion";
-import { useCreateBookMutation } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 
@@ -55,7 +54,7 @@ const CreateBook = () => {
             label="Category"
             options={CategoryOptions}
           />
-          
+
 
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button

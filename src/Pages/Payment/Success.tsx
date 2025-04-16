@@ -2,17 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useCreateOrderMutation } from "../../Redux/Features/Orders/Order.api";
 
-
 const Success = () => {
   const navigate = useNavigate();
-  const [placeOrder , { data, error }] = useCreateOrderMutation()
-  // const [placeOrder, { data, error }] = usePlaceOrderMutation();
-  // useEffect(() => {
-  //   // You can clear cart or perform any necessary cleanup here
-  //   console.log("Payment successful!");
-  // }, []);
+  const [createOrder, { data, error }] = useCreateOrderMutation();
 
-  const [paymentDetails, setPaymentDetails] = useState(null);
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id"); // Get session_id from URL
   console.log("sessionid", sessionId);
@@ -22,8 +15,8 @@ const Success = () => {
       fetch(`http://localhost:5000/checkout-session/${sessionId}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data)
-          placeOrder({
+          console.log("from seein id", data);
+          createOrder({
             email: data.userEmail,
             product: data.productId,
             quantity: parseInt(data.productQuantity),
@@ -35,7 +28,8 @@ const Success = () => {
         );
     }
   }, [sessionId]);
-  console.log(paymentDetails);
+
+  console.log("err", error);
 
   // console.log("adding product error", error);
 

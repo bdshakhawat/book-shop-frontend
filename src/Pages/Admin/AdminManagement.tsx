@@ -47,7 +47,6 @@ const ManageAdmin = () => {
     },
   ];
 
-  console.log(Books);
   const handleAction = async (data: string) => {
     const [_id, actionType] = data.split("-");
     console.log(_id, actionType);

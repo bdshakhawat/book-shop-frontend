@@ -32,7 +32,7 @@ const UserDashboard = () => {
   const [updatePassword] = useUpdatePasswordMutation();
   const userEmail = useAppSelector((state) => state.auth.user?.email);
   const { data, isLoading } = useGetOrdersByEmailQuery(undefined);
-console.log(data)
+  console.log(data);
   const { register, handleSubmit, reset } = useForm();
   const handleUpdatePassword: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);
@@ -90,34 +90,39 @@ console.log(data)
               Manage Order : ({data?.data?.length}){" "}
             </h1>
             <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
-            {
-              data?.data.length > 0 ? (  <table className="table">
-                {/* head */}
-                <thead>
-                  <tr className="bg-base-200">
-                    <th>Author Name  </th>
-                    <th>Customer Email</th>
-                    <th>Order Status</th>
-                    <th>Total Price</th>
-                    <th>Ordered At</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* row 1 */}
-
-                  {data?.data.map((orderItem: IOrder, index) => (
-                    <tr className="border border-gray-300">
-                      <td>{orderItem?.user?.name}</td>
-                      <td>{orderItem?.user?.email}</td>
-                      <td>{orderItem?.status}</td>
-                      <td>{orderItem.totalPrice}</td>
-                      <td>{(orderItem?.createdAt?.toLocaleString()) as string}</td>
+              {data?.data.length > 0 ? (
+                <table className="table">
+                  {/* head */}
+                  <thead>
+                    <tr className="bg-base-200">
+                      <th>Author Name </th>
+                      <th>Customer Email</th>
+                      <th>Order Status</th>
+                      <th>Total Price</th>
+                      <th>Ordered At</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>) : <p className="text-center text-2xl py-20 font-semibold">You currently don't have any order! 😔
-              </p>
-            }
+                  </thead>
+                  <tbody>
+                    {/* row 1 */}
+
+                    {data?.data.map((orderItem: IOrder, index) => (
+                      <tr className="border border-gray-300">
+                        <td>{orderItem?.user?.name}</td>
+                        <td>{orderItem?.user?.email}</td>
+                        <td>{orderItem?.status}</td>
+                        <td>{orderItem.totalPrice}</td>
+                        <td>
+                          {orderItem?.createdAt?.toLocaleString() as string}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <p className="text-center text-2xl py-20 font-semibold">
+                  You currently don't have any order! 😔
+                </p>
+              )}
             </div>
           </div>
         </div>
