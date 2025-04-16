@@ -21,7 +21,8 @@ const bookManagementApi = baseApi.injectEndpoints({
                     method: 'GET',
                     params:params
                 }
-            }
+            },
+            providesTags: ['Books'],
         }),
         createBook: builder.mutation({
             query: (data)=>({
