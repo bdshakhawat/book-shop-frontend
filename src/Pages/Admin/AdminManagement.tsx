@@ -1,4 +1,4 @@
-import { Select,Button } from "antd";
+import { Button, Select } from "antd";
 import { useState } from "react";
 import {
   useGetAllUsersQuery,
@@ -8,24 +8,24 @@ import {
 import moment from "moment";
 import {
   useDeleteABookMutation,
-  useGetAllbooksQuery,
+  useGetAllbooksQuery
 } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
-import {
+ import {
   useGetOrdersByEmailQuery,
   useUpdateOrderStatusMutation,
   useVerifyOrderMutation,
 } from "../../Redux/Features/Orders/Order.api";
 import { IResponseBook, TransactionDetails, User } from "../../Types/global";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 const ManageAdmin = () => {
   const [activeTab, setActiveTab] = useState("manageUser");
-  const { data: Users } = useGetAllUsersQuery(undefined);
-  const [deleteBook] = useDeleteABookMutation(undefined);
+  const { data: Users, refetch } = useGetAllUsersQuery(undefined);
   const [updateOrderStatus] = useUpdateOrderStatusMutation(undefined);
   const [verifyOrder] = useVerifyOrderMutation(undefined);
   const [deactivateUser] = useDeactivateUserMutation();
   const [activateUser] = useActivateUserMutation();
+  // const { refetch } = useGetAllbooksQuery();
   const navigate = useNavigate();
   const { data: Orders } = useGetOrdersByEmailQuery(undefined, {
     skip: activeTab !== "manageOrder",
@@ -47,16 +47,29 @@ const ManageAdmin = () => {
     },
   ];
 
-  const handleAction = async (data: string) => {
-    const [_id, actionType] = data.split("-");
-    console.log(_id, actionType);
-    if (actionType === "delete") {
-      const result = await deleteBook(_id);
-      console.log(result);
-    } else {
-      navigate(`/admin/update-book/${_id}`);
+  console.log(Books);
+
+  const [deleteBook, { isLoading }] = useDeleteABookMutation(); // Remove undefined
+
+const handleAction = async (data: string) => {
+  const [_id, actionType] = data.split("-");
+  console.log(_id, actionType);
+  
+  if (actionType === "delete") {
+    try {
+      const result = await deleteBook(_id).unwrap(); // Add .unwrap()
+      console.log("Book deleted successfully:", result);
+      refetch();
+      
+    } catch (error) {
+      console.error("Failed to delete book:", error);
+      // message.error("Failed to delete book");
     }
-  };
+  } else {
+    navigate(`/admin/update-book/${_id}`);
+  }
+};
+  
   const handleChangeOrderStatus = async (data: string) => {
     // console.log(data);
     const [_id, status] = data.split("-");
@@ -215,16 +228,9 @@ const ManageAdmin = () => {
         }`}
       >
         <div className="container px-4 mx-auto">
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-[18px] ">
-              Manage Products ({Books?.data?.length})
-            </p>
-            <Link to={"create-book"}>
-              <button className="bg-orange-500 text-white hover:bg-orange-600 py-2 px-3 rounded-md">
-                Add New Book
-              </button>
-            </Link>
-          </div>
+          <p className="text-[18px] mb-4">
+            Manage Products ({Books?.data?.length})
+          </p>
           <div className="flex flex-col">
             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -298,13 +304,18 @@ const ManageAdmin = () => {
                                 </div>
                               </td>
                               <td className="px-4 py-4 text-sm whitespace-nowrap">
-                                <Select
+                               <Select
                                   defaultValue="Edit"
                                   style={{ width: 120 }}
                                   onChange={handleAction}
+                                  loading={isLoading} // Show loading state
                                   options={[
                                     { value: `${_id}-update`, label: "Edit" },
-                                    { value: `${_id}-delete`, label: "Delete" },
+                                    { 
+                                      value: `${_id}-delete`, 
+                                      label: isLoading ? "Deleting..." : "Delete",
+                                      disabled: isLoading // Disable while deleting
+                                    },
                                   ]}
                                 />
                               </td>
