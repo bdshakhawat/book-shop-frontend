@@ -110,13 +110,17 @@ import { Navigate, useParams } from "react-router-dom";
 import { useGetSingleBookQuery } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../Redux/Features/Auth/authSlice";
+import Loader from "../loader/Loader";
 
 const BookDetailsSkeleton = () => {
   const { bookId } = useParams();
   const user = useSelector(selectCurrentUser);
-  const { data: book } = useGetSingleBookQuery(bookId);
+  const { data: book, isLoading } = useGetSingleBookQuery(bookId);
   console.log("product id", bookId);
   console.log(book);
+  if (isLoading) {
+    return <Loader></Loader>;
+  }
 
   const makePayment = async () => {
     // if (!user) {
@@ -159,17 +163,20 @@ const BookDetailsSkeleton = () => {
     }
   };
   return (
-    <div className="container mx-auto p-6 h-screen">
-      <div className="grid md:grid-cols-2 gap-10 items-start">
-        <div className="rounded-lg overflow-hidden shadow-lg">
+    <div className="container lg:w-[80%] mx-auto p-6 h-screen mt-10">
+      <div className="flex justify-center  gap-20  items-center">
+        <div className="rounded-lg flex-1 overflow-hidden shadow-lg">
           <img
-            src={book?.data?.img}
+            src={
+              book?.data?.img ||
+              "https://images.theconversation.com/files/45159/original/rptgtpxd-1396254731.jpg?ixlib=rb-4.1.0&q=45&auto=format&w=754&fit=clip"
+            }
             alt={book?.data?.title}
             className="w-full h-auto object-cover"
           />
         </div>
 
-        <div>
+        <div className="flex-1">
           <h2 className="text-3xl font-bold text-orange-600">
             {book?.data?.title}
           </h2>
@@ -204,7 +211,7 @@ const BookDetailsSkeleton = () => {
               onClick={makePayment}
               className="btn btn-primary bg-orange-600 border-none hover:bg-orange-700"
             >
-              Oeder Now
+              Order Now
             </button>
           </div>
         </div>

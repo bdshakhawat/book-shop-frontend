@@ -10,7 +10,6 @@ import { setUser, TUser } from "../../Redux/Features/Auth/authSlice";
 import { useAppDispatch } from "../../Redux/hook";
 
 const Login = () => {
-
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { state } = useLocation();
@@ -23,10 +22,10 @@ const Login = () => {
       password: data.password,
     };
     const res = (await loginUser(payload)) as any;
-    console.log(res.data.data.accessToken)
     if (res.data?.success) {
+      console.log(res);
       toast.success("Login successfully", { id: toastId });
-     
+
       const user = verifyToken(res.data.data.accessToken) as TUser;
       dispatch(setUser({ user: user, token: res.data.data.accessToken }));
       navigate(state || `/`);

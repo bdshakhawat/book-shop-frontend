@@ -4,32 +4,22 @@ import CustomInput from "../../components/CustomForm/CustomInput";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import CustomSelect from "../../components/CustomForm/CustomSelect";
 import { CategoryOptions } from "../../Constants/constants";
-
-import { useNavigate, useParams } from "react-router-dom";
-
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { useUpdateProductMutation } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
+import { useNavigate } from "react-router-dom";
+import { useCreateBookMutation } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
 
-const UpdateBook = () => {
-    const navigate = useNavigate()
-  const { id } = useParams()
-  const [updateBook] = useUpdateProductMutation(undefined);
+const CreateBook = () => {
+    const navigate = useNavigate();
+  const [addBook] = useCreateBookMutation(undefined);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    const toastId = toast.loading("Updating book...");
-    
-   
+    const toastId = toast.loading("Book crating...");
     try {
-      const { data: response } = await updateBook({ id, data} );
-      if (response?.success) {
-        toast.success("Book updated successfully", { id: toastId });
-        navigate('/admin/dashboard')
-      } else {
-        toast.error("Failed to update book", { id: toastId });
-      }
-      console.log(response);
+      await addBook(data).unwrap();
+      toast.success("Book created successfully", { id: toastId });
+        navigate("/admin/dashboard");
     } catch (error) {
-      toast.error("Failed to update book", { id: toastId });
+      toast.error("Failed to create book", { id: toastId });
       console.log(error);
     }
   };
@@ -47,7 +37,7 @@ const UpdateBook = () => {
         className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-md"
       >
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
-          Update Book Information📚
+          Create A Book📚
         </h2>
         <CustomForm onSubmit={onSubmit} className="space-y-6">
           <CustomInput name="title" placeholder="Title" type="text" />
@@ -56,12 +46,9 @@ const UpdateBook = () => {
             placeholder="Description"
             type="text"
           />
+          
           <CustomInput name="price" placeholder="Price" type="number" />
-          <CustomInput
-            name="quantity"
-            placeholder="Quantity"
-            type="number"
-          />
+          <CustomInput name="quantity" placeholder="Quantity" type="number" />
           <CustomInput name="author" placeholder="Author" type="text" />
           <CustomSelect
             name="category"
@@ -69,13 +56,14 @@ const UpdateBook = () => {
             options={CategoryOptions}
           />
 
+
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button
               htmlType="submit"
               className="custom-btn"
               style={{ width: "100%" }}
             >
-              Update Book
+              Submit
             </Button>
           </motion.div>
         </CustomForm>
@@ -84,4 +72,4 @@ const UpdateBook = () => {
   );
 };
 
-export default UpdateBook;
+export default CreateBook;
