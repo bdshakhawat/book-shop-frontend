@@ -35,17 +35,37 @@ const bookManagementApi = baseApi.injectEndpoints({
         url: `/books/delete-book/${params}`,
         method: "PATCH",
       }),
+        invalidatesTags: ['Books'],
+
     }),
        getSingleBook: builder.query({
         query: (id) => {
             return {
                 url : `/books/get-book/${id}`,
                 method: 'GET',
-            }
-        }
-       }) 
-    })
+            };
+        },
+            
+        providesTags: ['Books'], // ✅ Tells RTK Query this query provides 'Books' data
+         keepUnusedDataFor: 300,  // ✅ Cache for 5 minutes
+    }),
+
+
+    updateProduct: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `/books/update-book/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ['Books'],
+    }),
+  })
 })
 
-
-export const { useGetAllbooksQuery,useGetSingleBookQuery,useCreateBookMutation, useDeleteABookMutation } = bookManagementApi
+export const {
+  useGetAllbooksQuery,
+  useGetSingleBookQuery,
+  useDeleteABookMutation,
+  useCreateBookMutation,
+  useUpdateProductMutation, 
+} = bookManagementApi;

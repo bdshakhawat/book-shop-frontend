@@ -67,18 +67,7 @@ const handleAction = async (data: string) => {
     navigate(`/admin/update-book/${_id}`);
   }
 };
-  //   const [deleteBook] = useDeleteABookMutation(undefined);
-
-  // const handleAction = async (data: string) => {
-  //   const [_id, actionType] = data.split("-");
-  //   console.log(_id, actionType);
-  //   if (actionType === "delete") {
-  //     const result = await deleteBook(_id);
-  //     console.log(result);
-  //   } else {
-  //     navigate(`/admin/update-book/${_id}`);
-  //   }
-  // };
+  
   const handleChangeOrderStatus = async (data: string) => {
     // console.log(data);
     const [_id, status] = data.split("-");

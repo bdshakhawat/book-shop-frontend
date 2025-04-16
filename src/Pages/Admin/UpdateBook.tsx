@@ -4,38 +4,34 @@ import CustomInput from "../../components/CustomForm/CustomInput";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import CustomSelect from "../../components/CustomForm/CustomSelect";
 import { CategoryOptions } from "../../Constants/constants";
-// import { useUpdateBookDataMutation } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
-import { useParams } from "react-router-dom";
+
+import { useNavigate, useParams } from "react-router-dom";
+
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { useUpdateProductMutation } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
 
 const UpdateBook = () => {
-  const { id } = useParams();
-  //const [updateBook] = useUpdateBookDataMutation(undefined);
+    const navigate = useNavigate()
+  const { id } = useParams()
+  const [updateBook] = useUpdateProductMutation(undefined);
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Updating book...");
-    console.log(data);
-    // const custommizedData = {
-    //   title: "The Great Gatsby",
-    //   description: "A story of the Great Gatsby",
-    //   price: 100,
-    //   quantity: 10,
-    //   author: "F. Scott Fitzgerald",
-    //   category: "Fiction",
-    // };
-    // const { data: response } = await updateBook({ id, custommizedData });
-    // try {
-    //   const { data: response } = await updateBook({ id, data });
-    //   if (response?.data?.success) {
-    //     toast.success("Book updated successfully", { id: toastId });
-    //   } else {
-    //     toast.error("Failed to update book", { id: toastId });
-    //   }
-    //   // console.log(response);
-    // } catch (error) {
-    //   toast.error("Failed to update book", { id: toastId });
-    //   console.log(error);
-    // }
+    
+   
+    try {
+      const { data: response } = await updateBook({ id, data} );
+      if (response?.success) {
+        toast.success("Book updated successfully", { id: toastId });
+        navigate('/admin/dashboard')
+      } else {
+        toast.error("Failed to update book", { id: toastId });
+      }
+      console.log(response);
+    } catch (error) {
+      toast.error("Failed to update book", { id: toastId });
+      console.log(error);
+    }
   };
   return (
     <motion.div
@@ -66,7 +62,7 @@ const UpdateBook = () => {
             placeholder="Quantity"
             type="number"
           />
-          <CustomInput name="author" placeholderTitle="Author" type="text" />
+          <CustomInput name="author" placeholder="Author" type="text" />
           <CustomSelect
             name="category"
             label="Category"
