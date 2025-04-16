@@ -10,6 +10,7 @@ export const orderAPI = baseApi.injectEndpoints({
         url: `/order/change-order-status/${_id}?status=${status}`,
         method: "PATCH",
       }),
+      invalidatesTags: ["order"],
     }),
     verifyOrder: build.mutation({
       query: (orderId) => ({
@@ -22,7 +23,14 @@ export const orderAPI = baseApi.injectEndpoints({
         url: `/order/get-customer-orders`,
         method: "GET",
       }),
-      // providesTags: ["Orders"],
+      providesTags: ["order"],
+    }),
+    getAllOrders: build.query({
+      query: () => ({
+        url: `/order/get-orders`,
+        method: "GET",
+      }),
+      providesTags: ["order"],
     }),
     createOrder: build.mutation({
       query: (data) => ({
@@ -30,6 +38,7 @@ export const orderAPI = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["order"],
     }),
   }),
 });
@@ -40,4 +49,5 @@ export const {
   useUpdateOrderStatusMutation,
   useVerifyOrderMutation,
   useGetCustomerOrdersQuery,
+  useGetAllOrdersQuery,
 } = orderAPI;

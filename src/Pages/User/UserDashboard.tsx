@@ -32,6 +32,7 @@ const UserDashboard = () => {
   const [updatePassword] = useUpdatePasswordMutation();
   const userEmail = useAppSelector((state) => state.auth.user?.email);
   const { data, isLoading } = useGetOrdersByEmailQuery(undefined);
+
   console.log(data);
   const { register, handleSubmit, reset } = useForm();
   const handleUpdatePassword: SubmitHandler<FieldValues> = async (data) => {
@@ -50,6 +51,7 @@ const UserDashboard = () => {
       toast.error("Failed to update password");
     }
   };
+
   return (
     <div>
       <div className="w-full flex justify-between items-center mb-16">
@@ -96,24 +98,24 @@ const UserDashboard = () => {
                   <thead>
                     <tr className="bg-base-200">
                       <th>Author Name </th>
-                      <th>Customer Email</th>
+                      <th>Book Title </th>
+                      <th>Email</th>
                       <th>Order Status</th>
                       <th>Total Price</th>
-                      <th>Ordered At</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {/* row 1 */}
-
                     {data?.data.map((orderItem: IOrder, index) => (
-                      <tr className="border border-gray-300">
-                        <td>{orderItem?.user?.name}</td>
+                      // console.log(
+                      //   "inside map",
+                      //   orderItem.products[0]?.productId?.author
+                      // )
+                      <tr className="border border-gray-300" key={index}>
+                        <td>{orderItem.products[0]?.productId?.author}</td>
+                        <td>{orderItem.products[0]?.productId?.title}</td>
                         <td>{orderItem?.user?.email}</td>
                         <td>{orderItem?.status}</td>
                         <td>{orderItem.totalPrice}</td>
-                        <td>
-                          {orderItem?.createdAt?.toLocaleString() as string}
-                        </td>
                       </tr>
                     ))}
                   </tbody>

@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { LogOut } from "lucide-react";
 import { logout } from "../../Redux/Features/Auth/authSlice";
 import { Avatar, Space } from "antd";
-import { UserOutlined } from '@ant-design/icons';
+import { UserOutlined } from "@ant-design/icons";
 import { persistor } from "../../Redux/store";
 const Navbar = () => {
   const links = (
@@ -94,14 +94,16 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <a className="text-lg">
-            <img
-              src="https://i.ibb.co.com/q3t1CR0Z/360-F-211078110-mttx-Edu3gs-Sb-MKajsy98-E4-M4-E5-RUCiuo-removebg-preview.png"
-              height={100}
-              width={100}
-              alt=""
-            />
-          </a>
+          <Link to={"/"}>
+            <a className="text-lg">
+              <img
+                src="https://i.ibb.co.com/q3t1CR0Z/360-F-211078110-mttx-Edu3gs-Sb-MKajsy98-E4-M4-E5-RUCiuo-removebg-preview.png"
+                height={100}
+                width={100}
+                alt=""
+              />
+            </a>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-3">{links}</ul>
@@ -130,7 +132,7 @@ const Navbar = () => {
                 <div
                   onClick={() => {
                     dispatch(logout());
-                     persistor.purge();
+                    persistor.purge();
                     toast.success("Logout Successfull...");
                   }}
                 >

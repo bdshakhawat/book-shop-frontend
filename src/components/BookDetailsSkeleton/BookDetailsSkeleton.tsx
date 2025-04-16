@@ -115,12 +115,12 @@ import Loader from "../loader/Loader";
 const BookDetailsSkeleton = () => {
   const { bookId } = useParams();
   const user = useSelector(selectCurrentUser);
-  const { data: book,isLoading } = useGetSingleBookQuery(bookId);
+  const { data: book, isLoading } = useGetSingleBookQuery(bookId);
   console.log("product id", bookId);
   console.log(book);
- if(isLoading){
-  return <Loader></Loader>
- }
+  if (isLoading) {
+    return <Loader></Loader>;
+  }
 
   const makePayment = async () => {
     // if (!user) {
@@ -129,9 +129,7 @@ const BookDetailsSkeleton = () => {
     //   return;
     // }
     // setLoading(true);
-    const stripe = await loadStripe(
-      "pk_test_51M5sVrSH7xFCRHqM5aX9bzGVNU84eEqd8S1LQZncPaX6ks7Vsw1kZJnuz39Lb6lZsRjraY6xnvij9rFHfOn8zpCc00y7uEtVT7"
-    );
+    const stripe = await loadStripe("");
 
     const body = {
       product: book.data,
