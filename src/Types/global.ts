@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 
 // Newly added types
 
-
 export type TRoutes = {
   index?: boolean;
   path?: string;
@@ -61,4 +60,5 @@ export interface IResponseBook {
   price: number;
   quantity: number;
   inStock: boolean;
+  isDeleted: boolean;
 }
