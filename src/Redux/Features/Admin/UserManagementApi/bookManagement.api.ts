@@ -27,7 +27,8 @@ const bookManagementApi = baseApi.injectEndpoints({
           url: '/books/create-new-book',
           method: 'POST',
           body: data,
-      })
+      }),
+      invalidatesTags: ['Books'],
   }),
 
     deleteABook: builder.mutation({
