@@ -20,12 +20,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 const ManageAdmin = () => {
   const [activeTab, setActiveTab] = useState("manageUser");
-  const { data: Users } = useGetAllUsersQuery(undefined);
-  const [deleteBook] = useDeleteABookMutation(undefined);
+  const { data: Users, refetch } = useGetAllUsersQuery(undefined);
   const [updateOrderStatus] = useUpdateOrderStatusMutation(undefined);
   const [verifyOrder] = useVerifyOrderMutation(undefined);
   const [deactivateUser] = useDeactivateUserMutation();
   const [activateUser] = useActivateUserMutation();
+  // const { refetch } = useGetAllbooksQuery();
   const navigate = useNavigate();
   const { data: Orders } = useGetOrdersByEmailQuery(undefined, {
     skip: activeTab !== "manageOrder",
@@ -48,16 +48,28 @@ const ManageAdmin = () => {
   ];
 
   console.log(Books);
-  const handleAction = async (data: string) => {
-    const [_id, actionType] = data.split("-");
-    console.log(_id, actionType);
-    if (actionType === "delete") {
-      const result = await deleteBook(_id);
-      console.log(result);
-    } else {
-      navigate(`/admin/update-book/${_id}`);
+
+  const [deleteBook, { isLoading }] = useDeleteABookMutation(); // Remove undefined
+
+const handleAction = async (data: string) => {
+  const [_id, actionType] = data.split("-");
+  console.log(_id, actionType);
+  
+  if (actionType === "delete") {
+    try {
+      const result = await deleteBook(_id).unwrap(); // Add .unwrap()
+      console.log("Book deleted successfully:", result);
+      refetch();
+      
+    } catch (error) {
+      console.error("Failed to delete book:", error);
+      // message.error("Failed to delete book");
     }
-  };
+  } else {
+    navigate(`/admin/update-book/${_id}`);
+  }
+};
+  
   const handleChangeOrderStatus = async (data: string) => {
     // console.log(data);
     const [_id, status] = data.split("-");
@@ -292,13 +304,18 @@ const ManageAdmin = () => {
                                 </div>
                               </td>
                               <td className="px-4 py-4 text-sm whitespace-nowrap">
-                                <Select
+                               <Select
                                   defaultValue="Edit"
                                   style={{ width: 120 }}
                                   onChange={handleAction}
+                                  loading={isLoading} // Show loading state
                                   options={[
                                     { value: `${_id}-update`, label: "Edit" },
-                                    { value: `${_id}-delete`, label: "Delete" },
+                                    { 
+                                      value: `${_id}-delete`, 
+                                      label: isLoading ? "Deleting..." : "Delete",
+                                      disabled: isLoading // Disable while deleting
+                                    },
                                   ]}
                                 />
                               </td>

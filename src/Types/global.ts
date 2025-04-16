@@ -1,5 +1,8 @@
 import { ReactNode } from "react";
 
+// Newly added types
+
+
 export type TRoutes = {
   index?: boolean;
   path?: string;
