@@ -2,10 +2,11 @@
 import { baseApi } from "../../../api/baseApi"
 
 
+
 const bookManagementApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllbooks: builder.query({
-            query: (args) => {
+            query: (args? ) => {
                 console.log(args);
                 const params = new URLSearchParams();
 
@@ -29,10 +30,10 @@ const bookManagementApi = baseApi.injectEndpoints({
                 body: data,
             })
         }),
-        deleteABook: builder.mutation({
-        query: (params) => ({
-         url: `/books/delete-book/${params}`,
-         method: "PATCH",
+         deleteABook: builder.mutation({
+      query: (params) => ({
+        url: `/books/delete-book/${params}`,
+        method: "PATCH",
       }),
     }),
        getSingleBook: builder.query({
