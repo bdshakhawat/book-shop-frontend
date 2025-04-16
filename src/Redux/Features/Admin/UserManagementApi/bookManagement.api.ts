@@ -27,6 +27,7 @@ const bookManagementApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Books"],
     }),
     deleteABook: builder.mutation({
       query: (params) => ({

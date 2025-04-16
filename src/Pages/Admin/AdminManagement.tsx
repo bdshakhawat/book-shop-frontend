@@ -17,7 +17,7 @@ import {
   useVerifyOrderMutation,
 } from "../../Redux/Features/Orders/Order.api";
 import { IResponseBook, TransactionDetails, User } from "../../Types/global";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 const ManageAdmin = () => {
   const [activeTab, setActiveTab] = useState("manageUser");
@@ -27,15 +27,15 @@ const ManageAdmin = () => {
   const [deactivateUser] = useDeactivateUserMutation();
   const [activateUser] = useActivateUserMutation();
   const { data: AllOrders } = useGetAllOrdersQuery(undefined);
+
   console.log("all orders", AllOrders);
   // const { refetch } = useGetAllbooksQuery();
   const navigate = useNavigate();
   const { data: Orders } = useGetOrdersByEmailQuery(undefined, {
     skip: activeTab !== "manageOrder",
   });
-  const { data: Books } = useGetAllbooksQuery(undefined, {
-    skip: activeTab !== "manageProducts",
-  });
+  const { data: Books } = useGetAllbooksQuery(undefined);
+  console.log("allboks", Books);
   const tabs = [
     { id: "manageUser", label: "Manage User", count: Users?.data?.length || 0 },
     {
@@ -52,11 +52,11 @@ const ManageAdmin = () => {
 
   console.log(Books);
 
-  const [deleteBook, { isLoading }] = useDeleteABookMutation(); // Remove undefined
-
+  const [deleteBook, { data, error, isLoading }] = useDeleteABookMutation(); // Remove undefined
+  console.log("error", error, data);
   const handleAction = async (data: string) => {
     const [_id, actionType] = data.split("-");
-    console.log(_id, actionType);
+    console.log("inside handleAction", _id, actionType);
 
     if (actionType === "delete") {
       try {
@@ -232,9 +232,16 @@ const ManageAdmin = () => {
         }`}
       >
         <div className="container px-4 mx-auto">
-          <p className="text-[18px] mb-4">
-            Manage Products ({Books?.data?.length})
-          </p>
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-[18px] ">
+              Manage Products ({Books?.data?.length})
+            </p>
+            <Link to={"create-book"}>
+              <button className="bg-orange-500 text-white hover:bg-orange-600 py-2 px-3 rounded-md">
+                Add New Book
+              </button>
+            </Link>
+          </div>
           <div className="flex flex-col">
             <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
