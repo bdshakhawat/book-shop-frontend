@@ -8,14 +8,14 @@ export const userManagementApi = baseApi.injectEndpoints({
         url: "/users/get-all-users",
         method: "GET",
       }),
-      // providesTags: ["User"],
+      providesTags: ["User"],
     }),
     deactivateUser: builder.mutation({
       query: (id) => ({
         url: `/users/deactivate-user/${id}`,
         method: "PATCH",
       }),
-      // invalidatesTags: ["User"],
+      invalidatesTags: ["User"],
     }),
 
     activateUser: builder.mutation({
@@ -23,7 +23,7 @@ export const userManagementApi = baseApi.injectEndpoints({
         url: `/users/activate-user/${id}`,
         method: "PATCH",
       }),
-      // invalidatesTags: ["User"],
+      invalidatesTags: ["User"],
     }),
   }),
 });

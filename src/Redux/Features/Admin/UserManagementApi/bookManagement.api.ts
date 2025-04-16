@@ -29,13 +29,7 @@ const bookManagementApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Books"],
     }),
-    deleteABook: builder.mutation({
-      query: (params) => ({
-        url: `/books/delete-book/${params}`,
-        method: "PATCH",
-      }),
-      invalidatesTags: ["Books"],
-    }),
+
     getSingleBook: builder.query({
       query: (id) => {
         return {
@@ -47,7 +41,13 @@ const bookManagementApi = baseApi.injectEndpoints({
       providesTags: ["Books"], // ✅ Tells RTK Query this query provides 'Books' data
       keepUnusedDataFor: 300, // ✅ Cache for 5 minutes
     }),
-
+    deleteABook: builder.mutation({
+      query: (id) => ({
+        url: `/books/delete-book/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Books"],
+    }),
     updateProduct: builder.mutation({
       query: ({ data, id }) => ({
         url: `/books/update-book/${id}`,
@@ -62,7 +62,7 @@ const bookManagementApi = baseApi.injectEndpoints({
 export const {
   useGetAllbooksQuery,
   useGetSingleBookQuery,
-  useDeleteABookMutation,
   useCreateBookMutation,
   useUpdateProductMutation,
+  useDeleteABookMutation
 } = bookManagementApi;

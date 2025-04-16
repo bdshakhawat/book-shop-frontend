@@ -24,7 +24,7 @@ const ManageAdmin = () => {
   const { data: Users, refetch } = useGetAllUsersQuery(undefined);
   const [updateOrderStatus] = useUpdateOrderStatusMutation(undefined);
   const [verifyOrder] = useVerifyOrderMutation(undefined);
-  const [deactivateUser] = useDeactivateUserMutation();
+  const [deactivateUser ,{data:deactiveUser}] = useDeactivateUserMutation();
   const [activateUser] = useActivateUserMutation();
   const { data: AllOrders } = useGetAllOrdersQuery(undefined);
 
@@ -49,10 +49,9 @@ const ManageAdmin = () => {
       count: AllOrders?.data?.length || 0,
     },
   ];
-
+ 
   console.log(Books);
-
-  const [deleteBook, { data, error, isLoading }] = useDeleteABookMutation(); // Remove undefined
+  const [deleteBook, { data, error, isLoading }] =   useDeleteABookMutation(); // Remove undefined
   console.log("error", error, data);
   const handleAction = async (data: string) => {
     const [_id, actionType] = data.split("-");
@@ -87,6 +86,8 @@ const ManageAdmin = () => {
     toast.success("Status updated successfully", { id: toastId });
     console.log(result);
   };
+
+  console.log('deactived user ',deactiveUser)
 
   console.log("orders", Orders);
   return (
