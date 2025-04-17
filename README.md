@@ -46,12 +46,6 @@ https://book-shop-frontend-vert.vercel.app
   - **User Dashboard:** View orders and manage profile settings.
   - Password update functionality (requires current password).
 
-## UI/UX Enhancements
-
-- Responsive design for all screen sizes.
-- Error handling for login, registration and all other operations.
-- Adding Loading states for API callings.
-- Toasts for notifications.
 
 ## Technologies Used
 
