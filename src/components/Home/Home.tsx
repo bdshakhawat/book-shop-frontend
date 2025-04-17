@@ -1,4 +1,4 @@
-import DealsBanner from "../../Pages/bestDeals/DealsBanner";
+
 import Banner from "../Banner/Banner";
 import NewArrival from "../New Arrival/NewArrival";
 

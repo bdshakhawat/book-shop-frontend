@@ -5,7 +5,7 @@ const Footer = () => {
           <div className="max-w-[80%] mx-auto flex flex-col sm:flex-row sm:justify-between gap-10">
             <aside className="flex justify-center sm:justify-start">
               <img
-                src="/src/assets/360_F_211078110_mttxEdu3gsSbMKajsy98E4M4E5RUCiuo-removebg-preview.png"
+                src="https://i.ibb.co.com/q3t1CR0Z/360-F-211078110-mttx-Edu3gs-Sb-MKajsy98-E4-M4-E5-RUCiuo-removebg-preview.png"
                 alt="Logo"
                 className="w-32"
               />
