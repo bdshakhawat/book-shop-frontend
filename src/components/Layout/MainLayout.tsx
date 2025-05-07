@@ -5,7 +5,6 @@ import Footer from "../Footer/Footer";
 const MainLayout = () => {
   return (
     <div className="relative min-h-screen">
-      {/* <Home></Home> */}
       <Navbar />
       <Outlet />
       <Footer />

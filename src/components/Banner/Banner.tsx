@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 const Banner = () => {
     return (
       <div
-        className="hero relative"
+        className="hero relative "
         style={{
             height: "calc(100vh - 96px)",
           backgroundImage:
@@ -28,7 +28,7 @@ const Banner = () => {
 
   
         {/* Main content */}
-        <div className="hero-content text-neutral-content p-14 lg:p-20 rounded-lg bg-black bg-opacity-40 text-center">
+        <div className="max-w-[90%] mx-auto hero-content text-neutral-content p-14 lg:p-20 rounded-lg bg-black bg-opacity-40 text-center">
           <div className="">
           <h1 className="mb-5 text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-orange-400 via-red-500 to-yellow-500 bg-clip-text text-transparent drop-shadow-lg tracking-wide uppercase">
                 Welcome to BookStore

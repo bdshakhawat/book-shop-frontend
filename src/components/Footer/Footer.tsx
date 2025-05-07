@@ -2,7 +2,7 @@ const Footer = () => {
     return (
       <div className="mt-10">
         <footer className="bg-base-200 text-base-content p-10">
-          <div className="max-w-[80%] mx-auto flex flex-col sm:flex-row sm:justify-between gap-10">
+          <div className="max-w-[90%] mx-auto flex flex-col sm:flex-row sm:justify-between gap-10">
             <aside className="flex justify-center sm:justify-start">
               <img
                 src="/src/assets/360_F_211078110_mttxEdu3gsSbMKajsy98E4M4E5RUCiuo-removebg-preview.png"

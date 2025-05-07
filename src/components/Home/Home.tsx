@@ -11,12 +11,10 @@ import Reviews from "../Reviews/Reviews";
 const Home = () => {
   return (
     <div>
-      {/* <Navbar></Navbar> */}
       <Banner></Banner>
       <NewArrival></NewArrival>
       <ChooseUs></ChooseUs>
       <Reviews></Reviews>
-      {/* <Footer></Footer> */}
     </div>
   );
 };

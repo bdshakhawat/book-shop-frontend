@@ -47,7 +47,7 @@ const AllBooks = () => {
   };
   return (
     <div className="bg-gray-100">
-      <div className="  lg:max-w-[80%] mx-4 md:mx-6 lg:mx-auto py-4 lg:py-14 ">
+      <div className="  lg:max-w-[90%] mx-4 md:mx-6 lg:mx-auto py-4 lg:py-14 ">
         <div className="flex justify-center">
           <input
             onChange={handleSeach}
