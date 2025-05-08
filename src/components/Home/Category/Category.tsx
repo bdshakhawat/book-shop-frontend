@@ -1,17 +1,19 @@
-import { BookOpen, ChevronRight } from "lucide-react";
+import {  ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { TbCategory } from "react-icons/tb";
+
 
 const categories = [
-  { name: "Fiction", icon: <BookOpen className="w-5 h-5" /> },
-  { name: "Science", icon: <BookOpen className="w-5 h-5" /> },
-  { name: "Self Development", icon: <BookOpen className="w-5 h-5" /> },
-  { name: "Poetry", icon: <BookOpen className="w-5 h-5" /> },
-  { name: "Religious", icon: <BookOpen className="w-5 h-5" /> },
+  { name: "Fiction", icon: <TbCategory className="w-5 h-5" /> },
+  { name: "Science", icon: <TbCategory className="w-5 h-5" /> },
+  { name: "Self Development", icon: <TbCategory className="w-5 h-5" /> },
+  { name: "Poetry", icon: <TbCategory className="w-5 h-5" /> },
+  { name: "Religious", icon: <TbCategory className="w-5 h-5" /> },
 ];
 
 export default function Category() {
   return (
-    <section className="py-16  dark:bg-gray-900">
+    <section className="py-16  sm:px-4 dark:bg-gray-900">
       <div className="max-w-[90%] mx-auto px-4 sm:px-0 lg:px-0">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-2">

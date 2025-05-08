@@ -95,7 +95,7 @@ const Navbar = () => {
             ) : (
               <Link
                 to="/login"
-                className="hidden md:block px-4 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-300 dark:text-gray-300 dark:hover:bg-gray-800"
+                className="hidden md:block px-4 py-2 rounded-md text-md font-medium text-gray-700 bg-gray-100 border-2 border-gray-300 hover:bg-orange-50 hover:text-orange-600 transition-colors duration-300 dark:text-gray-300 dark:hover:bg-gray-800"
               >
                 Login
               </Link>

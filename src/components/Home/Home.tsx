@@ -8,7 +8,7 @@ import Category from "./Category/Category";
 
 const Home = () => {
   return (
-    <div className="bg-gray-100">
+    <div className="bg-gray-100 ">
       <Banner></Banner>
       <Category></Category>
       <NewArrival></NewArrival>

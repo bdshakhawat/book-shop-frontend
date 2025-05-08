@@ -2,7 +2,7 @@ import { FaShippingFast, FaRedo, FaHeadset, FaStar } from "react-icons/fa";
 
 const ChooseUs = () => {
     return (
-        <div className="bg-gray-50 pb-4 ">
+        <div className="bg-gray-50 sm:pb-14 ">
       <div className="max-w-[90%] mx-auto text-center">
         <h2 className="text-3xl md:text-4xl  font-bold text-gray-800 py-14">Why Choose Us?</h2>
         

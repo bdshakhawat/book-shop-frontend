@@ -11,7 +11,7 @@ const NewArrival = () => {
   }
 
   return (
-    <section className="sm:max-w-[90%]  mx-auto py-12">
+    <section className="max-w-[90%]  mx-auto py-12 px-4">
       {/* Title & Subtitle Options (Choose one) */}
       <div className="text-center mb-14">
        
