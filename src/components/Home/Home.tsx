@@ -1,19 +1,19 @@
-import DealsBanner from "../../Pages/bestDeals/DealsBanner";
-import Banner from "../Banner/Banner";
-import NewArrival from "../New Arrival/NewArrival";
+import DealsBanner from "./bestDeals/DealsBanner";
+import Banner from "./Banner/Banner";
+import NewArrival from "./New Arrival/NewArrival";
 
-import ChooseUs from '../../Pages/ChooseUs/ChooseUs';
-import Reviews from "../Reviews/Reviews";
-
-
-
+import ChooseUs from "./ChooseUs/ChooseUs";
+import Reviews from "./Reviews/Reviews";
+import Category from "./Category/Category";
 
 const Home = () => {
   return (
-    <div>
+    <div className="bg-gray-100">
       <Banner></Banner>
+      <Category></Category>
       <NewArrival></NewArrival>
       <ChooseUs></ChooseUs>
+      <DealsBanner></DealsBanner>
       <Reviews></Reviews>
     </div>
   );
