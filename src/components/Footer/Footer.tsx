@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
-import { useAppSelector } from "../../../Redux/hook";
+import { useAppSelector } from "../../Redux/hook";
 
 const Footer = () => {
   const user = useAppSelector((state)=>state.auth.user)
