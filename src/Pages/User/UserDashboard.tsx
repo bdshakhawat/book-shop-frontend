@@ -156,7 +156,7 @@ const UserDashboard = () => {
                     placeholder="Email"
                     defaultValue={userEmail}
                   />
-                  <label className="fieldset-label">Password</label>
+                  <label className="fieldset-label">Old Password</label>
                   <input
                     {...register("password")}
                     type="password"
