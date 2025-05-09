@@ -18,7 +18,7 @@ const BookCard = ({ book }: BookCardProps) => {
   return (
     <div className="group bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-orange-400 dark:hover:border-orange-400">
       {/* Image Container */}
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-40 overflow-hidden">
         <img
           src={
             book.image ||
@@ -40,13 +40,13 @@ const BookCard = ({ book }: BookCardProps) => {
         </span>
 
         {/* Price Tag */}
-        <div className="absolute bottom-3 left-3 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
+        <div className="absolute bottom-3 left-2 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg">
           ${book.price.toFixed(2)}
         </div>
       </div>
 
       {/* Content Container */}
-      <div className="p-5 space-y-3">
+      <div className="p-3 space-y-3">
         <div>
           <h3 className="text-xl font-bold text-gray-800 dark:text-white line-clamp-2 leading-tight">
             {book.title}

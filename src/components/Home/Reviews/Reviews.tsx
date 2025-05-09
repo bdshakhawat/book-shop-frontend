@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useGetReviewQuery } from "../../../Redux/Features/Review/reviewApi";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import ReviewCard from "../../BookDetails/ReviewCard";
 
 export interface IReview {
   _id: string;
@@ -69,7 +70,7 @@ const Reviews = () => {
               </p>
             </div>
           )}
-          
+
           <div className="flex justify-center mt-6 gap-4">
             <button
               onClick={prevReview}
@@ -90,40 +91,42 @@ const Reviews = () => {
         <div className="hidden md:block relative overflow-hidden">
           <div className="py-4">
             <div className="animate-scroll-horizontal flex gap-8 w-max">
-              {duplicatedReviews.map(({ _id, reviewMessage, name, rating }, idx) => (
-                <div
-                  key={`${_id}-${idx}`}
-                  className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg min-w-[350px] max-w-[350px] transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-                >
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-r from-orange-400 to-orange-600 flex items-center justify-center text-white text-xl font-bold">
-                      {name.charAt(0).toUpperCase()}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-lg text-gray-800 dark:text-gray-100">
-                        {name}
-                      </p>
-                      <div className="flex text-orange-500 mt-1">
-                        {[...Array(rating)].map((_, i) => (
-                          <Star key={i} size={20} fill="currentColor" />
-                        ))}
+              {duplicatedReviews.map(
+                ({ _id, reviewMessage, name, rating }, idx) => (
+                  <div
+                    key={`${_id}-${idx}`}
+                    className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg min-w-[350px] max-w-[350px] transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+                  >
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="w-14 h-14 rounded-full bg-gradient-to-r from-orange-400 to-orange-600 flex items-center justify-center text-white text-xl font-bold">
+                        {name.charAt(0).toUpperCase()}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-lg text-gray-800 dark:text-gray-100">
+                          {name}
+                        </p>
+                        <div className="flex text-orange-500 mt-1">
+                          {[...Array(rating)].map((_, i) => (
+                            <Star key={i} size={20} fill="currentColor" />
+                          ))}
+                        </div>
                       </div>
                     </div>
+                    <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
+                      "{reviewMessage}"
+                    </p>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">
-                    "{reviewMessage}"
-                  </p>
-                </div>
-              ))}
+                )
+              )}
             </div>
           </div>
-          
+
           {/* Gradient fade effect */}
           <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-50 to-transparent dark:from-gray-900 z-10"></div>
           <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-50 to-transparent dark:from-gray-900 z-10"></div>
         </div>
 
-        <style >{`
+        <style>{`
           .animate-scroll-horizontal {
             animation: scrollLeft 20s linear infinite;
           }

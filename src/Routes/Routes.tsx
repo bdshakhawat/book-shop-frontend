@@ -14,9 +14,9 @@ import { routeGenerator } from "../Utils/routesGenerator";
 import AdminRoutes from "./AdminRoutes";
 import UserRoutes from "./UserRoute";
 import ProtectedRoute from "../components/RouteComponents/ProtectedRoute";
-import BookDetailsSkeleton from "../components/BookDetailsSkeleton/BookDetailsSkeleton";
 import Success from "../Pages/Payment/Success";
 import Failure from "../Pages/Payment/Failure";
+import BookDetails from "../components/BookDetails/BookDetails";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/allbooks/:bookId",
-        element: <BookDetailsSkeleton />,
+        element: <BookDetails />,
       },
       {
         path: "/about",
