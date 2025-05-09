@@ -46,13 +46,13 @@ const BookDetailsSkeleton = () => {
     const session = await response.json();
     console.log("session", session);
 
-    const result = stripe?.redirectToCheckout({
+    const result = await stripe?.redirectToCheckout({
       sessionId: session?.id,
     });
     // setLoading(false);
     console.log("payment result", result);
 
-    if (result?.error) {
+    if (result && result.error) {
       console.log(result.error);
     }
   };
