@@ -1,10 +1,10 @@
-import DealsBanner from "./bestDeals/DealsBanner";
 import Banner from "./Banner/Banner";
-import NewArrival from "./New Arrival/NewArrival";
-
-import ChooseUs from "./ChooseUs/ChooseUs";
-import Reviews from "./Reviews/Reviews";
+import DealsBanner from "./bestDeals/DealsBanner";
 import Category from "./Category/Category";
+import ChooseUs from "./ChooseUs/ChooseUs";
+import NewArrival from "./New Arrival/NewArrival";
+import Reviews from "./Reviews/Reviews";
+
 
 const Home = () => {
   return (
