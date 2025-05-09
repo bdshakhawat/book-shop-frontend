@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGetReviewQuery } from "../../../Redux/Features/Review/reviewApi";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
-import ReviewCard from "../../BookDetails/ReviewCard";
 
 export interface IReview {
   _id: string;

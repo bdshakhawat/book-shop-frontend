@@ -12,7 +12,7 @@ import {
 import Loader from "../loader/Loader";
 import { useGetSingleBookReviewQuery } from "../../Redux/Features/Review/reviewApi";
 import { useGetSingleBookQuery } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
-import ReviewCard from "./ReviewCard";
+import ReviewCard, { IReview } from "./ReviewCard";
 import { loadStripe } from '@stripe/stripe-js';
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../Redux/Features/Auth/authSlice";
@@ -100,7 +100,7 @@ const BookDetails = () => {
     };
 
     const response = await fetch(
-      "http://localhost:5000/create-checkout-session",
+      "https://book-shop-backend-v1.vercel.app/create-checkout-session",
       {
         method: "POST",
         headers: headers,
@@ -117,8 +117,9 @@ const BookDetails = () => {
     // setLoading(false);
     console.log("payment result", result);
 
-    if (result?.error) {
-      console.log(result.error);
+    if ((await result)?.error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      console.log((await (result as any)).error);
     }
   };
 
@@ -482,8 +483,8 @@ const BookDetails = () => {
                   {reviewData?.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-4">
                       {reviewData.map((review: IReview, index: number) => (
-                        <div className="flex justify-center">
-                          <ReviewCard key={index} review={review}></ReviewCard>
+                        <div key={index} className="flex justify-center">
+                          <ReviewCard  review={review}></ReviewCard>
                         </div>
                       ))}
                     </div>

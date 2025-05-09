@@ -3,7 +3,7 @@ import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 
-interface IReview {
+export interface IReview {
   _id: string;
   name: string;
   rating: number;
