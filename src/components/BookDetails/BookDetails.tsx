@@ -10,26 +10,30 @@ import {
   BookmarkCheck,
 } from "lucide-react";
 import Loader from "../loader/Loader";
-import { useGetSingleBookReviewQuery } from "../../Redux/Features/Review/reviewApi";
-import { useGetSingleBookQuery } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
+import { useCreateReviewMutation, useGetSingleBookReviewQuery } from "../../Redux/Features/Review/reviewApi";
+import { useCreateBookMutation, useGetSingleBookQuery } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
 import ReviewCard, { IReview } from "./ReviewCard";
-import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe } from "@stripe/stripe-js";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../Redux/Features/Auth/authSlice";
-
+import { Avatar, Modal, Rate, Form, Input, Button } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import SimilarBooks from "./SimilarBooks";
+import { toast } from "sonner";
 
 const BookDetails = () => {
   const { bookId } = useParams();
-    const user = useSelector(selectCurrentUser);
+  const user = useSelector(selectCurrentUser);
   const { data: review } = useGetSingleBookReviewQuery(bookId);
   const reviewData = review?.data;
-  console.log("review ", reviewData);
   const { data: book, isLoading, error } = useGetSingleBookQuery(bookId);
+  const [addReview] = useCreateReviewMutation(undefined)
 
-  //   console.log("Books all", book?.data);
   const [activeTab, setActiveTab] = useState("description");
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [form] = Form.useForm();
 
   if (isLoading) return <Loader />;
   if (error)
@@ -46,9 +50,7 @@ const BookDetails = () => {
           key={i}
           size={18}
           fill={i < rating ? "currentColor" : "none"}
-          className={`${
-            i < rating ? "text-yellow-500" : "text-gray-300"
-          } inline-block`}
+          className={i < rating ? "text-yellow-500" : "text-gray-300"}
         />
       ));
   };
@@ -64,10 +66,10 @@ const BookDetails = () => {
   // for quantity
   const increaseQuantity = () => {
     if (quantity < 10) {
-      // You can replace 10 with book.stockCount if available
       setQuantity(quantity + 1);
     }
   };
+
   const decreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
@@ -77,18 +79,14 @@ const BookDetails = () => {
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value);
     if (!isNaN(value) && value >= 1 && value <= 10) {
-      // Adjust max as needed
       setQuantity(value);
     }
   };
-   const makePayment = async () => {
-    // if (!user) {
-    //   // Redirect to login and remember current location
-    //   Navigate("/login", { state: { from: location } });
-    //   return;
-    // }
-    // setLoading(true);
-    const stripe = await loadStripe("pk_test_51NFeKsHXxHHqqBSEXEZ6oVqeAquqIpszGA5xvnGO3XSkrX53ffO3A2pRkRRuIhjoVvUKiFxBoC476BMmG8pr8GDK00kNXNphd6");
+
+  const makePayment = async () => {
+    const stripe = await loadStripe(
+      "pk_test_51NFeKsHXxHHqqBSEXEZ6oVqeAquqIpszGA5xvnGO3XSkrX53ffO3A2pRkRRuIhjoVvUKiFxBoC476BMmG8pr8GDK00kNXNphd6"
+    );
 
     const body = {
       product: book.data,
@@ -109,17 +107,37 @@ const BookDetails = () => {
     );
 
     const session = await response.json();
-    console.log("session", session);
-
     const result = stripe?.redirectToCheckout({
       sessionId: session?.id,
     });
-    // setLoading(false);
-    console.log("payment result", result);
 
     if ((await result)?.error) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      console.log((await (result as any)).error);
+      console.log((await result)?.error);
+    }
+  };
+
+  // Review modal handlers
+  const showReviewModal = () => {
+    setIsReviewModalOpen(true);
+  };
+  const handleReviewCancel = () => {
+    setIsReviewModalOpen(false);
+    form.resetFields();
+  };
+
+  const handleReviewSubmit = async (values: IReview) => {
+    const data = { ...values, likeCount: 0, name: user?.name, bookId: bookId };
+    try {
+      console.log("Review submitted:", values);
+      const result =await addReview(data)
+    
+      if(result?.data?.success){
+        toast.success('Review Added Successfully')
+      }
+      setIsReviewModalOpen(false);
+      form.resetFields();
+    } catch (error) {
+      console.error("Error submitting review:", error);
     }
   };
 
@@ -151,16 +169,6 @@ const BookDetails = () => {
                   alt={book?.data?.title}
                   className="w-full h-auto rounded-lg shadow-md border border-gray-200 dark:border-gray-700"
                 />
-                {/* {book.isNew && (
-                  <span className="absolute top-3 right-3 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
-                    New Release
-                  </span>
-                )} */}
-                {/* {book.discount > 0 && (
-                  <span className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-sm">
-                    {book.discount}% OFF
-                  </span>
-                )} */}
               </div>
 
               {/* Action buttons */}
@@ -304,7 +312,7 @@ const BookDetails = () => {
                     type="number"
                     id="quantity"
                     min="1"
-                    max="10" // Adjust based on your stock
+                    max="10"
                     value={quantity}
                     onChange={handleQuantityChange}
                     className="w-full text-center py-2 bg-white dark:bg-gray-800 border-t border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white"
@@ -312,7 +320,7 @@ const BookDetails = () => {
                   <button
                     onClick={increaseQuantity}
                     className="px-3 py-2 bg-gray-200 dark:bg-gray-700 rounded-r-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-                    disabled={quantity >= 10} // Adjust based on your stock
+                    disabled={quantity >= 10}
                   >
                     +
                   </button>
@@ -333,7 +341,7 @@ const BookDetails = () => {
                   Add to Cart
                 </button>
                 <button
-                onClick={makePayment}
+                  onClick={makePayment}
                   className={`flex-1 py-3 px-6 rounded-lg font-medium transition-colors ${
                     book?.data?.inStock
                       ? "border border-orange-600 text-orange-600 dark:text-orange-400 dark:border-orange-400 hover:bg-orange-50 dark:hover:bg-gray-700"
@@ -434,14 +442,10 @@ const BookDetails = () => {
                     <h4 className="font-medium text-gray-900 dark:text-white mb-4">
                       About the Author
                     </h4>
-                    <div className="flex items-start mb-4">
-                      <img
-                        src={
-                          book.authorImage ||
-                          "https://i.ibb.co.com/q3t1CR0Z/360-F-211078110-mttx-Edu3gs-Sb-MKajsy98-E4-M4-E5-RUCiuo-removebg-preview.png"
-                        }
-                        alt={book?.data.author}
-                        className="w-16 h-16 rounded-full object-cover mr-4 border border-gray-200 dark:border-gray-700"
+                    <div className="flex gap-3 items-center mb-4">
+                      <Avatar
+                        className="bg-orange-500 transition-colors"
+                        icon={<UserOutlined />}
                       />
                       <div>
                         <h5 className="font-medium text-gray-900 dark:text-white">
@@ -461,31 +465,37 @@ const BookDetails = () => {
 
               {activeTab === "reviews" && (
                 <div>
-                  {reviewData.slice(0, 1).map((review: IReview) => (
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                          Customer Reviews
-                        </h3>
-                        <div className="flex items-center">
-                          {renderStars(review.rating)}
-                          <span className="ml-2 text-gray-600 dark:text-gray-400 text-sm">
-                            {review.rating.toFixed(1)} out of 5
-                          </span>
+                  {reviewData
+                    ?.slice(0, 1)
+                    .map((review: IReview, index: number) => (
+                      <div
+                        key={index}
+                        className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8"
+                      >
+                        <div>
+                          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                            Customer Reviews
+                          </h3>
+                          <div className="flex items-center">
+                            {renderStars(review.rating)}
+                            <span className="ml-2 text-gray-600 dark:text-gray-400 text-sm">
+                              {review.rating.toFixed(1)} out of 5
+                            </span>
+                          </div>
                         </div>
+                        <button
+                          onClick={showReviewModal}
+                          className="mt-4 md:mt-0 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg text-sm font-medium transition-colors shadow-sm"
+                        >
+                          Write a Review
+                        </button>
                       </div>
-                      <button className="mt-4 md:mt-0 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg text-sm font-medium transition-colors shadow-sm">
-                        Write a Review
-                      </button>
-                    </div>
-                  ))}
+                    ))}
 
                   {reviewData?.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 py-4">
                       {reviewData.map((review: IReview, index: number) => (
-                        <div key={index} className="flex justify-center">
-                          <ReviewCard  review={review}></ReviewCard>
-                        </div>
+                        <ReviewCard key={index} review={review} />
                       ))}
                     </div>
                   ) : (
@@ -493,7 +503,10 @@ const BookDetails = () => {
                       <p className="text-gray-500 dark:text-gray-400 mb-4">
                         No reviews yet. Be the first to review this book!
                       </p>
-                      <button className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg text-sm font-medium transition-colors">
+                      <button
+                        onClick={showReviewModal}
+                        className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg text-sm font-medium transition-colors"
+                      >
                         Write a Review
                       </button>
                     </div>
@@ -510,8 +523,57 @@ const BookDetails = () => {
             You May Also Like
           </h2>
           {/* <SimilarBooks currentBookId={book._id} category={book.category} /> */}
+          <SimilarBooks ></SimilarBooks>
         </div>
       </div>
+
+      {/* Review Modal */}
+      <Modal
+        title="Write a Review"
+        open={isReviewModalOpen}
+        onCancel={handleReviewCancel}
+        footer={null}
+        centered
+        width={600}
+      >
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={handleReviewSubmit}
+          initialValues={{ rating: 5 }}
+        >
+          <Form.Item
+            name="rating"
+            label="Your Rating"
+            rules={[{ required: true, message: "Please select a rating" }]}
+          >
+            <Rate  />
+          </Form.Item>
+
+          <Form.Item
+            name="reviewMessage"
+            label="Your Review"
+            rules={[
+              { required: true, message: "Please write your review" },
+              { min: 10, message: "Review must be at least 10 characters" },
+            ]}
+          >
+            <Input.TextArea
+              rows={4}
+              placeholder="Share your thoughts about this book..."
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <div className="flex justify-end gap-4">
+              <Button onClick={handleReviewCancel}>Cancel</Button>
+              <Button type="primary" htmlType="submit">
+                Submit Review
+              </Button>
+            </div>
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 };

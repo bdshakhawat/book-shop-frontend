@@ -26,7 +26,7 @@ const AllBooks = () => {
     ...(category ? [{ name: "category", value: category }] : []),
 
   ]);
-  console.log("allbooks", allBook);
+  // console.log("allbooks", allBook);
 
   if (isLoading) {
     return (
@@ -38,7 +38,7 @@ const AllBooks = () => {
 
   const allBooks = allBook?.data || [];
 
-  console.log(allBooks);
+  // console.log(allBooks);
 
   const totalPages = Math.ceil(allBooks?.length / itemsPerPage);
   const currentBooks = allBooks?.slice(

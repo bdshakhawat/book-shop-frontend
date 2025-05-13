@@ -4,13 +4,13 @@ import { UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 
 export interface IReview {
-  _id: string;
-  name: string;
+  _id?: string;
+  name?: string;
   rating: number;
   reviewMessage: string;
-  createdAt: string;
-  likeCount: number;
-  dislikeCount: number;
+  createdAt?: string | undefined;
+  likeCount?: number | undefined;
+  dislikeCount?: number | undefined;
 }
 
 const ReviewCard = ({ review }: { review: IReview }) => {
@@ -42,13 +42,13 @@ const ReviewCard = ({ review }: { review: IReview }) => {
 
   const handleLike = () => {
     if (userReaction === "like") {
-      setLocalLikes(localLikes - 1);
+      setLocalLikes((localLikes as number) - 1);
       setUserReaction(null);
     } else {
       if (userReaction === "dislike") {
-        setLocalDislikes(localDislikes - 1);
+        setLocalDislikes((localDislikes as number) - 1);
       }
-      setLocalLikes(localLikes + 1);
+      setLocalLikes((localLikes as number) + 1);
       setUserReaction("like");
     }
     // TODO: Add API call to update like count
@@ -56,13 +56,13 @@ const ReviewCard = ({ review }: { review: IReview }) => {
 
   const handleDislike = () => {
     if (userReaction === "dislike") {
-      setLocalDislikes(localDislikes - 1);
+      setLocalDislikes((localDislikes as number) - 1);
       setUserReaction(null);
     } else {
       if (userReaction === "like") {
-        setLocalLikes(localLikes - 1);
+        setLocalLikes((localLikes as number) - 1);
       }
-      setLocalDislikes(localDislikes + 1);
+      setLocalDislikes((localDislikes as number) + 1);
       setUserReaction("dislike");
     }
     // TODO: Add API call to update dislike count
@@ -85,7 +85,7 @@ const ReviewCard = ({ review }: { review: IReview }) => {
               <div className="flex items-center mt-1">
                 {renderStars(review.rating)}
                 <span className="text-sm text-gray-500 dark:text-gray-400 ml-2">
-                  {formatDate(review.createdAt)}
+                  {formatDate((review.createdAt as string))}
                 </span>
               </div>
             </div>
