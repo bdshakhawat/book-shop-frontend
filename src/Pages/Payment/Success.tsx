@@ -14,7 +14,9 @@ const Success = () => {
     if (sessionId && !orderPlacedRef.current) {
       orderPlacedRef.current = true; // ✅ prevent re-entry
 
-      fetch(`http://localhost:5000/checkout-session/${sessionId}`)
+      fetch(
+        `https://book-shop-backend-ten.vercel.app/checkout-session/${sessionId}`
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log("Checkout session data:", data);

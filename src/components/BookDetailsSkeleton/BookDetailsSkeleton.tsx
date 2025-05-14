@@ -38,7 +38,7 @@ const BookDetailsSkeleton = () => {
     };
 
     const response = await fetch(
-      "http://localhost:5000/create-checkout-session",
+      "https://book-shop-backend-ten.vercel.app/create-checkout-session",
       {
         method: "POST",
         headers: headers,
