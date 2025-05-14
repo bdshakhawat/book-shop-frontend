@@ -6,153 +6,122 @@ import { logout } from "../../Redux/Features/Auth/authSlice";
 import { Avatar, Space } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { persistor } from "../../Redux/store";
+
 const Navbar = () => {
-  const links = (
-    <>
-      <NavLink
-        to="/"
-        className={({ isActive }) =>
-          `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
-            isActive
-              ? "bg-orange-100 text-orange-600 font-semibold"
-              : "hover:bg-orange-50 hover:text-orange-500"
-          }`
-        }
-      >
-        Home
-      </NavLink>
-
-      <NavLink
-        to="/allbooks"
-        className={({ isActive }) =>
-          `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
-            isActive
-              ? "bg-orange-100 text-orange-600 font-semibold"
-              : "hover:bg-orange-50 hover:text-orange-500"
-          }`
-        }
-      >
-        All Books
-      </NavLink>
-      <NavLink
-        to="/about"
-        className={({ isActive }) =>
-          `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
-            isActive
-              ? "bg-orange-100 text-orange-600 font-semibold"
-              : "hover:bg-orange-50 hover:text-orange-500"
-          }`
-        }
-      >
-        About
-      </NavLink>
-
-      <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-            `px-4 text-lg py-2 rounded-md transition-all duration-300 ${
-                isActive
-                ? "bg-orange-100 text-orange-600 font-semibold"
-                : "hover:bg-orange-50 hover:text-orange-500"
-            }`
-            }
-        >
-            Contact
-        </NavLink>
-    </>
-  );
-
   const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
 
-  return (
-    <div className="max-w-[80%] mx-auto">
-      <div className="navbar h-24 bg-base-100 shadow-sm ">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {" "}
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />{" "}
-              </svg>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-            >
-              {links}
-            </ul>
-          </div>
-          <Link to={"/"}>
-            <a className="text-lg">
-              <img
-                src="https://i.ibb.co.com/q3t1CR0Z/360-F-211078110-mttx-Edu3gs-Sb-MKajsy98-E4-M4-E5-RUCiuo-removebg-preview.png"
-                height={100}
-                width={100}
-                alt=""
-              />
-            </a>
-          </Link>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 gap-3">{links}</ul>
-        </div>
-        <div className="navbar-end">
-          {user?.email ? (
-            <div className="dropdown">
-              <div tabIndex={0} role="button">
-                <Space size={16} wrap>
-                  {/* <Avatar size={40}>{user?.email[0]}</Avatar> */}
-                  <Avatar className="bg-orange-600 " icon={<UserOutlined />} />
-                </Space>
-              </div>
+  const navLinks = (
+    <>
+      {["/", "/allbooks", "/about", "/contact"].map((path, i) => {
+        const labels = ["Home", "All Books", "About", "Contact"];
+        return (
+          <NavLink
+            key={path}
+            to={path}
+            className={({ isActive }) =>
+              `px-4 py-2 rounded-md text-base font-medium transition-all duration-200 ${
+                isActive
+                  ? "bg-orange-100 text-orange-600 font-semibold"
+                  : "text-gray-700 hover:text-orange-500 hover:bg-orange-50"
+              }`
+            }
+          >
+            {labels[i]}
+          </NavLink>
+        );
+      })}
+    </>
+  );
 
+  return (
+    <header className="sticky top-0 z-50 bg-white shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+        <nav className="flex h-20 items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2">
+            <img
+              src="https://i.ibb.co.com/q3t1CR0Z/360-F-211078110-mttx-Edu3gs-Sb-MKajsy98-E4-M4-E5-RUCiuo-removebg-preview.png"
+              alt="Logo"
+              className="h-12 w-auto"
+            />
+          
+          </Link>
+
+          {/* Desktop Nav */}
+          <div className="hidden lg:flex items-center gap-6">{navLinks}</div>
+
+          {/* User Section */}
+          <div className="flex items-center gap-4">
+            {user?.email ? (
+              <div className="relative dropdown dropdown-end">
+                <div tabIndex={0} role="button">
+                  <Space>
+                    <Avatar className="bg-orange-600" icon={<UserOutlined />} />
+                  </Space>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu bg-white text-gray-800 shadow-md rounded-md mt-3 w-44 z-50 p-2"
+                >
+                  <li>
+                    <Link
+                      to={`/${user?.role}/dashboard`}
+                      className="hover:bg-orange-100 rounded-md px-3 py-2"
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => {
+                        dispatch(logout());
+                        persistor.purge();
+                        toast.success("Logout Successful...");
+                      }}
+                      className="flex items-center gap-2 text-left w-full hover:bg-orange-100 rounded-md px-3 py-2"
+                    >
+                      <LogOut size={16} /> Log out
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <Link to="/login">
+                <button className="btn btn-outline border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition">
+                  Login
+                </button>
+              </Link>
+            )}
+
+            {/* Mobile Menu Button */}
+            <div className="lg:hidden dropdown dropdown-end">
+              <div tabIndex={0} role="button" className="btn btn-ghost p-2">
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content menu bg-base-100 rounded-box z-1 w-24 lg:w-44  p-2 shadow-sm"
+                className="menu dropdown-content mt-3 z-50 p-4 shadow-md bg-white rounded-md w-52"
               >
-                <Link
-                  className="mt-2 bg-brandTextTertiary hover:bg-brandTextTertiary/70 text-base"
-                  to={`/${user?.role}/dashboard`}
-                >
-                  Dashboard
-                </Link>
-                <br />
-                <div
-                  onClick={() => {
-                    dispatch(logout());
-                    persistor.purge();
-                    toast.success("Logout Successfull...");
-                  }}
-                >
-                  <div className="flex items-center gap-2 cursor-pointer">
-                    <LogOut />
-                    <span>Log out</span>
-                  </div>
-                </div>
+                {navLinks}
               </ul>
             </div>
-          ) : (
-            <Link to="/login">
-              <button className="btn p-4 hover:bg-orange-50 hover:text-orange-500 text-base">
-                Login
-              </button>
-            </Link>
-          )}
-        </div>
+          </div>
+        </nav>
       </div>
-    </div>
+    </header>
   );
 };
 

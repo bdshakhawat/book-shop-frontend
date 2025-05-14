@@ -5,7 +5,7 @@ import { Star } from 'lucide-react';
 const Reviews = () => {
   return (
     <section className="py-12 ">
-      <div className="container lg:max-w-[80%] mx-auto px-4">
+      <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center text-gray-800 py-14">
           Customer Reviews
         </h2>

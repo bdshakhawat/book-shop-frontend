@@ -62,7 +62,7 @@ const NewArrival = () => {
       <Loader></Loader>
     }
     return (
-        <div className='lg:max-w-[80%] px-5 mx-auto' >
+        <div className='container mx-auto' >
             <h1 className='text-3xl font-bold text-center text-gray-800 my-14'>New Arrivals</h1>
             <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 rounded-md gap-6">
             {
