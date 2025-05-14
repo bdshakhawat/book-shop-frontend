@@ -17,6 +17,7 @@ import ProtectedRoute from "../components/RouteComponents/ProtectedRoute";
 import BookDetailsSkeleton from "../components/BookDetailsSkeleton/BookDetailsSkeleton";
 import Success from "../Pages/Payment/Success";
 import Failure from "../Pages/Payment/Failure";
+import Contact from "../Pages/contact/Contact";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About></About>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
       },
     ],
   },

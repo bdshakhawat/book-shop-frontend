@@ -1,40 +1,45 @@
+import { Link } from "react-router-dom";
+
+
 const Footer = () => {
     return (
-      <div className="mt-10">
-        <footer className="bg-base-200 text-base-content p-10">
-          <div className="max-w-[80%] mx-auto flex flex-col sm:flex-row sm:justify-between gap-10">
-            <aside className="flex justify-center sm:justify-start">
-              <img
-                src="https://i.ibb.co.com/q3t1CR0Z/360-F-211078110-mttx-Edu3gs-Sb-MKajsy98-E4-M4-E5-RUCiuo-removebg-preview.png"
-                alt="Logo"
-                className="w-32"
-              />
-            </aside>
-            <nav className="grid">
-              <h6 className="footer-title">Services</h6>
-              <a className="link link-hover">Branding</a>
-              <a className="link link-hover">Design</a>
-              <a className="link link-hover">Marketing</a>
-              <a className="link link-hover">Advertisement</a>
-            </nav>
-            <nav className="grid">
-              <h6 className="footer-title">Company</h6>
-              <a className="link link-hover">About us</a>
-              <a className="link link-hover">Contact</a>
-              <a className="link link-hover">Jobs</a>
-              <a className="link link-hover">Press kit</a>
-            </nav>
-            <nav className="grid">
-              <h6 className="footer-title">Legal</h6>
-              <a className="link link-hover">Terms of use</a>
-              <a className="link link-hover">Privacy policy</a>
-              <a className="link link-hover">Cookie policy</a>
-            </nav>
-          </div>
+        <footer className="bg-blue-50 text-black dark:bg-gray-800 dark:text-white border-t mx-auto">
+            <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-gray-600 dark:text-gray-400">
+          
+                {/* Brand Info */}
+                <div>
+                    <h3 className="text-2xl font-semibold text-orange-600 dark:text-blue-300 mb-2">BookShop </h3>
+                    <p>Any users can buy any book eisyly.</p>
+                </div>
+    
+                {/* Explore */}
+                <div>
+                    <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-2">Explore</h4>
+                    <ul className="space-y-1">
+                        <li><Link to="/" className="hover:text-blue-600 dark:hover:text-blue-400">Home</Link></li>
+                        <li><Link to="/allbooks" className="hover:text-blue-600 dark:hover:text-blue-400">All Books</Link></li>
+                        <li><Link to="/about" className="hover:text-blue-600 dark:hover:text-blue-400">About Us</Link></li>
+                        <li><Link to="/contact" className="hover:text-blue-600 dark:hover:text-blue-400">Contact</Link></li>
+                        
+                    </ul>
+                </div>
+    
+    
+                {/* Contact */}
+                <div>
+                    <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-2">Contact</h4>
+                    <p>Email: support@bookshop.com</p>
+                    <p>Phone: +880-1234-567890</p>
+                    <p>Dhaka, Bangladesh </p>
+                </div>
+            </div>
+    
+            {/* Copyright */}
+            <div className="border-t border-gray-500 dark:border-blue-100 text-center text-xs py-4 text-gray-500 dark:text-gray-300">
+                © {new Date().getFullYear()} BookShop. All rights reserved.
+            </div>
         </footer>
-      </div>
     );
-  };
-  
-  export default Footer;
-  
+};
+
+export default Footer;

@@ -2,7 +2,7 @@ Front-end:
 # Book Shop Application:
 
 ##  Live Demo
-https://book-shop-frontend-vert.vercel.app
+https://book-shop-frontend-one.vercel.app/
 
 
 ## Overview 

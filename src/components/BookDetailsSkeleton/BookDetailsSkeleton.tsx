@@ -1,7 +1,6 @@
-
-import  { useState } from "react";
+import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetSingleBookQuery } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "../../Redux/Features/Auth/authSlice";
@@ -39,7 +38,7 @@ const BookDetailsSkeleton = () => {
     };
 
     const response = await fetch(
-      "https://book-shop-backend-v1.vercel.app/create-checkout-session",
+      "http://localhost:5000/create-checkout-session",
       {
         method: "POST",
         headers: headers,
@@ -55,7 +54,6 @@ const BookDetailsSkeleton = () => {
     });
     setLoading(false);
     console.log("payment result", result);
-
   };
   return (
     <div className="container lg:w-[80%] mx-auto p-6 h-screen mt-10">
@@ -106,7 +104,7 @@ const BookDetailsSkeleton = () => {
               onClick={makePayment}
               className="btn btn-primary bg-orange-600 border-none hover:bg-orange-700"
             >
-              {loading ? 'loading...' : 'Order Now'}
+              {loading ? "loading..." : "Order Now"}
             </button>
           </div>
         </div>
