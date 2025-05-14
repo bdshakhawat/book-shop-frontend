@@ -4,6 +4,7 @@ import AdminRoutes from "../../Routes/AdminRoutes";
 import UserRoutes from "../../Routes/UserRoute";
 import { IoHomeOutline } from "react-icons/io5";
 import { useAppSelector } from "../../Redux/hook";
+import DashboardNavbar from "./DashboardNavbar";
 
 const userRole = {
   ADMIN: "admin",
@@ -67,8 +68,11 @@ const DashboardLayout = () => {
           </div>
         </div>
 
-        <div className="ml-60 w-full py-8 px-14 bg-base-200">
-          <Outlet></Outlet>
+        <div className="ml-60 w-full bg-base-200 min-h-screen">
+          <DashboardNavbar />
+          <div className="py-4 md:py-8 px-7 md:px-10">
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>

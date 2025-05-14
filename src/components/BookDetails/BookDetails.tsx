@@ -10,8 +10,14 @@ import {
   BookmarkCheck,
 } from "lucide-react";
 import Loader from "../loader/Loader";
-import { useCreateReviewMutation, useGetSingleBookReviewQuery } from "../../Redux/Features/Review/reviewApi";
-import { useCreateBookMutation, useGetSingleBookQuery } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
+import {
+  useCreateReviewMutation,
+  useGetSingleBookReviewQuery,
+} from "../../Redux/Features/Review/reviewApi";
+import {
+  useCreateBookMutation,
+  useGetSingleBookQuery,
+} from "../../Redux/Features/Books/bookManagement.api";
 import ReviewCard, { IReview } from "./ReviewCard";
 import { loadStripe } from "@stripe/stripe-js";
 import { useSelector } from "react-redux";
@@ -27,7 +33,7 @@ const BookDetails = () => {
   const { data: review } = useGetSingleBookReviewQuery(bookId);
   const reviewData = review?.data;
   const { data: book, isLoading, error } = useGetSingleBookQuery(bookId);
-  const [addReview] = useCreateReviewMutation(undefined)
+  const [addReview] = useCreateReviewMutation(undefined);
 
   const [activeTab, setActiveTab] = useState("description");
   const [quantity, setQuantity] = useState(1);
@@ -129,10 +135,10 @@ const BookDetails = () => {
     const data = { ...values, likeCount: 0, name: user?.name, bookId: bookId };
     try {
       console.log("Review submitted:", values);
-      const result =await addReview(data)
-    
-      if(result?.data?.success){
-        toast.success('Review Added Successfully')
+      const result = await addReview(data);
+
+      if (result?.data?.success) {
+        toast.success("Review Added Successfully");
       }
       setIsReviewModalOpen(false);
       form.resetFields();
@@ -523,7 +529,7 @@ const BookDetails = () => {
             You May Also Like
           </h2>
           {/* <SimilarBooks currentBookId={book._id} category={book.category} /> */}
-          <SimilarBooks ></SimilarBooks>
+          <SimilarBooks></SimilarBooks>
         </div>
       </div>
 
@@ -547,7 +553,7 @@ const BookDetails = () => {
             label="Your Rating"
             rules={[{ required: true, message: "Please select a rating" }]}
           >
-            <Rate  />
+            <Rate />
           </Form.Item>
 
           <Form.Item

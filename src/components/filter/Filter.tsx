@@ -3,7 +3,7 @@
 import { FormProvider, useForm } from "react-hook-form";
 import CoustomRadioSelect from "../CustomForm/CoustomRadioSelect";
 import CustomInput from "../CustomForm/CustomInput";
-import { useGetAllbooksQuery } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
+import { useGetAllbooksQuery } from "../../Redux/Features/Books/bookManagement.api";
 import { TBook } from "../Card/BookCard";
 import { useEffect } from "react";
 
@@ -57,8 +57,6 @@ const Filter = ({ setShowFilter, showFilter, setFilterParams }: any) => {
     setFilterParams(filterArray);
   }, [min, max, inStock, category, author, setFilterParams]);
 
-
-
   if (isLoading) {
     return <p>loading ..</p>;
   }
@@ -67,7 +65,7 @@ const Filter = ({ setShowFilter, showFilter, setFilterParams }: any) => {
     ...new Set(data?.data?.map((book: TBook) => book.category)),
   ] as string[];
   const authorOptions = [
-    'All',
+    "All",
     ...new Set(data?.data?.map((book: TBook) => book.author)),
   ] as string[];
 
@@ -145,7 +143,11 @@ const Filter = ({ setShowFilter, showFilter, setFilterParams }: any) => {
           />
         </div>
         <div>
-          <CoustomRadioSelect options={authorOptions} label="Author" name="author" />
+          <CoustomRadioSelect
+            options={authorOptions}
+            label="Author"
+            name="author"
+          />
         </div>
       </form>
     </FormProvider>

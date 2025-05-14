@@ -1,22 +1,24 @@
-import AdminDashboard from "../Pages/Admin/AdminDashboard";
-import UpdateBook from "../Pages/Admin/UpdateBook";
-import CreateBook from "../Pages/Admin/CreateBook";
+import AdminDashboard from "../Pages/dashboard/Admin/AdminDashboard";
+import CreateBook from "../Pages/dashboard/Admin/CreateBook";
+import UpdateBook from "../Pages/dashboard/Admin/UpdateBook";
+import AdminDashboardOverview from './../Pages/dashboard/Admin/AdminDashboardOverview';
+
 
 const AdminRoutes = [
   {
-    index: true,
+    path: 'dashboard',
     name: "Dashboard",
-    element: <AdminDashboard />,
+    element: <AdminDashboardOverview></AdminDashboardOverview>,
   },
   {
-    path: "dashboard",
-    name: "Dashboard",
+    path: "admin-management",
+    name: "Admin-Management",
     element: <AdminDashboard />,
   },
 
   {
     element: <CreateBook />,
-    path: "/admin/dashboard/create-book",
+    path: "/admin/admin-management/create-book",
   },
   {
     element: <UpdateBook />,

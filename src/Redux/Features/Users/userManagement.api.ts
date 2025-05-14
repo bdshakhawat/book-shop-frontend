@@ -1,5 +1,5 @@
 // no eslint-disable @typescript-eslint/no-unused-vars
-import { baseApi } from "../../../api/baseApi";
+import { baseApi } from "../../api/baseApi";
 
 export const userManagementApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

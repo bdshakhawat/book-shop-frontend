@@ -1,4 +1,4 @@
-import UserDashboard from "./../Pages/User/UserDashboard";
+import UserDashboard from "../Pages/dashboard/User/UserDashboard";
 
 const UserRoutes = [
   {
@@ -6,7 +6,5 @@ const UserRoutes = [
     name: "Dashboard",
     element: <UserDashboard />,
   },
- 
-  
 ];
 export default UserRoutes;

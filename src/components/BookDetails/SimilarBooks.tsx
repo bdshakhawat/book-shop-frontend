@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Loader from "../loader/Loader";
-import { useGetAllbooksQuery } from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
+import { useGetAllbooksQuery } from "../../Redux/Features/Books/bookManagement.api";
 import { Link, NavLink } from "react-router-dom";
 import { Star } from "lucide-react";
 
@@ -36,7 +36,10 @@ const SimilarBooks = () => {
           {/* Book Cover with hover effect */}
           <div className="relative overflow-hidden">
             <img
-              src={book.coverImage || "https://images.theconversation.com/files/45159/original/rptgtpxd-1396254731.jpg"}
+              src={
+                book.coverImage ||
+                "https://images.theconversation.com/files/45159/original/rptgtpxd-1396254731.jpg"
+              }
               alt={book.title}
               className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
@@ -61,12 +64,10 @@ const SimilarBooks = () => {
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
               by {book.author}
             </p>
-            
+
             {/* Rating */}
             <div className="flex items-center mb-2">
-              <div className="flex mr-1">
-                {renderStars(book.rating || 0)}
-              </div>
+              <div className="flex mr-1">{renderStars(book.rating || 0)}</div>
               <span className="text-xs text-gray-500 dark:text-gray-400">
                 ({book.reviewCount || 0})
               </span>
@@ -84,11 +85,13 @@ const SimilarBooks = () => {
                   </span>
                 )}
               </div>
-              <span className={`text-xs px-2 py-1 rounded-full ${
-                book.inStock 
-                  ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                  : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
-              }`}>
+              <span
+                className={`text-xs px-2 py-1 rounded-full ${
+                  book.inStock
+                    ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                    : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+                }`}
+              >
                 {book.inStock ? "In Stock" : "Out of Stock"}
               </span>
             </div>

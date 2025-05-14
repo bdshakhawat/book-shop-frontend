@@ -1,10 +1,10 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useAppSelector } from "../../Redux/hook";
+import { useAppSelector } from "../../../Redux/hook";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { FiUser } from "react-icons/fi";
 import { toast } from "sonner";
-import { useUpdatePasswordMutation } from "../../Redux/Features/Auth/authApi";
-import { useGetOrdersByEmailQuery } from "../../Redux/Features/Orders/Order.api";
+import { useUpdatePasswordMutation } from "../../../Redux/Features/Auth/authApi";
+import { useGetOrdersByEmailQuery } from "../../../Redux/Features/Orders/Order.api";
 
 export interface IProduct {
   _id: string;
@@ -117,10 +117,10 @@ const UserDashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data?.data.map((orderItem: IOrder,index:number) => (
+                    {data?.data.map((orderItem: IOrder, index: number) => (
                       <tr className="border border-gray-300" key={index}>
-                        <td>{orderItem.products[0]?.productId?.author }</td>
-                        <td>{orderItem.products[0]?.productId?.title }</td>
+                        <td>{orderItem.products[0]?.productId?.author}</td>
+                        <td>{orderItem.products[0]?.productId?.title}</td>
                         <td>{orderItem?.user?.email}</td>
                         <td>{orderItem?.status}</td>
                         <td>{orderItem.totalPrice}</td>

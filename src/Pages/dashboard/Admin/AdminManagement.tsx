@@ -1,30 +1,33 @@
 import { Button, Select } from "antd";
 import { useState } from "react";
-import {
-  useGetAllUsersQuery,
-  useDeactivateUserMutation,
-  useActivateUserMutation,
-} from "../../Redux/Features/Admin/UserManagementApi/userManagement.api";
+
 import moment from "moment";
+
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import {
-  useDeleteABookMutation,
-  useGetAllbooksQuery,
-} from "../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
+  useActivateUserMutation,
+  useDeactivateUserMutation,
+  useGetAllUsersQuery,
+} from "../../../Redux/Features/Users/userManagement.api";
 import {
   useGetAllOrdersQuery,
   useGetOrdersByEmailQuery,
   useUpdateOrderStatusMutation,
   useVerifyOrderMutation,
-} from "../../Redux/Features/Orders/Order.api";
-import { IResponseBook, TransactionDetails, User } from "../../Types/global";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "sonner";
+} from "../../../Redux/Features/Orders/Order.api";
+import {
+  useDeleteABookMutation,
+  useGetAllbooksQuery,
+} from "../../../Redux/Features/Books/bookManagement.api";
+import { IResponseBook, TransactionDetails, User } from "../../../Types/global";
+
 const ManageAdmin = () => {
   const [activeTab, setActiveTab] = useState("manageUser");
   const { data: Users, refetch } = useGetAllUsersQuery(undefined);
   const [updateOrderStatus] = useUpdateOrderStatusMutation(undefined);
   const [verifyOrder] = useVerifyOrderMutation(undefined);
-  const [deactivateUser ,{data:deactiveUser}] = useDeactivateUserMutation();
+  const [deactivateUser, { data: deactiveUser }] = useDeactivateUserMutation();
   const [activateUser] = useActivateUserMutation();
   const { data: AllOrders } = useGetAllOrdersQuery(undefined);
 
@@ -49,9 +52,9 @@ const ManageAdmin = () => {
       count: AllOrders?.data?.length || 0,
     },
   ];
- 
+
   console.log(Books);
-  const [deleteBook, { data, error, isLoading }] =   useDeleteABookMutation(); // Remove undefined
+  const [deleteBook, { data, error, isLoading }] = useDeleteABookMutation(); // Remove undefined
   console.log("error", error, data);
   const handleAction = async (data: string) => {
     const [_id, actionType] = data.split("-");
@@ -87,7 +90,7 @@ const ManageAdmin = () => {
     console.log(result);
   };
 
-  console.log('deactived user ',deactiveUser)
+  console.log("deactived user ", deactiveUser);
 
   console.log("orders", Orders);
   return (

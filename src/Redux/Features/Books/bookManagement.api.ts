@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { baseApi } from "../../../api/baseApi";
+import { baseApi } from "../../api/baseApi";
 
 const bookManagementApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -63,5 +63,5 @@ export const {
   useGetSingleBookQuery,
   useCreateBookMutation,
   useUpdateProductMutation,
-  useDeleteABookMutation
+  useDeleteABookMutation,
 } = bookManagementApi;

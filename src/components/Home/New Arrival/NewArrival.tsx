@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import BookCard from "../../Card/BookCard";
-import { useGetAllbooksQuery } from "../../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
+import { useGetAllbooksQuery } from "../../../Redux/Features/Books/bookManagement.api";
 import Loader from "../../loader/Loader";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -14,7 +14,6 @@ const NewArrival = () => {
     <section className="max-w-[90%]  mx-auto py-12 px-4">
       {/* Title & Subtitle Options (Choose one) */}
       <div className="text-center mb-14">
-       
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-3">
           New Literary Adventures Await
         </h1>

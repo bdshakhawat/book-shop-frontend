@@ -62,3 +62,22 @@ export interface IResponseBook {
   inStock: boolean;
   isDeleted: boolean;
 }
+
+
+
+export interface IOrder {
+  _id:string,
+  user?:{
+    name:string
+  },
+  products: {
+    product:string,
+    quantity: number;
+  }[],
+  totalPrice: number;
+  email: string;
+  status: string,
+  createdAt?: string;
+  updatedAt?: string;
+}
+

@@ -4,12 +4,9 @@ import BookCard from "../../../components/Card/BookCard";
 import Pagination from "../../../components/pagination/Pagination";
 import Filter from "../../../components/filter/Filter";
 import { BsFilter } from "react-icons/bs";
-import { useGetAllbooksQuery } from "../../../Redux/Features/Admin/UserManagementApi/bookManagement.api";
+import { useGetAllbooksQuery } from "../../../Redux/Features/Books/bookManagement.api";
 import Loader from "../../../components/loader/Loader";
 import { useSearchParams } from "react-router-dom";
-
-
-
 
 const AllBooks = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,7 +21,6 @@ const AllBooks = () => {
     ...filterParams,
     { name: "searchTerm", value: `${search}` },
     ...(category ? [{ name: "category", value: category }] : []),
-
   ]);
   // console.log("allbooks", allBook);
 
@@ -33,7 +29,7 @@ const AllBooks = () => {
       <div>
         <Loader></Loader>
       </div>
-    )
+    );
   }
 
   const allBooks = allBook?.data || [];
