@@ -45,7 +45,6 @@ const UserDashboard = () => {
   const userEmail = useAppSelector((state) => state.auth.user?.email);
   const { data } = useGetOrdersByEmailQuery(undefined);
 
-  console.log(data);
   const { register, handleSubmit, reset } = useForm();
   const handleUpdatePassword: SubmitHandler<FieldValues> = async (data) => {
     console.log(data);

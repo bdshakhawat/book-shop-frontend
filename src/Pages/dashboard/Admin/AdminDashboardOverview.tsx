@@ -141,7 +141,7 @@ const topBooksDatas = [
                   dataKey="value"
                   label
                 >
-                  {userRoleData.map((entry, index) => (
+                  {userRoleData.map((_entry, index) => (
                     <Cell
                       key={`cell-${index}`}
                       fill={COLORS[index % COLORS.length]}

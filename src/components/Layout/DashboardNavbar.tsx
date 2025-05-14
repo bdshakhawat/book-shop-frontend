@@ -1,23 +1,30 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { useAppSelector } from "../../Redux/hook";
+import { useAppDispatch, useAppSelector } from "../../Redux/hook";
 import { FaUserCircle } from "react-icons/fa";
 import { IoMdLogOut } from "react-icons/io";
+import { logout } from "../../Redux/Features/Auth/authSlice";
+import { persistor } from "../../Redux/store";
+import { toast } from "sonner";
 
 const DashboardNavbar = () => {
+  const dispatch =useAppDispatch()
   const user = useAppSelector((state) => state.auth.user);
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleLogout = () => {
-    // 🔐 Add your logout logic here
-    console.log("Logging out...");
+    dispatch(logout());
+    persistor.purge();
+    toast.success("Logged out successfully");
   };
 
   // Close dropdown on click outside or Escape key
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
         setOpen(false);
       }
     };
@@ -30,8 +37,9 @@ const DashboardNavbar = () => {
 
   return (
     <div className="w-full bg-white shadow px-6 py-4 flex items-center justify-between sticky top-0 z-50">
-      
-      <h1 className="text-xl font-bold text-orange-500">Hello {user?.name}, Welcome to Dashboard</h1>
+      <h1 className="text-xl font-bold text-orange-500">
+        Hello {user?.name}, Welcome to Dashboard
+      </h1>
 
       <div className="relative" ref={dropdownRef}>
         <button

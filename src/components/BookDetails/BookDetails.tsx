@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import {
   Star,
   Heart,
   Share2,
   BookOpen,
   ChevronLeft,
-  ShoppingCart,
   BookmarkCheck,
 } from "lucide-react";
 import Loader from "../loader/Loader";
@@ -14,10 +13,7 @@ import {
   useCreateReviewMutation,
   useGetSingleBookReviewQuery,
 } from "../../Redux/Features/Review/reviewApi";
-import {
-  useCreateBookMutation,
-  useGetSingleBookQuery,
-} from "../../Redux/Features/Books/bookManagement.api";
+import { useGetSingleBookQuery } from "../../Redux/Features/Books/bookManagement.api";
 import ReviewCard, { IReview } from "./ReviewCard";
 import { loadStripe } from "@stripe/stripe-js";
 import { useSelector } from "react-redux";
@@ -29,6 +25,7 @@ import { toast } from "sonner";
 
 const BookDetails = () => {
   const { bookId } = useParams();
+  const Navigate =useNavigate()
   const user = useSelector(selectCurrentUser);
   const { data: review } = useGetSingleBookReviewQuery(bookId);
   const reviewData = review?.data;
@@ -90,6 +87,13 @@ const BookDetails = () => {
   };
 
   const makePayment = async () => {
+    if (user?.role !== 'user') {
+      // Redirect to login and remember current location
+      Navigate("/login");
+      toast('Login as a user ')
+      return;
+    }
+
     const stripe = await loadStripe(
       "pk_test_51NFeKsHXxHHqqBSEXEZ6oVqeAquqIpszGA5xvnGO3XSkrX53ffO3A2pRkRRuIhjoVvUKiFxBoC476BMmG8pr8GDK00kNXNphd6"
     );
@@ -335,7 +339,7 @@ const BookDetails = () => {
 
               {/* Action buttons */}
               <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                <button
+                {/* <button
                   className={`flex-1 flex items-center justify-center py-3 px-6 rounded-lg font-medium transition-colors ${
                     book?.data?.inStock
                       ? "bg-orange-600 hover:bg-orange-700 text-white shadow-md hover:shadow-lg"
@@ -345,12 +349,12 @@ const BookDetails = () => {
                 >
                   <ShoppingCart size={20} className="mr-2" />
                   Add to Cart
-                </button>
+                </button> */}
                 <button
                   onClick={makePayment}
                   className={`flex-1 py-3 px-6 rounded-lg font-medium transition-colors ${
                     book?.data?.inStock
-                      ? "border border-orange-600 text-orange-600 dark:text-orange-400 dark:border-orange-400 hover:bg-orange-50 dark:hover:bg-gray-700"
+                      ? "border border-orange-600 text-orange-600 dark:text-orange-400 dark:border-orange-400 hover:bg-orange-500 hover:text-white dark:hover:bg-gray-700 "
                       : "border border-gray-300 text-gray-500 dark:text-gray-400 cursor-not-allowed"
                   }`}
                   disabled={!book?.data?.inStock}

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Loader from "../loader/Loader";
 import { useGetAllbooksQuery } from "../../Redux/Features/Books/bookManagement.api";
-import { Link, NavLink } from "react-router-dom";
 import { Star } from "lucide-react";
 
 const SimilarBooks = () => {

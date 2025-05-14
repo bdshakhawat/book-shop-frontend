@@ -51,47 +51,47 @@ const Register = () => {
   };
   return (
     <div className="register">
-      <div className="border w-[400px] p-8 rounded-lg  backdrop-blur-md bg-brandPrimary/40">
+      <div className="border w-[400px] p-8 rounded-lg  backdrop-blur-2xl bg-brandPrimary/40">
         <div className="flex justify-center items-center mb-4"></div>
-        <h1 className="text-3xl text-center font-bold text-brandTextSecondary">
+        <h1 className="text-3xl text-center font-bold text-gray-900">
           REGISTER NOW{" "}
         </h1>
         <form onSubmit={handleSubmit(handleRegister)}>
           <div className="mt-8">
             <label
               htmlFor="name"
-              className="font-semibold tracking-[4px] text-brandTextTertiary"
+              className="font-semibold tracking-[4px] text-black"
             >
               NAME
             </label>
             <input
               {...register("name")}
-              placeholder="Ex: Saiful Islam"
+              placeholder="Enter your name "
               type="text"
               id="name"
-              className="w-full border border-brandTextSecondary p-2 rounded-lg bg-transparent outline-none mt-2"
+              className="w-full border border-brandTextSecondary p-2 rounded-lg bg-transparent outline-none mt-2 placeholder:text-gray-900 text-black"
             />
           </div>
           <div className="mt-4">
             <label
               htmlFor="email"
-              className="font-semibold tracking-[4px] text-brandTextTertiary"
+              className="font-semibold tracking-[4px] text-black"
             >
               EMAIL
             </label>
             <input
               {...register("email")}
-              placeholder="Ex: saiful@example.com"
+              placeholder="Enter your email"
               type="email"
               id="email"
-              className="w-full border border-brandTextSecondary p-2 rounded-lg bg-transparent outline-none mt-2"
+              className="w-full border border-brandTextSecondary p-2 rounded-lg bg-transparent outline-none mt-2 placeholder:text-gray-900 text-black"
             />
           </div>
 
           <div className="mt-4">
             <label
               htmlFor="password"
-              className="font-semibold tracking-[4px] text-brandTextTertiary"
+              className="font-semibold tracking-[4px] text-black"
             >
               PASSWORD
             </label>
@@ -100,19 +100,19 @@ const Register = () => {
               placeholder="Ex: ******"
               type="password"
               id="password"
-              className="w-full border border-brandTextSecondary p-2 rounded-lg bg-transparent outline-none mt-2"
+              className="w-full border border-brandTextSecondary p-2 rounded-lg bg-transparent outline-none mt-2 placeholder:text-gray-900 text-black"
             />
           </div>
 
           <Button
             htmlType="submit"
-            className="w-full mt-8 bg-brandTextSecondary hover:bg-brandTextSecondary/70"
+            className="w-full mt-8 bg-gray-800 text-white"
           >
             Register
           </Button>
 
           <div className="mt-4">
-            <p className="text-center text-brandTextTertiary">
+            <p className="text-center text-black">
               Have an account?{" "}
               <Link to="/login" className="text-[#510039] font-semibold">
                 Please Login
